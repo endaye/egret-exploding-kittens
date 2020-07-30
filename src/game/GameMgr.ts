@@ -24,10 +24,10 @@ class GameMgr {
         }
         return GameMgr.$mgr;
     }
-    private constructor() {}
+    private constructor() { }
 
     private $players: Player[] = [];
-    private readonly $user: User = User.inst;
+    private readonly $user: User = User.inst; // 玩家本人
     private $matchInfo: Native.IMatchInfo;
     private $rid: string;
     private $uid: number;
@@ -43,6 +43,7 @@ class GameMgr {
     clockwise: boolean = true;
     userSeat: number = 0;
     stackCnt: number = 0;
+    aliveCnt: number = 0;
 
     get uid(): number {
         return this.$uid;
@@ -153,6 +154,7 @@ class GameMgr {
         this.stackCnt = roomInfo.deckInfo ? roomInfo.deckInfo.leftCount : 0;
         let tp: Player;
         let rp: Common.IPlayerInfo;
+        this.aliveCnt = 0;
         for (let i = 0; i < this.$players.length; i++) {
             tp = this.$players[i];
             rp = roomInfo.players[i];
@@ -162,8 +164,14 @@ class GameMgr {
             } else {
                 tp.handsCnt = 0;
             }
+
             // TODO: attack marks
             tp.attackMark = 0;
+
+            if (tp.state !== PlayerState.DEAD) {
+                this.aliveCnt++;
+            }
+
             if (tp.uid === User.inst.player.uid && rp.handsInfo) {
                 User.inst.hands = rp.handsInfo.cardIds;
                 this.$uiMain.setUserHands(User.inst.hands);
@@ -261,9 +269,9 @@ class GameMgr {
         NetMgr.inst.req.joinRoom(joinRoomData);
     }
 
-    toDie() {}
+    toDie() { }
 
-    toWin() {}
+    toWin() { }
 
     startGame() {
         egret.log('game start');
