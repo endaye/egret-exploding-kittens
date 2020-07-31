@@ -73,6 +73,9 @@ class UIMain extends eui.Component implements eui.UIComponent {
     deckTween: any;
     attackTween: any;
 
+    // 压力表
+    boomPin: eui.Image;
+
     private cardSmScale = 0.5;
     private cardsArray: eui.ArrayCollection = new eui.ArrayCollection();
 
@@ -280,11 +283,17 @@ class UIMain extends eui.Component implements eui.UIComponent {
         egret.log(`boomCnt=${boomCnt}, stackCnt=${GameMgr.inst.stackCnt}`)
         if (stackCnt >= 0 && boomCnt > 0) {
             // TODO: 具体实现，这里会调用你在压力表里的具体方法
-            // uiManometer.updatePress(boomCnt, stackCnt);
+            this.updatePressure(boomCnt, stackCnt);
         } else {
             egret.warn(`压力表参数有误：boomCnt=${boomCnt}, stackCnt=${GameMgr.inst.stackCnt}`)
         }
     }
+
+    updatePressure(boomCnt:number, stackCnt:number):void{
+		let thePin = egret.Tween.get(this.boomPin);
+		let arg:number = (boomCnt / stackCnt) * 270 - 100;
+		thePin.to({rotation: arg}, 1000);
+	}
 
     showHandsCnt(show: boolean = true) {
         for (let i = 1; i < this.players.length; i++) {
