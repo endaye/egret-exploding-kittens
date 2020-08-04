@@ -64,6 +64,8 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
         // console.log(`${this.player.nickname} ${this.player.state}`)
         if (this.player.state === PlayerState.DEFUSE) {
             this.boom.visible = true;
+            // 只会有一个玩家在defuse状态
+            this.boomShaking();
             this.bang.visible = false;
             this.attack.visible = false;
         } else if (this.player.state === PlayerState.DEAD) {
@@ -72,6 +74,7 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
             this.attack.visible = false;
             this.boom.visible = false;
             this.bang.visible = true;
+            this.boomBang();
             this.handsBg.visible = false;
             this.handsCnt.visible = false;
         } else if (this.player.attackMark > 0) {
@@ -105,5 +108,22 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
         if (this.uiMain) {
             this.uiMain.userAttack(false);
         }
+
+        // 攻击动画
+
+    }
+
+    // 炸弹闪烁的动画
+    boomShaking() : void{
+        // 炸弹来临时，炸弹的动画
+        var the_boom = egret.Tween.get(this.boom, {loop:true});
+        the_boom.to({scaleX: 1.2, scaleY: 1.2}, 100);
+    }
+
+    // 炸弹爆炸动画
+    boomBang() : void{
+        var the_bang = egret.Tween.get(this.bang);
+        the_bang.to({scaleX: 2}, 400, egret.Ease.circIn).to({scaleY: 1.5}, 300, egret.Ease.circIn);
+        // this.bang.visible = false;
     }
 }

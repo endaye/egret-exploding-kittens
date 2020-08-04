@@ -289,6 +289,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
         }
     }
 
+    // 实现压力表旋转动画
     updatePressure(boomCnt:number, stackCnt:number):void{
 		let thePin = egret.Tween.get(this.boomPin);
 		let arg:number = (boomCnt / stackCnt) * 270 - 100;
@@ -378,6 +379,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
 
     // 玩家拆弹
     userDefuse(show: boolean, defuseIdx?: number) {
+        // TODO: animation
         this.defuseBg.visible = false;
         this.gpDefuse.visible = show;
         this.defuseFrame.visible = true;

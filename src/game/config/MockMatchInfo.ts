@@ -20,42 +20,42 @@ namespace TestMode {
         matchid: getRamdonMatchId(Config.RamdonMatchId), // 用后续matchId 去进行游戏结算
         players: [
             {
-                uid: 101,
+                uid: 111,
                 type: 1, // 1 = 机器人 0 = 正常玩家
                 avatar: 'https://endaye.com/img/icon-att-01-64x64.png',
                 mobile: '11291502685',
                 nickname: '玩家1',
             },
             {
-                uid: 102,
+                uid: 112,
                 type: 1,
                 avatar: 'https://endaye.com/img/icon-shield-01-64x64.png',
                 mobile: '11291502685',
                 nickname: '玩家2',
             },
             {
-                uid: 103,
+                uid: 113,
                 type: 0,
                 avatar: 'https://endaye.com/img/icon-cane-01-64x64.png',
                 mobile: '11291502685',
                 nickname: '玩家3',
             },
             {
-                uid: 104,
+                uid: 114,
                 type: 1,
                 avatar: 'https://endaye.com/img/icon-magic-01-64x64.png',
                 mobile: '11291502685',
                 nickname: '玩家4',
             },
             {
-                uid: 105,
+                uid: 115,
                 type: 1,
                 avatar: 'https://endaye.com/img/icon-att-01-64x64.png',
                 mobile: '11291502685',
                 nickname: '玩家5',
             },
             {
-                uid: 106,
+                uid: 116,
                 type: 1,
                 avatar: 'https://endaye.com/img/icon-shield-01-64x64.png',
                 mobile: '11291502685',
@@ -64,7 +64,7 @@ namespace TestMode {
         ],
     };
 
-    export const MockUid: number = 103;
+    export const MockUid: number = 115;
     export const MockWdh: number = -1;
 
     export const MockCookie: string = 'mock cookie';
