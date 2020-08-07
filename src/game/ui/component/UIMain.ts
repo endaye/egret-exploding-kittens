@@ -250,6 +250,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
         this.updateStackCnt();
         this.updateAttack();
         this.updateManometer();
+
     }
 
     updateHandsCnt() {
@@ -512,10 +513,12 @@ class UIMain extends eui.Component implements eui.UIComponent {
             },
             1000
             )
-            .to({ visible: false }, 0)
-            .call(() => {
-                User.inst.checkNextCard();
-            });
+            .to({ visible: false }, 0);
+            // .call(() => {
+            //     User.inst.checkNextCard();
+            // });
+
+            // 把上面注释了之后不会出现手牌有牌背面的bug
     }
 
     // 自己出牌

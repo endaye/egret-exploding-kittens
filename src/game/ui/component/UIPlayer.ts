@@ -110,6 +110,7 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
         }
 
         // 攻击动画
+        this.attackAnima();
 
     }
 
@@ -125,5 +126,11 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
         var the_bang = egret.Tween.get(this.bang);
         the_bang.to({scaleX: 2}, 400, egret.Ease.circIn).to({scaleY: 1.5}, 300, egret.Ease.circIn);
         // this.bang.visible = false;
+    }
+
+    // 攻击动画
+    attackAnima() : void{
+        var the_attack = egret.Tween.get(this.attack);
+        the_attack.to({scaleX: 1.8}, 1000, egret.Ease.circOut).to({scaleX: 1}, 500, egret.Ease.circOut);
     }
 }

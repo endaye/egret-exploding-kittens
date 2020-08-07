@@ -10,7 +10,7 @@
 	<e:Image id="boomPin" source="Boom_Pin_png" x="102.41" y="558.92" anchorOffsetX="5" width="10" anchorOffsetY="22" height="27"/>
 	<e:Image id="stack" source="Deck_png" x="180" y="441.74" anchorOffsetX="0" width="120" anchorOffsetY="0" height="160"/>
 
-	<e:Image id="playArea" source="Deck_png" x="320" y="441.74" anchorOffsetX="0" width="120" anchorOffsetY="0" height="160" visible="false" locked="true"/>
+	<e:Image id="playArea" source="Deck_png" x="320" y="441.74" anchorOffsetX="0" width="120" anchorOffsetY="0" height="160" locked="true" visible="false"/>
 	<e:Label id="stackCnt" text="剩余0涨" x="175.29" y="610" size="16" fontFamily="Microsoft YaHei" height="16" width="128" textAlign="center"/>
 
 	<e:Image id="fg0" source="Foreground_png" left="0" right="0" scale9Grid="0,70,413,122" bottom="-49" anchorOffsetY="0" height="349"/>

@@ -179,6 +179,11 @@ class GameMgr {
                     NetMgr.inst.disconnect();
                 }
             }
+
+
+            // for debug
+            for (let i = 0; i < this.players.length; i++)
+                console.log(this.players[i].state);
         }
 
         this.$uiMain.updateRoomInfo();
