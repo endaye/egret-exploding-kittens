@@ -67,7 +67,7 @@ class User {
         return -1;
     }
 
-    checkNextCard() {
+    async checkNextCard(){
         // GameMgr.inst.defuseBoom(false, -1);
         if (
             this.nextCard === Card.BOOM &&

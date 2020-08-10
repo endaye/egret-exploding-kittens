@@ -5,7 +5,8 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
     handsCnt: eui.Label;
     player: Player;
     dead: eui.Rect;
-    avatarBg0: eui.Rect;
+    avatarBg0: eui.Rect;    // 等待状态
+    avatarBg1: eui.Rect;    // 闪烁状态
     attack: eui.Image;
     boom: eui.Image;
     bang: eui.Image;
@@ -13,6 +14,11 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
     uiMain: UIMain;
 
     btnAttack: eui.Button;
+
+
+    // 定义动画，为了在下个回合开始取消之前的动画
+    playTween: any;     // 出牌动画
+    bangTween: any;     // 死亡爆炸动画
 
     constructor() {
         super();
@@ -49,7 +55,31 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
         this.update();
     }
 
+
+    // 头像环闪烁动画
+    // 表示正在出牌的玩家
+    playAnim() : void{
+        this.playTween = egret.Tween.get(this.avatarBg1, {loop:true});
+        this.playTween.to({visible: true}, 500).to({visible:false},500);
+    }
+    
+    // 取消上一个玩家可能存在的动画
+    cancelAnim() : void{
+        if (this.playTween){
+            egret.Tween.removeTweens(this.avatarBg1);
+            this.avatarBg1.visible = false;
+        }
+        // if (this.bangTween){
+        //     egret.Tween.removeTweens(this.bang);
+        //     this.bang.visible = false;
+        // }
+    }
+
     update(): void {
+        this.cancelAnim();
+        if (this.player.state == PlayerState.ACTION){
+            this.playAnim();
+        } 
         this.updateHandsCnt();
         this.updateState();
     }
@@ -74,7 +104,11 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
             this.attack.visible = false;
             this.boom.visible = false;
             this.bang.visible = true;
-            this.boomBang();
+            // 先检查死亡列表是否存在，如果存在，则无动作，否则播放动画并将其加入死亡列表
+            if (UIMain.deadList.indexOf(this.player) == -1){
+                this.boomBang();
+                UIMain.deadList.push(this.player);
+            }
             this.handsBg.visible = false;
             this.handsCnt.visible = false;
         } else if (this.player.attackMark > 0) {
@@ -123,9 +157,8 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
 
     // 炸弹爆炸动画
     boomBang() : void{
-        var the_bang = egret.Tween.get(this.bang);
-        the_bang.to({scaleX: 2}, 400, egret.Ease.circIn).to({scaleY: 1.5}, 300, egret.Ease.circIn);
-        // this.bang.visible = false;
+        this.bangTween = egret.Tween.get(this.bang);
+        this.bangTween.to({scaleX: 2}, 400, egret.Ease.circIn).to({scaleY: 1.5}, 300, egret.Ease.circIn).to({visible: false}, 800);
     }
 
     // 攻击动画

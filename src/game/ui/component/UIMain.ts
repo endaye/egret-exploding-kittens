@@ -73,6 +73,10 @@ class UIMain extends eui.Component implements eui.UIComponent {
     deckTween: any;
     attackTween: any;
 
+    // 死亡列表，如果存在，则UIPlayer更新的时候就不会重新播放他们的动画
+    // 静态变量
+    public static deadList: Player[];
+
     // 压力表
     boomPin: eui.Image;
 
@@ -293,7 +297,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
     // 实现压力表旋转动画
     updatePressure(boomCnt:number, stackCnt:number):void{
 		let thePin = egret.Tween.get(this.boomPin);
-		let arg:number = (boomCnt / stackCnt) * 270 - 100;
+        let arg:number = ((boomCnt / stackCnt) * 270 - 100) % 136;      // 最大角度135
 		thePin.to({rotation: arg}, 1000);
 	}
 
