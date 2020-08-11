@@ -73,10 +73,6 @@ class UIMain extends eui.Component implements eui.UIComponent {
     deckTween: any;
     attackTween: any;
 
-    // 死亡列表，如果存在，则UIPlayer更新的时候就不会重新播放他们的动画
-    // 静态变量
-    public static deadList: Player[];
-
     // 压力表
     boomPin: eui.Image;
 

@@ -15,10 +15,9 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
 
     btnAttack: eui.Button;
 
-
-    // 定义动画，为了在下个回合开始取消之前的动画
-    playTween: any;     // 出牌动画
-    bangTween: any;     // 死亡爆炸动画
+    // 缓存
+    cacheState: PlayerState;
+    cacheAttackMark: number;
 
     constructor() {
         super();
@@ -55,32 +54,10 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
         this.update();
     }
 
-
-    // 头像环闪烁动画
-    // 表示正在出牌的玩家
-    playAnim(): void {
-        this.playTween = egret.Tween.get(this.avatarBg1, { loop: true });
-        this.playTween.to({ visible: true }, 500).to({ visible: false }, 500);
-    }
-
-    // 取消上一个玩家可能存在的动画
-    cancelAnim(): void {
-        if (this.playTween) {
-            egret.Tween.removeTweens(this.avatarBg1);
-            this.avatarBg1.visible = false;
-        }
-        // if (this.bangTween){
-        //     egret.Tween.removeTweens(this.bang);
-        //     this.bang.visible = false;
-        // }
-    }
-
     update(): void {
-        this.cancelAnim();
-        if (this.player.state == PlayerState.ACTION) {
-            this.playAnim();
-        }
+
         this.updateHandsCnt();
+        this.updateAttackMark();
         this.updateState();
     }
 
@@ -90,35 +67,66 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
         this.handsCnt.text = this.player ? this.player.handsCnt.toString() : '';
     }
 
+    updateAttackMark(): void {
+        if (this.player.attackMark === this.cacheAttackMark) {
+            return;
+        }
+        // 检查是否被攻击
+        if (this.player.attackMark > 0) {
+            this.attack.visible = true;
+        } else {
+            this.attack.visible = false;
+        }
+
+        // 刚刚被攻击
+        if (this.player.attackMark > this.cacheAttackMark) {
+            this.attackAnim();
+        }
+
+        this.cacheAttackMark = this.player.attackMark;
+    }
+
     updateState(): void {
         // console.log(`${this.player.nickname} ${this.player.state}`)
+        if (this.player.state === this.cacheState) {
+            // 确保只有state变更的时候才会执行之后的代码
+            return;
+        }
+
+        // 检查Action状态
+        if (this.player.state === PlayerState.ACTION && this.player.state == this.cacheState) {
+            this.actionAnim();
+        } else {
+            this.clearActionAnim();
+        }
+
+        // 检查Boom状态
         if (this.player.state === PlayerState.DEFUSE) {
             this.boom.visible = true;
             // 只会有一个玩家在defuse状态
-            this.boomShaking();
-            this.bang.visible = false;
-            this.attack.visible = false;
-        } else if (this.player.state === PlayerState.DEAD) {
+            this.boomAnim();
+            this.boom.visible = true;
+        } else {
+            this.clearBoomAnim();
+        }
+
+        // 检查死亡状态
+        if (this.player.state === PlayerState.DEAD) {
             this.dead.visible = true;
             this.avatarBg0.strokeColor = 0xcccccc;
             this.attack.visible = false;
             this.boom.visible = false;
             this.bang.visible = true;
-            // 先检查死亡列表是否存在，如果存在，则无动作，否则播放动画并将其加入死亡列表
-            if (UIMain.deadList.indexOf(this.player) == -1) {
-                this.boomBang();
-                UIMain.deadList.push(this.player);
-            }
+            this.bangAnim();
             this.handsBg.visible = false;
             this.handsCnt.visible = false;
-        } else if (this.player.attackMark > 0) {
-            this.boom.visible = false;
-            this.attack.visible = true;
         } else {
             this.bang.visible = false;
-            this.attack.visible = false;
-            this.boom.visible = false;
+            this.handsBg.visible = false;
+            this.handsCnt.visible = false;
         }
+
+        this.cacheState = this.player.state;
     }
 
     showBtnAttack(show: boolean): void {
@@ -144,26 +152,55 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
         }
 
         // 攻击动画
-        this.attackAnima();
+        this.attackAnim();
 
+    }
+
+    // 头像环闪烁动画，表示正在出牌的玩家
+    actionAnim(): void {
+        // loop动画之后需要remove
+        const tw = egret.Tween.get(this.avatarBg1, { loop: true });
+        tw.to({ visible: true }, 500).to({ visible: false }, 500);
+    }
+
+    // 清除玩家身上的Action动画
+    clearActionAnim(): void {
+        egret.Tween.removeTweens(this.avatarBg1);
+        this.avatarBg1.visible = false;
     }
 
     // 炸弹闪烁的动画
-    boomShaking(): void {
-        // 炸弹来临时，炸弹的动画
-        var the_boom = egret.Tween.get(this.boom, { loop: true });
-        the_boom.to({ scaleX: 1.2, scaleY: 1.2 }, 100);
+    boomAnim(): void {
+        // 炸弹来临时，炸弹的动画，
+        // loop动画之后需要remove
+        const tw = egret.Tween.get(this.boom, { loop: true });
+        tw.to({ scaleX: 1.2, scaleY: 1.2 }, 100);
+    }
+
+    // 清除玩家身上的Boom动画
+    clearBoomAnim(): void {
+        egret.Tween.removeTweens(this.boom);
+        this.boom.visible = false;
     }
 
     // 炸弹爆炸动画
-    boomBang(): void {
-        this.bangTween = egret.Tween.get(this.bang);
-        this.bangTween.to({ scaleX: 2 }, 400, egret.Ease.circIn).to({ scaleY: 1.5 }, 300, egret.Ease.circIn).to({ visible: false }, 800);
+    bangAnim(): void {
+        const tw = egret.Tween.get(this.bang);
+        tw.to({ scaleX: 2 }, 400, egret.Ease.circIn)
+            .to({ scaleY: 1.5 }, 300, egret.Ease.circIn)
+            .to({ visible: false }, 800)
+            .call(() => {
+                egret.Tween.removeTweens(this.bang);
+            });
     }
 
     // 攻击动画
-    attackAnima(): void {
-        var the_attack = egret.Tween.get(this.attack);
-        the_attack.to({ scaleX: 1.8 }, 1000, egret.Ease.circOut).to({ scaleX: 1 }, 500, egret.Ease.circOut);
+    attackAnim(): void {
+        const tw = egret.Tween.get(this.attack);
+        tw.to({ scaleX: 1.8 }, 1000, egret.Ease.circOut)
+            .to({ scaleX: 1 }, 500, egret.Ease.circOut)
+            .call(() => {
+                egret.Tween.removeTweens(this.attack);
+            });
     }
 }
