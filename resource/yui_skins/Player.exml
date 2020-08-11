@@ -9,7 +9,7 @@
 	<e:Rect id="handsBg" width="24" height="24" y="130" fillColor="0xc5f8f8" ellipseHeight="24" ellipseWidth="24" anchorOffsetX="12" horizontalCenter="0"/>
 	<e:Label id="handsCnt" text="99" y="130" fontFamily="Microsoft YaHei" size="16" anchorOffsetX="12" width="24" height="24" textAlign="center" verticalAlign="middle" horizontalCenter="0" textColor="0x3cb49e"/>
 	<e:Image id="attack" source="Pan_Sm_png" y="-21" horizontalCenter="4" scaleX="1" scaleY="1" locked="true" visible="false"/>
-	<e:Image id="boom" source="Boom_Sm_png" y="45" anchorOffsetX="62" width="124" anchorOffsetY="60" height="120" horizontalCenter="7" scaleX="1" scaleY="1" locked="true" visible="false"/>
+	<e:Image id="boom" source="Boom_Sm_png" y="43" anchorOffsetX="62" width="124" anchorOffsetY="60" height="120" horizontalCenter="9" scaleX="1" scaleY="1" locked="true" visible="false"/>
 	<e:Image id="bang" source="Bang_Sm_png" y="37.89" anchorOffsetX="74.5" horizontalCenter="0.5" width="149" anchorOffsetY="76" height="152.22" scaleX="1" scaleY="1" locked="true" visible="false"/>
 	<e:Button id="btnAttack" label="攻击" y="165" skinName="yui.BtnRed" horizontalCenter="0" locked="true" visible="false"/>
 </e:Skin>
