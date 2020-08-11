@@ -58,14 +58,14 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
 
     // 头像环闪烁动画
     // 表示正在出牌的玩家
-    playAnim() : void{
-        this.playTween = egret.Tween.get(this.avatarBg1, {loop:true});
-        this.playTween.to({visible: true}, 500).to({visible:false},500);
+    playAnim(): void {
+        this.playTween = egret.Tween.get(this.avatarBg1, { loop: true });
+        this.playTween.to({ visible: true }, 500).to({ visible: false }, 500);
     }
-    
+
     // 取消上一个玩家可能存在的动画
-    cancelAnim() : void{
-        if (this.playTween){
+    cancelAnim(): void {
+        if (this.playTween) {
             egret.Tween.removeTweens(this.avatarBg1);
             this.avatarBg1.visible = false;
         }
@@ -77,9 +77,9 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
 
     update(): void {
         this.cancelAnim();
-        if (this.player.state == PlayerState.ACTION){
+        if (this.player.state == PlayerState.ACTION) {
             this.playAnim();
-        } 
+        }
         this.updateHandsCnt();
         this.updateState();
     }
@@ -105,7 +105,7 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
             this.boom.visible = false;
             this.bang.visible = true;
             // 先检查死亡列表是否存在，如果存在，则无动作，否则播放动画并将其加入死亡列表
-            if (UIMain.deadList.indexOf(this.player) == -1){
+            if (UIMain.deadList.indexOf(this.player) == -1) {
                 this.boomBang();
                 UIMain.deadList.push(this.player);
             }
@@ -149,21 +149,21 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
     }
 
     // 炸弹闪烁的动画
-    boomShaking() : void{
+    boomShaking(): void {
         // 炸弹来临时，炸弹的动画
-        var the_boom = egret.Tween.get(this.boom, {loop:true});
-        the_boom.to({scaleX: 1.2, scaleY: 1.2}, 100);
+        var the_boom = egret.Tween.get(this.boom, { loop: true });
+        the_boom.to({ scaleX: 1.2, scaleY: 1.2 }, 100);
     }
 
     // 炸弹爆炸动画
-    boomBang() : void{
+    boomBang(): void {
         this.bangTween = egret.Tween.get(this.bang);
-        this.bangTween.to({scaleX: 2}, 400, egret.Ease.circIn).to({scaleY: 1.5}, 300, egret.Ease.circIn).to({visible: false}, 800);
+        this.bangTween.to({ scaleX: 2 }, 400, egret.Ease.circIn).to({ scaleY: 1.5 }, 300, egret.Ease.circIn).to({ visible: false }, 800);
     }
 
     // 攻击动画
-    attackAnima() : void{
+    attackAnima(): void {
         var the_attack = egret.Tween.get(this.attack);
-        the_attack.to({scaleX: 1.8}, 1000, egret.Ease.circOut).to({scaleX: 1}, 500, egret.Ease.circOut);
+        the_attack.to({ scaleX: 1.8 }, 1000, egret.Ease.circOut).to({ scaleX: 1 }, 500, egret.Ease.circOut);
     }
 }

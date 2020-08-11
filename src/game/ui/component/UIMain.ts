@@ -295,11 +295,11 @@ class UIMain extends eui.Component implements eui.UIComponent {
     }
 
     // 实现压力表旋转动画
-    updatePressure(boomCnt:number, stackCnt:number):void{
-		let thePin = egret.Tween.get(this.boomPin);
-        let arg:number = ((boomCnt / stackCnt) * 270 - 100) % 136;      // 最大角度135
-		thePin.to({rotation: arg}, 1000);
-	}
+    updatePressure(boomCnt: number, stackCnt: number): void {
+        let thePin = egret.Tween.get(this.boomPin);
+        let arg: number = ((boomCnt / stackCnt) * 270 - 100) % 136;      // 最大角度135
+        thePin.to({ rotation: arg }, 1000);
+    }
 
     showHandsCnt(show: boolean = true) {
         for (let i = 1; i < this.players.length; i++) {
@@ -424,13 +424,13 @@ class UIMain extends eui.Component implements eui.UIComponent {
                 this.deckTween = egret.Tween.get(this.deck);
                 this.deckTween
                     .to(
-                    {
-                        x: x,
-                        y: y,
-                        scaleX: this.cardSmScale,
-                        scaleY: this.cardSmScale,
-                    },
-                    1000
+                        {
+                            x: x,
+                            y: y,
+                            scaleX: this.cardSmScale,
+                            scaleY: this.cardSmScale,
+                        },
+                        1000
                     )
                     .to({ visible: false }, 0);
                 break;
@@ -462,13 +462,13 @@ class UIMain extends eui.Component implements eui.UIComponent {
                 this.deckTween = egret.Tween.get(this.deck);
                 this.deckTween
                     .to(
-                    {
-                        x: this.playArea.x,
-                        y: this.playArea.y,
-                        scaleX: this.playArea.scaleX,
-                        scaleY: this.playArea.scaleY,
-                    },
-                    1000
+                        {
+                            x: this.playArea.x,
+                            y: this.playArea.y,
+                            scaleX: this.playArea.scaleX,
+                            scaleY: this.playArea.scaleY,
+                        },
+                        1000
                     )
                     .to({ visible: false }, 0)
                     .call(() => {
@@ -511,18 +511,18 @@ class UIMain extends eui.Component implements eui.UIComponent {
         this.deckTween = egret.Tween.get(this.deck);
         this.deckTween
             .to(
-            {
-                x: x,
-                y: y,
-            },
-            1000
+                {
+                    x: x,
+                    y: y,
+                },
+                1000
             )
             .to({ visible: false }, 0);
-            // .call(() => {
-            //     User.inst.checkNextCard();
-            // });
+        // .call(() => {
+        //     User.inst.checkNextCard();
+        // });
 
-            // 把上面注释了之后不会出现手牌有牌背面的bug
+        // 把上面注释了之后不会出现手牌有牌背面的bug
     }
 
     // 自己出牌
@@ -556,11 +556,11 @@ class UIMain extends eui.Component implements eui.UIComponent {
         this.deckTween = egret.Tween.get(this.deck);
         this.deckTween
             .to(
-            {
-                x: x,
-                y: y,
-            },
-            1000
+                {
+                    x: x,
+                    y: y,
+                },
+                1000
             )
             .to({ visible: false }, 0)
             .call(() => {

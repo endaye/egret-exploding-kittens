@@ -11,7 +11,7 @@ class User {
         }
         return User.$user;
     }
-    private constructor() {}
+    private constructor() { }
 
     player: Player;
     private $hands: Card[] = []; // 手牌
@@ -67,7 +67,7 @@ class User {
         return -1;
     }
 
-    async checkNextCard(){
+    async checkNextCard() {
         // GameMgr.inst.defuseBoom(false, -1);
         if (
             this.nextCard === Card.BOOM &&
