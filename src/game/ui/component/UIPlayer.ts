@@ -94,7 +94,7 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
         }
 
         // 检查Action状态
-        if (this.player.state === PlayerState.ACTION && this.player.state == this.cacheState) {
+        if (this.player.state === PlayerState.ACTION && this.player.state != this.cacheState) {
             this.actionAnim();
         } else {
             this.clearActionAnim();
