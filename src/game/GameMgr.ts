@@ -318,15 +318,15 @@ class GameMgr {
             User.inst.nextCard = card;
         } else {
             // Others
-            this.$uiMain.drawCard(uid);
+            this.$uiMain.otherDrawCard(uid);
         }
     }
 
     playCard(uid: number, card?: Card) {
         if (uid === User.inst.player.uid) {
-            // TODO: User draw a card
+            // TODO: User play a card
         } else if (card !== undefined) {
-            this.$uiMain.playCard(uid, card);
+            this.$uiMain.otherPlayCard(uid, card);
         }
     }
 }

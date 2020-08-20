@@ -92,6 +92,22 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
 
     updateState(): void {
         // console.log(`${this.player.nickname} ${this.player.state}`)
+<<<<<<< Updated upstream
+=======
+        if (this.player.state === this.cacheState) {
+            // 确保只有state变更的时候才会执行之后的代码
+            return;
+        }
+
+        // 检查Action状态
+        if (this.player.state === PlayerState.ACTION && this.player.state != this.cacheState) {
+            this.actionAnim();
+        } else {
+            this.clearActionAnim();
+        }
+
+        // 检查Boom状态
+>>>>>>> Stashed changes
         if (this.player.state === PlayerState.DEFUSE) {
             this.boom.visible = true;
             // 只会有一个玩家在defuse状态

@@ -249,12 +249,13 @@ class UIMain extends eui.Component implements eui.UIComponent {
     }
 
     updateRoomInfo() {
+        this.switchCardAnim(112);
         this.updateDirection();
         this.updateHandsCnt();
         this.updateStackCnt();
         this.updateAttack();
         this.updateManometer();
-
+    
     }
 
     updateHandsCnt() {
@@ -398,7 +399,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
     }
 
     // 其他玩家抓牌动画
-    drawCard(uid: number) {
+    otherDrawCard(uid: number) {
         if (this.deckTween) {
             egret.Tween.removeTweens(this.deckTween);
         }
@@ -439,7 +440,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
     }
 
     // 其他玩家出牌动画
-    playCard(uid: number, card: Card) {
+    otherPlayCard(uid: number, card: Card) {
         if (this.deckTween) {
             egret.Tween.removeTweens(this.deckTween);
         }
@@ -567,6 +568,45 @@ class UIMain extends eui.Component implements eui.UIComponent {
                 this.playArea.source = cardImg;
                 this.playArea.visible = true;
             });
+    }
+
+    // 交换手牌动画
+    // uid是交换对象的uid
+    private switchCardAnim(uid: number): void{
+        // 目标卡牌位置
+        let targetPos: egret.Point;
+        // 我所有手牌的位置
+        let userCardsPos: egret.Point[];
+
+        // // 记录玩家每张手牌的舞台位置
+        // this.hands.selectedIndex = 0;
+        // while (this.hands.selectedIndex < 6){
+        //     userCardsPos.push(this.hands.parent.localToGlobal(this.hands.x, this.hands.y));
+        //     this.hands.selectedIndex++;
+        // }
+
+        // 找到目标对象
+        for (const uip of this.players){
+            if (uip.player.uid == uid){
+                targetPos = uip.parent.localToGlobal(uip.x, uip.y);
+            }
+        }
+
+        // 玩家的每张牌移动过去
+        this.hands.selectedIndex = 0;
+        while (this.hands.selectedIndex < 6){
+            let anim = egret.Tween.get(this.hands);
+            anim.to(
+                {
+                    x: targetPos.x,
+                    y: targetPos.y
+                },
+                1000
+            )
+        }
+
+        // TODO: 需要交换卡牌
+        
     }
 
     // 背景动画

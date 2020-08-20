@@ -13,9 +13,13 @@
 		"protobuf/bundles/protobuf-bundles.js"
 	],
 	"game": [
-		"bin-debug/game/config/Config.js",
+		"bin-debug/game/ui/config/Config.js",
 		"bin-debug/game/ui/panel/UIBasePanel.js",
+<<<<<<< Updated upstream
 		"bin-debug/game/ui/component/UIAvatar.js",
+=======
+		"bin-debug/game/ui/component/UIMain.js",
+>>>>>>> Stashed changes
 		"bin-debug/event/EventName.js",
 		"bin-debug/event/GameDispatcher.js",
 		"bin-debug/game/CardMgr.js",
@@ -23,12 +27,12 @@
 		"bin-debug/game/IMatchInfo.js",
 		"bin-debug/game/Player.js",
 		"bin-debug/game/User.js",
-		"bin-debug/AssetAdapter.js",
-		"bin-debug/game/config/MockMatchInfo.js",
-		"bin-debug/Main.js",
+		"bin-debug/game/ui/component/UIAvatar.js",
 		"bin-debug/game/ui/component/UICardItem.js",
-		"bin-debug/game/ui/component/UIMain.js",
+		"bin-debug/Main.js",
 		"bin-debug/game/ui/component/UIPlayer.js",
+		"bin-debug/AssetAdapter.js",
+		"bin-debug/game/ui/config/MockMatchInfo.js",
 		"bin-debug/ThemeAdapter.js",
 		"bin-debug/game/ui/panel/UILoadingPanel.js",
 		"bin-debug/game/ui/panel/UIMainPanel.js",
