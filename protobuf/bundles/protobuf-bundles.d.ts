@@ -526,6 +526,150 @@ declare namespace Common {
         public static verify(message: { [k: string]: any }): (string|null);
     }
 
+    /** Properties of a PickInfo. */
+    interface IPickInfo {
+
+        /** PickInfo uid */
+        uid?: (number|null);
+    }
+
+    /** Represents a PickInfo. */
+    class PickInfo implements IPickInfo {
+
+        /**
+         * Constructs a new PickInfo.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: Common.IPickInfo);
+
+        /** PickInfo uid. */
+        public uid: number;
+
+        /**
+         * Creates a new PickInfo instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns PickInfo instance
+         */
+        public static create(properties?: Common.IPickInfo): Common.PickInfo;
+
+        /**
+         * Encodes the specified PickInfo message. Does not implicitly {@link Common.PickInfo.verify|verify} messages.
+         * @param message PickInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: Common.IPickInfo, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Encodes the specified PickInfo message, length delimited. Does not implicitly {@link Common.PickInfo.verify|verify} messages.
+         * @param message PickInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: Common.IPickInfo, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a PickInfo message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns PickInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): Common.PickInfo;
+
+        /**
+         * Decodes a PickInfo message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns PickInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: (protobuf.Reader|Uint8Array)): Common.PickInfo;
+
+        /**
+         * Verifies a PickInfo message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+    }
+
+    /** Properties of a ReleaseInfo. */
+    interface IReleaseInfo {
+
+        /** ReleaseInfo uid */
+        uid?: (number|null);
+
+        /** ReleaseInfo cardId */
+        cardId?: (number|null);
+    }
+
+    /** Represents a ReleaseInfo. */
+    class ReleaseInfo implements IReleaseInfo {
+
+        /**
+         * Constructs a new ReleaseInfo.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: Common.IReleaseInfo);
+
+        /** ReleaseInfo uid. */
+        public uid: number;
+
+        /** ReleaseInfo cardId. */
+        public cardId: number;
+
+        /**
+         * Creates a new ReleaseInfo instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ReleaseInfo instance
+         */
+        public static create(properties?: Common.IReleaseInfo): Common.ReleaseInfo;
+
+        /**
+         * Encodes the specified ReleaseInfo message. Does not implicitly {@link Common.ReleaseInfo.verify|verify} messages.
+         * @param message ReleaseInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: Common.IReleaseInfo, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Encodes the specified ReleaseInfo message, length delimited. Does not implicitly {@link Common.ReleaseInfo.verify|verify} messages.
+         * @param message ReleaseInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: Common.IReleaseInfo, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a ReleaseInfo message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ReleaseInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): Common.ReleaseInfo;
+
+        /**
+         * Decodes a ReleaseInfo message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ReleaseInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: (protobuf.Reader|Uint8Array)): Common.ReleaseInfo;
+
+        /**
+         * Verifies a ReleaseInfo message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+    }
+
     /** Properties of a GameRankingInfo. */
     interface IGameRankingInfo {
 
@@ -728,6 +872,12 @@ declare namespace Msg {
 
         /** Message err */
         err?: (Common.IError|null);
+
+        /** Message pickInfoNtf */
+        pickInfoNtf?: (Common.IPickInfo|null);
+
+        /** Message releaseInfoNtf */
+        releaseInfoNtf?: (Common.IReleaseInfo|null);
     }
 
     /** Represents a Message. */
@@ -775,8 +925,14 @@ declare namespace Msg {
         /** Message err. */
         public err?: (Common.IError|null);
 
+        /** Message pickInfoNtf. */
+        public pickInfoNtf?: (Common.IPickInfo|null);
+
+        /** Message releaseInfoNtf. */
+        public releaseInfoNtf?: (Common.IReleaseInfo|null);
+
         /** Message extension. */
-        public extension?: ("joinRoomReq"|"clearBoomReq"|"releaseCardReq"|"releaseCardResp"|"roomInfoNtf"|"gameRankingNtf"|"err");
+        public extension?: ("joinRoomReq"|"clearBoomReq"|"releaseCardReq"|"releaseCardResp"|"roomInfoNtf"|"gameRankingNtf"|"err"|"pickInfoNtf"|"releaseInfoNtf");
 
         /**
          * Creates a new Message instance using the specified properties.
@@ -841,7 +997,9 @@ declare namespace Msg {
             RELEASE_CARD_RESP = 6,
             ROOM_INFO_NTF = 7,
             GAME_RANK_NTF = 8,
-            ERROR = 9
+            ERROR = 9,
+            PICK_INFO_NTF = 10,
+            RELEASE_INFO_NTF = 11
         }
     }
 }
