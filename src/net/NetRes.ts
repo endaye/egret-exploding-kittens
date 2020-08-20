@@ -9,6 +9,8 @@ class NetRes {
         this.handlers[Msg.Message.CommandType.ROOM_INFO_NTF] = this.roomInfo;
         this.handlers[Msg.Message.CommandType.GAME_RANK_NTF] = this.gameRank;
         this.handlers[Msg.Message.CommandType.ERROR] = this.error;
+        this.handlers[Msg.Message.CommandType.PICK_INFO_NTF] = this.pickInfo;
+        this.handlers[Msg.Message.CommandType.RELEASE_INFO_NTF] = this.releaseInfo;
     }
 
     response(msg: Msg.IMessage) {
@@ -48,6 +50,22 @@ class NetRes {
         if (msg.err) {
             egret.log(msg.err);
             GameMgr.inst.handleError(msg.err);
+        }
+    }
+
+    pickInfo(msg: Msg.IMessage) {
+        egret.log('res: PICK_INFO_NTF');
+        if (msg.pickInfoNtf) {
+            egret.log(msg.pickInfoNtf);
+            GameMgr.inst.drawCard(msg.pickInfoNtf.uid);
+        }
+    }
+
+    releaseInfo(msg: Msg.IMessage) {
+        egret.log('RELEASE_INFO_NTF');
+        if (msg.releaseInfoNtf) {
+            egret.log(msg.releaseInfoNtf);
+            GameMgr.inst.playCard(msg.releaseInfoNtf.uid, msg.releaseInfoNtf.cardId);
         }
     }
 }
