@@ -9,7 +9,9 @@ namespace TestMode {
      * 100 => 游戏结束
      */
 
-    function getRamdonMatchId(isRandom = true) {
+    const uids = [101, 102, 103, 104, 105, 106]
+
+    function getMatchId(isRandom = true) {
         const matchid = isRandom ? Math.random().toString().substr(2, 16) : '1234567890123456';
         egret.log(`matchid: ${matchid}`);
         return matchid;
@@ -17,54 +19,54 @@ namespace TestMode {
 
     export const MockMatchInfo: Native.IMatchInfo = {
         status: 1, // status = 1 参考以上结果
-        matchid: getRamdonMatchId(Config.RamdonMatchId), // 用后续matchId 去进行游戏结算
+        matchid: getMatchId(Config.RamdonMatchId), // 用后续matchId 去进行游戏结算
         players: [
             {
-                uid: 111,
+                uid: uids[0],
                 type: 1, // 1 = 机器人 0 = 正常玩家
                 avatar: 'https://endaye.com/img/icon-att-01-64x64.png',
                 mobile: '11291502685',
-                nickname: '玩家1',
+                nickname: '玩家#' + uids[0],
             },
             {
-                uid: 112,
+                uid: uids[1],
                 type: 1,
                 avatar: 'https://endaye.com/img/icon-shield-01-64x64.png',
                 mobile: '11291502685',
-                nickname: '玩家2',
+                nickname: '玩家#' + uids[1],
             },
             {
-                uid: 113,
+                uid: uids[2],
                 type: 0,
                 avatar: 'https://endaye.com/img/icon-cane-01-64x64.png',
                 mobile: '11291502685',
-                nickname: '玩家3',
+                nickname: '玩家#' + uids[2],
             },
             {
-                uid: 114,
+                uid: uids[3],
                 type: 1,
                 avatar: 'https://endaye.com/img/icon-magic-01-64x64.png',
                 mobile: '11291502685',
-                nickname: '玩家4',
+                nickname: '玩家#' + uids[3],
             },
             {
-                uid: 115,
+                uid: uids[4],
                 type: 1,
                 avatar: 'https://endaye.com/img/icon-att-01-64x64.png',
                 mobile: '11291502685',
-                nickname: '玩家5',
+                nickname: '玩家#' + uids[4],
             },
             {
-                uid: 116,
+                uid: uids[5],
                 type: 1,
                 avatar: 'https://endaye.com/img/icon-shield-01-64x64.png',
                 mobile: '11291502685',
-                nickname: '玩家6',
+                nickname: '玩家#' + uids[5],
             },
         ],
     };
 
-    export const MockUid: number = 115;
+    export const MockUid: number = uids[2];
     export const MockWdh: number = -1;
 
     export const MockCookie: string = 'mock cookie';
