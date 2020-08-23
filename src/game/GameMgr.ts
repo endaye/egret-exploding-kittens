@@ -173,7 +173,7 @@ class GameMgr {
             }
 
             if (tp.uid === User.inst.player.uid && rp.handsInfo) {
-                User.inst.hands = rp.handsInfo.cardIds;
+                User.inst.checkHands(rp.handsInfo.cardIds)
                 this.$uiMain.setUserHands(User.inst.hands);
                 if (tp.state === PlayerState.DEAD) {
                     NetMgr.inst.disconnect();
@@ -231,7 +231,6 @@ class GameMgr {
         // console.log(JSON.stringify(this.$matchInfo));
 
         this.$rid = this.$matchInfo.matchid;
-        console.log(`rid: ${this.$rid}`);
 
         this.$state = GameState.READY;
         NetMgr.inst.setUidAndRid(this.$uid, this.$rid);
@@ -269,7 +268,9 @@ class GameMgr {
         NetMgr.inst.req.joinRoom(joinRoomData);
     }
 
-    toDie() { }
+    toDie() {
+        NetMgr.inst.req.defuseFailed();
+    }
 
     toWin() { }
 
@@ -312,10 +313,10 @@ class GameMgr {
         this.gameBombsEnd(2, this.$wdh, gameResultJson);
     }
 
-    drawCard(uid: number, card?: Card) {
-        if (uid === User.inst.player.uid && card !== undefined) {
+    drawCard(uid: number) {
+        if (uid === User.inst.player.uid) {
             // User
-            User.inst.nextCard = card;
+            // User.inst.nextCard = card;
         } else {
             // Others
             this.$uiMain.otherDrawCard(uid);

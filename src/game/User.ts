@@ -19,6 +19,7 @@ class User {
     nextCard: Card; // 即将抓到的牌
     boomSeq: number; // 预言：炸弹在第几张
     card3: Card[]; // 透视：三张牌
+    drawing: boolean = false; // 正在抓拍
 
     get hands() {
         return this.$hands;
@@ -33,6 +34,7 @@ class User {
     }
 
     drawACard() {
+        this.drawing = true;
         NetMgr.inst.req.pickCard();
     }
 
@@ -49,6 +51,21 @@ class User {
             new egret.Event(EventName.HANDS_REFRESH, false, false)
         );
     }
+
+    checkHands(cardIds: Card[]) {
+        if (this.drawing) {
+            if (this.$hands.length = cardIds.length - 1) {
+                this.nextCard = cardIds[cardIds.length - 1]
+                this.checkNextCard();
+            } else {
+                throw Error('下发下发手牌有误');
+            }
+            this.drawing = false;
+        } else {
+            this.hands = cardIds;
+        }
+    }
+
 
     attack(uid: number) {
         NetMgr.inst.req.releaseCard({
@@ -67,13 +84,11 @@ class User {
         return -1;
     }
 
-    async checkNextCard() {
-        // GameMgr.inst.defuseBoom(false, -1);
+    checkNextCard() {
         if (
             this.nextCard === Card.BOOM &&
             this.player.state === PlayerState.DEFUSE
         ) {
-            // GameMgr.inst.defuseBoom(true, this.getDefuseCard());
             console.log('USER_DEFUSE');
             GameDispatcher.inst.dispatchEvent(
                 new egret.Event(EventName.USER_DEFUSE, false, false, {
