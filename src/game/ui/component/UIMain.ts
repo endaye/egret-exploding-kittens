@@ -70,8 +70,11 @@ class UIMain extends eui.Component implements eui.UIComponent {
     boomBackOpt: number;
     boomBackOptBtns: eui.Button[];
 
-    deckTween: any;
-    attackTween: any;
+    deckTween: egret.Tween; // 抓拍摸牌的tween
+    attackTween: egret.Tween; // 甩锅的tween
+    switchTween0: egret.Tween; // 换牌的tween
+    switchTween1: egret.Tween; // 换牌的tween
+
 
     // 压力表
     boomPin: eui.Image;
@@ -283,7 +286,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
     updateManometer() {
         const stackCnt = GameMgr.inst.stackCnt;
         const boomCnt = GameMgr.inst.aliveCnt - 1;
-        console.log(`boomCnt=${boomCnt}, stackCnt=${GameMgr.inst.stackCnt}`)
+        // console.log(`boomCnt=${boomCnt}, stackCnt=${GameMgr.inst.stackCnt}`)
         if (stackCnt >= 0 && boomCnt >= 0) {
             this.updatePressure(boomCnt, stackCnt);
         } else if (boomCnt == 0) {
@@ -516,7 +519,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
             )
         // .to({ visible: false }, 0)
         // .call(() => {
-        //     User.inst.checkNextCard();
+        //     User.inst.checkHands();
         // });
 
         // 把上面注释了之后不会出现手牌有牌背面的bug
@@ -573,13 +576,19 @@ class UIMain extends eui.Component implements eui.UIComponent {
     }
 
     // 两个玩家交换手牌动画
-    private playerSwitchCardAnim(uid0: number, uid1: number): void{
+    playerSwitchCardAnim(uid0: number, uid1: number): void {
         // 策略是用固定数量的动画来交换，正确数量的暂时没有更新
+        if (this.switchTween0) {
+            egret.Tween.removeTweens(this.switchTween0)
+        }
+        if (this.switchTween1) {
+            egret.Tween.removeTweens(this.switchTween1)
+        }
 
         // 为了减少遍历次数，用一个简单的map记录两个玩家的全局坐标
-        let playerPos: {[uid:number] : egret.Point} = {};
-        for (const uip of this.players){
-            if (uip.player.uid == uid0 || uip.player.uid == uid1){
+        let playerPos: { [uid: number]: egret.Point } = {};
+        for (const uip of this.players) {
+            if (uip.player.uid == uid0 || uip.player.uid == uid1) {
                 playerPos[uip.player.uid] = uip.parent.localToGlobal(uip.x, uip.y);
             }
         }
@@ -592,25 +601,25 @@ class UIMain extends eui.Component implements eui.UIComponent {
 
         this.switchCards0.visible = true;
         this.switchCards1.visible = true;
-        
-        let switchAnim0 = egret.Tween.get(this.switchCards0);
-        let switchAnim1 = egret.Tween.get(this.switchCards1);
 
-        switchAnim0.to(
+        this.switchTween0 = egret.Tween.get(this.switchCards0);
+        this.switchTween1 = egret.Tween.get(this.switchCards1);
+
+        this.switchTween0.to(
             {
                 x: playerPos[uid1].x,
                 y: playerPos[uid1].y
             },
             1000
-        ).to({visible: false}, 0);
-        
-        switchAnim1.to(
+        ).to({ visible: false }, 0);
+
+        this.switchTween1.to(
             {
                 x: playerPos[uid0].x,
                 y: playerPos[uid0].y
             },
             1000
-        ).to({visible: false}, 0);
+        ).to({ visible: false }, 0);
     }
 
     onHandsSelected(e: eui.PropertyEvent) {
