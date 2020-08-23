@@ -999,7 +999,8 @@ declare namespace Msg {
             GAME_RANK_NTF = 8,
             ERROR = 9,
             PICK_INFO_NTF = 10,
-            RELEASE_INFO_NTF = 11
+            RELEASE_INFO_NTF = 11,
+            DEFUSE_FAILED_REQ = 12
         }
     }
 }
