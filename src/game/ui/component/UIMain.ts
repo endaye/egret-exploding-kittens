@@ -569,12 +569,6 @@ class UIMain extends eui.Component implements eui.UIComponent {
             });
     }
 
-    // 背景动画
-    private bgTween(): void {
-        const tw = egret.Tween.get(this.bg1, { loop: true });
-        tw.to({ rotation: 360 }, 30000).to({ rotation: 0 }, 0);
-    }
-
     // 两个玩家交换手牌动画
     playerSwitchCardAnim(uid0: number, uid1: number): void {
         // 策略是用固定数量的动画来交换，正确数量的暂时没有更新
@@ -620,6 +614,12 @@ class UIMain extends eui.Component implements eui.UIComponent {
             },
             1000
         ).to({ visible: false }, 0);
+    }
+
+    // 背景动画
+    private bgTween(): void {
+        const tw = egret.Tween.get(this.bg1, { loop: true });
+        tw.to({ rotation: 360 }, 30000).to({ rotation: 0 }, 0);
     }
 
     onHandsSelected(e: eui.PropertyEvent) {

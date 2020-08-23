@@ -75,16 +75,24 @@ class User {
         });
     }
 
-    getDefuseCard(): number {
-        for (let i = 0; i < this.hands.length; i++) {
-            if (this.hands[i] === Card.DEFUSE) {
-                return i;
-            }
+    ableToPlayACard(cardIdx: number): boolean {
+        if (
+            this.hands.length === 0 ||
+            cardIdx < 0 ||
+            cardIdx > this.hands.length - 1
+        ) {
+            return false;
+        } else if (this.hands.length === 1) {
+            return this.hands[0] !== Card.DEFUSE || this.hands[0] !== Card.BOOM;
+        } else {
+            return (
+                this.hands[cardIdx] !== Card.DEFUSE ||
+                this.hands[cardIdx] !== Card.BOOM
+            );
         }
-        return -1;
     }
 
-    checkNextCard() {
+    private checkNextCard() {
         if (
             this.nextCard === Card.BOOM &&
             this.player.state === PlayerState.DEFUSE
@@ -105,20 +113,12 @@ class User {
         }
     }
 
-    ableToPlayACard(cardIdx: number): boolean {
-        if (
-            this.hands.length === 0 ||
-            cardIdx < 0 ||
-            cardIdx > this.hands.length - 1
-        ) {
-            return false;
-        } else if (this.hands.length === 1) {
-            return this.hands[0] !== Card.DEFUSE || this.hands[0] !== Card.BOOM;
-        } else {
-            return (
-                this.hands[cardIdx] !== Card.DEFUSE ||
-                this.hands[cardIdx] !== Card.BOOM
-            );
+    private getDefuseCard(): number {
+        for (let i = 0; i < this.hands.length; i++) {
+            if (this.hands[i] === Card.DEFUSE) {
+                return i;
+            }
         }
+        return -1;
     }
 }
