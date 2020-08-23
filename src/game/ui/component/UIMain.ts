@@ -267,7 +267,6 @@ class UIMain extends eui.Component implements eui.UIComponent {
     }
 
     updateAttack() {
-        // TODO: animation
         this.gpAttack.visible = this.player0.player.attackMark > 0;
         if (this.gpAttack.visible) {
             setTimeout(() => {
@@ -280,12 +279,11 @@ class UIMain extends eui.Component implements eui.UIComponent {
     updateManometer() {
         const stackCnt = GameMgr.inst.stackCnt;
         const boomCnt = GameMgr.inst.aliveCnt - 1;
-        egret.log(`boomCnt=${boomCnt}, stackCnt=${GameMgr.inst.stackCnt}`)
-        if (stackCnt >= 0 && boomCnt > 0) {
-            // TODO: 具体实现，这里会调用你在压力表里的具体方法
+        console.log(`boomCnt=${boomCnt}, stackCnt=${GameMgr.inst.stackCnt}`)
+        if (stackCnt >= 0 && boomCnt >= 0) {
             this.updatePressure(boomCnt, stackCnt);
-        } else {
-            egret.warn(`压力表参数有误：boomCnt=${boomCnt}, stackCnt=${GameMgr.inst.stackCnt}`)
+        } else if (boomCnt == 0) {
+            console.warn(`压力表参数有误：boomCnt=${boomCnt}, stackCnt=${GameMgr.inst.stackCnt}`)
         }
     }
 
@@ -387,7 +385,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
         this.gpBang.visible = false;
         this.gpBack.visible = false;
         this.defuseIdx = defuseIdx === undefined ? this.defuseIdx : defuseIdx;
-        egret.log(`this.defuseIdx = ${this.defuseIdx}`);
+        console.log(`this.defuseIdx = ${this.defuseIdx}`);
         this.btnDefuse.visible = this.defuseIdx > -1;
         this.btnDefuseDisable.visible = this.defuseIdx < 0;
     }
@@ -489,7 +487,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
         this.deck.y = this.stack.y;
         this.deck.scaleX = this.stack.scaleX;
         this.deck.scaleY = this.stack.scaleY;
-        console.log(`index: ${User.inst.player.handsCnt - 1}`);
+        // console.log(`index: ${User.inst.player.handsCnt - 1}`);
         const index = Math.max(
             0,
             Math.min(this.hands.numChildren, User.inst.player.handsCnt) - 1
@@ -512,7 +510,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
             },
             1000
             )
-            .to({ visible: false }, 0);
+        // .to({ visible: false }, 0)
         // .call(() => {
         //     User.inst.checkNextCard();
         // });
@@ -578,10 +576,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
         );
     }
 
-    onCheckNextCard(e: eui.PropertyEvent) {
-        // 检查下一个张牌，关闭所有的pop弹窗
-        this.userDefuse(false, -1);
-    }
+
 
     onHandsRefresh(e?: eui.PropertyEvent) {
         this.setUserHands(User.inst.hands);
@@ -631,11 +626,11 @@ class UIMain extends eui.Component implements eui.UIComponent {
     }
 
     onBtnDefuseOptClick(opt: number) {
-        egret.log(`Defuse的手牌位置${this.defuseIdx}`);
-        egret.log(`炸弹放回选项为${opt}`);
+        console.log(`Defuse的手牌位置${this.defuseIdx}`);
+        console.log(`炸弹放回选项为${opt}`);
         const pos =
             opt === 0 ? Math.max(GameMgr.inst.stackCnt - 1, 0) : opt - 1;
-        egret.log(`将炸弹放到${pos}位置`);
+        console.log(`将炸弹放到${pos}位置`);
         this.userDefuse(false, this.defuseIdx);
         if (this.defuseIdx > -1) {
             this.userPlayCardAnim();
