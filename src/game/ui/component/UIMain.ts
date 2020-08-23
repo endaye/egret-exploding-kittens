@@ -76,6 +76,10 @@ class UIMain extends eui.Component implements eui.UIComponent {
     // 压力表
     boomPin: eui.Image;
 
+    // 交换手牌动画用的卡组
+    switchCards0: eui.Group;
+    switchCards1: eui.Group;
+
     private cardSmScale = 0.5;
     private cardsArray: eui.ArrayCollection = new eui.ArrayCollection();
 
@@ -566,6 +570,47 @@ class UIMain extends eui.Component implements eui.UIComponent {
     private bgTween(): void {
         const tw = egret.Tween.get(this.bg1, { loop: true });
         tw.to({ rotation: 360 }, 30000).to({ rotation: 0 }, 0);
+    }
+
+    // 两个玩家交换手牌动画
+    private playerSwitchCardAnim(uid0: number, uid1: number): void{
+        // 策略是用固定数量的动画来交换，正确数量的暂时没有更新
+
+        // 为了减少遍历次数，用一个简单的map记录两个玩家的全局坐标
+        let playerPos: {[uid:number] : egret.Point} = {};
+        for (const uip of this.players){
+            if (uip.player.uid == uid0 || uip.player.uid == uid1){
+                playerPos[uip.player.uid] = uip.parent.localToGlobal(uip.x, uip.y);
+            }
+        }
+
+        // 先把预置好的卡牌放在合适位置，这样不会突兀
+        this.switchCards0.x = playerPos[uid0].x;
+        this.switchCards0.y = playerPos[uid0].y;
+        this.switchCards1.x = playerPos[uid1].x;
+        this.switchCards1.y = playerPos[uid1].y;
+
+        this.switchCards0.visible = true;
+        this.switchCards1.visible = true;
+        
+        let switchAnim0 = egret.Tween.get(this.switchCards0);
+        let switchAnim1 = egret.Tween.get(this.switchCards1);
+
+        switchAnim0.to(
+            {
+                x: playerPos[uid1].x,
+                y: playerPos[uid1].y
+            },
+            1000
+        ).to({visible: false}, 0);
+        
+        switchAnim1.to(
+            {
+                x: playerPos[uid0].x,
+                y: playerPos[uid0].y
+            },
+            1000
+        ).to({visible: false}, 0);
     }
 
     onHandsSelected(e: eui.PropertyEvent) {
