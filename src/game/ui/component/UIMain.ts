@@ -430,7 +430,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
                         scaleX: this.cardSmScale,
                         scaleY: this.cardSmScale,
                     },
-                    1000
+                    600
                     )
                     .to({ visible: false }, 0);
                 break;
@@ -468,7 +468,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
                         scaleX: this.playArea.scaleX,
                         scaleY: this.playArea.scaleY,
                     },
-                    1000
+                    600
                     )
                     .to({ visible: false }, 0)
                     .call(() => {
@@ -515,7 +515,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
                 x: x,
                 y: y,
             },
-            1000
+            600
             )
         // .to({ visible: false }, 0)
         // .call(() => {
@@ -560,7 +560,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
                 x: x,
                 y: y,
             },
-            1000
+            600
             )
             .to({ visible: false }, 0)
             .call(() => {
@@ -604,7 +604,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
                 x: playerPos[uid1].x,
                 y: playerPos[uid1].y
             },
-            1000
+            600
         ).to({ visible: false }, 0);
 
         this.switchTween1.to(
@@ -612,7 +612,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
                 x: playerPos[uid0].x,
                 y: playerPos[uid0].y
             },
-            1000
+            600
         ).to({ visible: false }, 0);
     }
 
