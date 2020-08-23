@@ -1188,6 +1188,301 @@ $root.Common = (function() {
         return Error;
     })();
 
+    Common.PickInfo = (function() {
+
+        /**
+         * Properties of a PickInfo.
+         * @memberof Common
+         * @interface IPickInfo
+         * @property {number|null} [uid] PickInfo uid
+         */
+
+        /**
+         * Constructs a new PickInfo.
+         * @memberof Common
+         * @classdesc Represents a PickInfo.
+         * @implements IPickInfo
+         * @constructor
+         * @param {Common.IPickInfo=} [properties] Properties to set
+         */
+        function PickInfo(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * PickInfo uid.
+         * @member {number} uid
+         * @memberof Common.PickInfo
+         * @instance
+         */
+        PickInfo.prototype.uid = 0;
+
+        /**
+         * Creates a new PickInfo instance using the specified properties.
+         * @function create
+         * @memberof Common.PickInfo
+         * @static
+         * @param {Common.IPickInfo=} [properties] Properties to set
+         * @returns {Common.PickInfo} PickInfo instance
+         */
+        PickInfo.create = function create(properties) {
+            return new PickInfo(properties);
+        };
+
+        /**
+         * Encodes the specified PickInfo message. Does not implicitly {@link Common.PickInfo.verify|verify} messages.
+         * @function encode
+         * @memberof Common.PickInfo
+         * @static
+         * @param {Common.IPickInfo} message PickInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PickInfo.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.uid);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified PickInfo message, length delimited. Does not implicitly {@link Common.PickInfo.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof Common.PickInfo
+         * @static
+         * @param {Common.IPickInfo} message PickInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PickInfo.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a PickInfo message from the specified reader or buffer.
+         * @function decode
+         * @memberof Common.PickInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {Common.PickInfo} PickInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PickInfo.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Common.PickInfo();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.uid = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a PickInfo message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof Common.PickInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {Common.PickInfo} PickInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PickInfo.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a PickInfo message.
+         * @function verify
+         * @memberof Common.PickInfo
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        PickInfo.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                if (!$util.isInteger(message.uid))
+                    return "uid: integer expected";
+            return null;
+        };
+
+        return PickInfo;
+    })();
+
+    Common.ReleaseInfo = (function() {
+
+        /**
+         * Properties of a ReleaseInfo.
+         * @memberof Common
+         * @interface IReleaseInfo
+         * @property {number|null} [uid] ReleaseInfo uid
+         * @property {number|null} [cardId] ReleaseInfo cardId
+         */
+
+        /**
+         * Constructs a new ReleaseInfo.
+         * @memberof Common
+         * @classdesc Represents a ReleaseInfo.
+         * @implements IReleaseInfo
+         * @constructor
+         * @param {Common.IReleaseInfo=} [properties] Properties to set
+         */
+        function ReleaseInfo(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * ReleaseInfo uid.
+         * @member {number} uid
+         * @memberof Common.ReleaseInfo
+         * @instance
+         */
+        ReleaseInfo.prototype.uid = 0;
+
+        /**
+         * ReleaseInfo cardId.
+         * @member {number} cardId
+         * @memberof Common.ReleaseInfo
+         * @instance
+         */
+        ReleaseInfo.prototype.cardId = 0;
+
+        /**
+         * Creates a new ReleaseInfo instance using the specified properties.
+         * @function create
+         * @memberof Common.ReleaseInfo
+         * @static
+         * @param {Common.IReleaseInfo=} [properties] Properties to set
+         * @returns {Common.ReleaseInfo} ReleaseInfo instance
+         */
+        ReleaseInfo.create = function create(properties) {
+            return new ReleaseInfo(properties);
+        };
+
+        /**
+         * Encodes the specified ReleaseInfo message. Does not implicitly {@link Common.ReleaseInfo.verify|verify} messages.
+         * @function encode
+         * @memberof Common.ReleaseInfo
+         * @static
+         * @param {Common.IReleaseInfo} message ReleaseInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ReleaseInfo.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.uid);
+            if (message.cardId != null && Object.hasOwnProperty.call(message, "cardId"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.cardId);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified ReleaseInfo message, length delimited. Does not implicitly {@link Common.ReleaseInfo.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof Common.ReleaseInfo
+         * @static
+         * @param {Common.IReleaseInfo} message ReleaseInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ReleaseInfo.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a ReleaseInfo message from the specified reader or buffer.
+         * @function decode
+         * @memberof Common.ReleaseInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {Common.ReleaseInfo} ReleaseInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ReleaseInfo.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Common.ReleaseInfo();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.uid = reader.uint32();
+                    break;
+                case 2:
+                    message.cardId = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a ReleaseInfo message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof Common.ReleaseInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {Common.ReleaseInfo} ReleaseInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ReleaseInfo.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a ReleaseInfo message.
+         * @function verify
+         * @memberof Common.ReleaseInfo
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        ReleaseInfo.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                if (!$util.isInteger(message.uid))
+                    return "uid: integer expected";
+            if (message.cardId != null && message.hasOwnProperty("cardId"))
+                if (!$util.isInteger(message.cardId))
+                    return "cardId: integer expected";
+            return null;
+        };
+
+        return ReleaseInfo;
+    })();
+
     Common.GameRankingInfo = (function() {
 
         /**
@@ -1585,6 +1880,8 @@ $root.Msg = (function() {
          * @property {Common.IRoomInfo|null} [roomInfoNtf] Message roomInfoNtf
          * @property {Common.IGameRankingInfo|null} [gameRankingNtf] Message gameRankingNtf
          * @property {Common.IError|null} [err] Message err
+         * @property {Common.IPickInfo|null} [pickInfoNtf] Message pickInfoNtf
+         * @property {Common.IReleaseInfo|null} [releaseInfoNtf] Message releaseInfoNtf
          */
 
         /**
@@ -1698,17 +1995,33 @@ $root.Msg = (function() {
          */
         Message.prototype.err = null;
 
+        /**
+         * Message pickInfoNtf.
+         * @member {Common.IPickInfo|null|undefined} pickInfoNtf
+         * @memberof Msg.Message
+         * @instance
+         */
+        Message.prototype.pickInfoNtf = null;
+
+        /**
+         * Message releaseInfoNtf.
+         * @member {Common.IReleaseInfo|null|undefined} releaseInfoNtf
+         * @memberof Msg.Message
+         * @instance
+         */
+        Message.prototype.releaseInfoNtf = null;
+
         // OneOf field names bound to virtual getters and setters
         var $oneOfFields;
 
         /**
          * Message extension.
-         * @member {"joinRoomReq"|"clearBoomReq"|"releaseCardReq"|"releaseCardResp"|"roomInfoNtf"|"gameRankingNtf"|"err"|undefined} extension
+         * @member {"joinRoomReq"|"clearBoomReq"|"releaseCardReq"|"releaseCardResp"|"roomInfoNtf"|"gameRankingNtf"|"err"|"pickInfoNtf"|"releaseInfoNtf"|undefined} extension
          * @memberof Msg.Message
          * @instance
          */
         Object.defineProperty(Message.prototype, "extension", {
-            get: $util.oneOfGetter($oneOfFields = ["joinRoomReq", "clearBoomReq", "releaseCardReq", "releaseCardResp", "roomInfoNtf", "gameRankingNtf", "err"]),
+            get: $util.oneOfGetter($oneOfFields = ["joinRoomReq", "clearBoomReq", "releaseCardReq", "releaseCardResp", "roomInfoNtf", "gameRankingNtf", "err", "pickInfoNtf", "releaseInfoNtf"]),
             set: $util.oneOfSetter($oneOfFields)
         });
 
@@ -1760,6 +2073,10 @@ $root.Msg = (function() {
                 $root.Common.GameRankingInfo.encode(message.gameRankingNtf, writer.uint32(/* id 202, wireType 2 =*/1618).fork()).ldelim();
             if (message.err != null && Object.hasOwnProperty.call(message, "err"))
                 $root.Common.Error.encode(message.err, writer.uint32(/* id 300, wireType 2 =*/2402).fork()).ldelim();
+            if (message.pickInfoNtf != null && Object.hasOwnProperty.call(message, "pickInfoNtf"))
+                $root.Common.PickInfo.encode(message.pickInfoNtf, writer.uint32(/* id 400, wireType 2 =*/3202).fork()).ldelim();
+            if (message.releaseInfoNtf != null && Object.hasOwnProperty.call(message, "releaseInfoNtf"))
+                $root.Common.ReleaseInfo.encode(message.releaseInfoNtf, writer.uint32(/* id 401, wireType 2 =*/3210).fork()).ldelim();
             return writer;
         };
 
@@ -1830,6 +2147,12 @@ $root.Msg = (function() {
                 case 300:
                     message.err = $root.Common.Error.decode(reader, reader.uint32());
                     break;
+                case 400:
+                    message.pickInfoNtf = $root.Common.PickInfo.decode(reader, reader.uint32());
+                    break;
+                case 401:
+                    message.releaseInfoNtf = $root.Common.ReleaseInfo.decode(reader, reader.uint32());
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -1892,6 +2215,8 @@ $root.Msg = (function() {
                 case 7:
                 case 8:
                 case 9:
+                case 10:
+                case 11:
                     break;
                 }
             if (message.joinRoomReq != null && message.hasOwnProperty("joinRoomReq")) {
@@ -1962,6 +2287,26 @@ $root.Msg = (function() {
                         return "err." + error;
                 }
             }
+            if (message.pickInfoNtf != null && message.hasOwnProperty("pickInfoNtf")) {
+                if (properties.extension === 1)
+                    return "extension: multiple values";
+                properties.extension = 1;
+                {
+                    var error = $root.Common.PickInfo.verify(message.pickInfoNtf);
+                    if (error)
+                        return "pickInfoNtf." + error;
+                }
+            }
+            if (message.releaseInfoNtf != null && message.hasOwnProperty("releaseInfoNtf")) {
+                if (properties.extension === 1)
+                    return "extension: multiple values";
+                properties.extension = 1;
+                {
+                    var error = $root.Common.ReleaseInfo.verify(message.releaseInfoNtf);
+                    if (error)
+                        return "releaseInfoNtf." + error;
+                }
+            }
             return null;
         };
 
@@ -1979,6 +2324,8 @@ $root.Msg = (function() {
          * @property {number} ROOM_INFO_NTF=7 ROOM_INFO_NTF value
          * @property {number} GAME_RANK_NTF=8 GAME_RANK_NTF value
          * @property {number} ERROR=9 ERROR value
+         * @property {number} PICK_INFO_NTF=10 PICK_INFO_NTF value
+         * @property {number} RELEASE_INFO_NTF=11 RELEASE_INFO_NTF value
          */
         Message.CommandType = (function() {
             var valuesById = {}, values = Object.create(valuesById);
@@ -1992,6 +2339,8 @@ $root.Msg = (function() {
             values[valuesById[7] = "ROOM_INFO_NTF"] = 7;
             values[valuesById[8] = "GAME_RANK_NTF"] = 8;
             values[valuesById[9] = "ERROR"] = 9;
+            values[valuesById[10] = "PICK_INFO_NTF"] = 10;
+            values[valuesById[11] = "RELEASE_INFO_NTF"] = 11;
             return values;
         })();
 

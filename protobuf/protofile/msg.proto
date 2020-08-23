@@ -25,6 +25,8 @@ message Message {
     ROOM_INFO_NTF = 7;     // 房间信息更新通知
     GAME_RANK_NTF = 8;     // 游戏结果通知
     ERROR = 9;             // 异常错误时
+    PICK_INFO_NTF = 10;    // 房间玩家摸牌通知
+    RELEASE_INFO_NTF = 11; // 房间玩家出牌通知
   }
 
   // 子类作为父类的 optional 字段。从 100 开始记数
@@ -36,5 +38,7 @@ message Message {
     RoomInfo roomInfoNtf = 201;
     GameRankingInfo gameRankingNtf = 202; // 游戏名次uids
     Error err = 300;
+    PickInfo pickInfoNtf = 400;       // 房间玩家摸牌通知
+    ReleaseInfo releaseInfoNtf = 401; // 房间玩家出牌通知
   }
 }

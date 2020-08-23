@@ -15,11 +15,7 @@
 	"game": [
 		"bin-debug/game/ui/config/Config.js",
 		"bin-debug/game/ui/panel/UIBasePanel.js",
-<<<<<<< Updated upstream
-		"bin-debug/game/ui/component/UIAvatar.js",
-=======
 		"bin-debug/game/ui/component/UIMain.js",
->>>>>>> Stashed changes
 		"bin-debug/event/EventName.js",
 		"bin-debug/event/GameDispatcher.js",
 		"bin-debug/game/CardMgr.js",
