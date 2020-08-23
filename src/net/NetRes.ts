@@ -14,57 +14,57 @@ class NetRes {
     }
 
     response(msg: Msg.IMessage) {
-        egret.log(`res: ${msg.content}`);
+        // console.log(`res: ${msg.content}`);
         this.handlers[msg.cmd as Msg.Message.CommandType](msg);
     }
 
     heartBeat(msg: Msg.IMessage) {
-        egret.log('res: HEARTBEAT_RESP');
+        // console.log('res: HEARTBEAT_RESP');
     }
 
     releaseCard(msg: Msg.IMessage) {
-        egret.log('res: RELEASE_CARD_RESP');
+        console.log('res: RELEASE_CARD_RESP');
         if (msg.releaseCardResp) {
-            egret.log(msg.releaseCardResp);
+            console.log(msg.releaseCardResp);
         }
     }
 
     roomInfo(msg: Msg.IMessage) {
-        egret.log('res: ROOM_INFO_NTF');
+        console.log('res: ROOM_INFO_NTF');
         if (msg.roomInfoNtf) {
-            egret.log(msg.roomInfoNtf);
+            // console.log(msg.roomInfoNtf);
             GameMgr.inst.updateRoomInfo(msg.roomInfoNtf);
         }
     }
 
     gameRank(msg: Msg.IMessage) {
-        egret.log('res: GAME_RANK_NTF');
+        console.log('res: GAME_RANK_NTF');
         if (msg.gameRankingNtf) {
-            egret.log(msg.gameRankingNtf);
+            console.log(msg.gameRankingNtf);
             GameMgr.inst.gameover(msg.gameRankingNtf.ranking);
         }
     }
 
     error(msg: Msg.IMessage) {
-        egret.log('res: ERROR');
+        console.log('res: ERROR');
         if (msg.err) {
-            egret.log(msg.err);
+            console.log(msg.err);
             GameMgr.inst.handleError(msg.err);
         }
     }
 
     pickInfo(msg: Msg.IMessage) {
-        egret.log('res: PICK_INFO_NTF');
+        console.log('res: PICK_INFO_NTF');
         if (msg.pickInfoNtf) {
-            egret.log(msg.pickInfoNtf);
+            console.log(msg.pickInfoNtf);
             GameMgr.inst.drawCard(msg.pickInfoNtf.uid);
         }
     }
 
     releaseInfo(msg: Msg.IMessage) {
-        egret.log('RELEASE_INFO_NTF');
+        console.log('res: RELEASE_INFO_NTF');
         if (msg.releaseInfoNtf) {
-            egret.log(msg.releaseInfoNtf);
+            console.log(msg.releaseInfoNtf);
             GameMgr.inst.playCard(msg.releaseInfoNtf.uid, msg.releaseInfoNtf.cardId);
         }
     }

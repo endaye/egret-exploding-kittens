@@ -18,7 +18,7 @@ class NetReq {
     }
 
     private request(msg: Msg.IMessage): void {
-        egret.log(`req: ${msg.content}`);
+        // console.log(`req: ${msg.content}`);
         let sendData = new Msg.Message(msg);
         let sendByte: Uint8Array = Msg.Message.encode(sendData).finish();
         let dataBytes = new egret.ByteArray(sendByte);
