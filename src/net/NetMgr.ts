@@ -30,7 +30,7 @@ class NetMgr {
     }
 
     private initSocketListeners(): void {
-        egret.log('initSocketListeners');
+        console.log('initSocketListeners');
         this.$socket.addEventListener(
             egret.ProgressEvent.SOCKET_DATA,
             this.onReceiveMessage,
@@ -56,7 +56,7 @@ class NetMgr {
     setUidAndRid(uid: number, rid: string): void {
         this.req.userId = uid;
         this.req.roomNo = rid;
-        // egret.log(`setUidAndRid(${uid}, ${rid})`);
+        // console.log(`setUidAndRid(${uid}, ${rid})`);
     }
 
     connect(): void {
@@ -66,7 +66,7 @@ class NetMgr {
             const url = Config.NetServerConfig.url;
             const port = Config.NetServerConfig.port;
             const secured = Config.NetServerConfig.secured;
-            egret.log(
+            console.log(
                 `Socket connect ${secured ? 'wss' : 'ws'}://${url}:${port}`
             );
             this.connectTo(url, port, secured);
@@ -75,14 +75,14 @@ class NetMgr {
     }
 
     private onSocketOpen(): void {
-        egret.log('onSocketOpen');
+        console.log('onSocketOpen');
         this.isConnected = true;
         this.startHeartBeat();
         GameMgr.inst.tryInitGame();
     }
 
     private startHeartBeat(): void {
-        egret.log('startHeartBeat');
+        console.log('startHeartBeat');
         if (this.hbTimerId) {
             clearInterval(this.hbTimerId);
             this.hbTimerId;
@@ -93,15 +93,15 @@ class NetMgr {
     }
 
     private onSocketClose(): void {
-        egret.log('onSocketClose');
+        console.log('onSocketClose');
     }
 
     private onSocketError(e: egret.IOErrorEvent): void {
-        egret.log('onSocketError');
+        console.log('onSocketError');
     }
 
     private onReceiveMessage(e: egret.ProgressEvent): void {
-        egret.log('onReceiveMessage');
+        // console.log('onReceiveMessage');
         const buf: egret.ByteArray = new egret.ByteArray();
         this.$socket.readBytes(buf);
         buf.readByte();
@@ -141,7 +141,7 @@ class NetMgr {
     }
 
     disconnect(): void {
-        egret.log(`Socket.io Disconnect => ${Config.ServerUrlDebug}`);
+        console.log(`Socket.io Disconnect => ${Config.ServerUrlDebug}`);
         this.$socket.close();
     }
 }

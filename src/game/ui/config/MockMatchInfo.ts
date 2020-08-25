@@ -13,7 +13,7 @@ namespace TestMode {
 
     function getMatchId(isRandom = true) {
         const matchid = isRandom ? Math.random().toString().substr(2, 16) : '1234567890123456';
-        egret.log(`matchid: ${matchid}`);
+        console.log(`matchid: ${matchid}`);
         return matchid;
     }
 

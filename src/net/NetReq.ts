@@ -3,7 +3,7 @@ class NetReq {
     private $userId: number;
     private $roomNo: string;
 
-    constructor() {}
+    constructor() { }
 
     set userId(uid: number) {
         this.$userId = uid;
@@ -18,7 +18,7 @@ class NetReq {
     }
 
     private request(msg: Msg.IMessage): void {
-        egret.log(`req: ${msg.content}`);
+        // console.log(`req: ${msg.content}`);
         let sendData = new Msg.Message(msg);
         let sendByte: Uint8Array = Msg.Message.encode(sendData).finish();
         let dataBytes = new egret.ByteArray(sendByte);
@@ -81,6 +81,13 @@ class NetReq {
         msg.cmd = Msg.Message.CommandType.RELEASE_CARD_REQ;
         msg.content = 'RELEASE_CARD_REQ';
         msg.releaseCardReq = data;
+        this.request(msg);
+    }
+
+    defuseFailed(): void {
+        const msg: Msg.IMessage = this.getMsg();
+        msg.cmd = Msg.Message.CommandType.DEFUSE_FAILED_REQ;
+        msg.content = 'DEFUSE_FAILED_REQ';
         this.request(msg);
     }
 }

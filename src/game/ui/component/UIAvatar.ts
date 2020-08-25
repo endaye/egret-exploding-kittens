@@ -30,7 +30,7 @@ class UIAvatar extends eui.Component implements eui.UIComponent {
             egret.Event.COMPLETE,
             (evt: egret.Event) => {
                 if (evt.currentTarget.data) {
-                    egret.log('加载头像成功: ' + evt.currentTarget.data);
+                    // console.log('加载头像成功: ' + evt.currentTarget.data);
                     let texture = new egret.Texture();
                     texture.bitmapData = evt.currentTarget.data;
                     let bitmap = new egret.Bitmap(texture);

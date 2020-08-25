@@ -70,8 +70,11 @@ class UIMain extends eui.Component implements eui.UIComponent {
     boomBackOpt: number;
     boomBackOptBtns: eui.Button[];
 
-    deckTween: any;
-    attackTween: any;
+    deckTween: egret.Tween; // 抓拍摸牌的tween
+    attackTween: egret.Tween; // 甩锅的tween
+    switchTween0: egret.Tween; // 换牌的tween
+    switchTween1: egret.Tween; // 换牌的tween
+
 
     // 压力表
     boomPin: eui.Image;
@@ -271,7 +274,6 @@ class UIMain extends eui.Component implements eui.UIComponent {
     }
 
     updateAttack() {
-        // TODO: animation
         this.gpAttack.visible = this.player0.player.attackMark > 0;
         if (this.gpAttack.visible) {
             setTimeout(() => {
@@ -284,12 +286,11 @@ class UIMain extends eui.Component implements eui.UIComponent {
     updateManometer() {
         const stackCnt = GameMgr.inst.stackCnt;
         const boomCnt = GameMgr.inst.aliveCnt - 1;
-        egret.log(`boomCnt=${boomCnt}, stackCnt=${GameMgr.inst.stackCnt}`)
-        if (stackCnt >= 0 && boomCnt > 0) {
-            // TODO: 具体实现，这里会调用你在压力表里的具体方法
+        // console.log(`boomCnt=${boomCnt}, stackCnt=${GameMgr.inst.stackCnt}`)
+        if (stackCnt >= 0 && boomCnt >= 0) {
             this.updatePressure(boomCnt, stackCnt);
-        } else {
-            egret.warn(`压力表参数有误：boomCnt=${boomCnt}, stackCnt=${GameMgr.inst.stackCnt}`)
+        } else if (boomCnt == 0) {
+            console.warn(`压力表参数有误：boomCnt=${boomCnt}, stackCnt=${GameMgr.inst.stackCnt}`)
         }
     }
 
@@ -391,7 +392,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
         this.gpBang.visible = false;
         this.gpBack.visible = false;
         this.defuseIdx = defuseIdx === undefined ? this.defuseIdx : defuseIdx;
-        egret.log(`this.defuseIdx = ${this.defuseIdx}`);
+        console.log(`this.defuseIdx = ${this.defuseIdx}`);
         this.btnDefuse.visible = this.defuseIdx > -1;
         this.btnDefuseDisable.visible = this.defuseIdx < 0;
     }
@@ -429,7 +430,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
                         scaleX: this.cardSmScale,
                         scaleY: this.cardSmScale,
                     },
-                    1000
+                    600
                     )
                     .to({ visible: false }, 0);
                 break;
@@ -467,7 +468,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
                         scaleX: this.playArea.scaleX,
                         scaleY: this.playArea.scaleY,
                     },
-                    1000
+                    600
                     )
                     .to({ visible: false }, 0)
                     .call(() => {
@@ -493,7 +494,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
         this.deck.y = this.stack.y;
         this.deck.scaleX = this.stack.scaleX;
         this.deck.scaleY = this.stack.scaleY;
-        console.log(`index: ${User.inst.player.handsCnt - 1}`);
+        // console.log(`index: ${User.inst.player.handsCnt - 1}`);
         const index = Math.max(
             0,
             Math.min(this.hands.numChildren, User.inst.player.handsCnt) - 1
@@ -514,11 +515,11 @@ class UIMain extends eui.Component implements eui.UIComponent {
                 x: x,
                 y: y,
             },
-            1000
+            600
             )
-            .to({ visible: false }, 0);
+        // .to({ visible: false }, 0)
         // .call(() => {
-        //     User.inst.checkNextCard();
+        //     User.inst.checkHands();
         // });
 
         // 把上面注释了之后不会出现手牌有牌背面的bug
@@ -559,7 +560,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
                 x: x,
                 y: y,
             },
-            1000
+            600
             )
             .to({ visible: false }, 0)
             .call(() => {
@@ -568,59 +569,20 @@ class UIMain extends eui.Component implements eui.UIComponent {
             });
     }
 
-    // 交换手牌动画
-    // uid是交换对象的uid
-    private switchCardAnim(uid: number): void{
-        // 目标卡牌位置
-        let targetPos: egret.Point;
-        // 我所有手牌的位置
-        let userCardsPos: egret.Point[];
-
-        // // 记录玩家每张手牌的舞台位置
-        // this.hands.selectedIndex = 0;
-        // while (this.hands.selectedIndex < 6){
-        //     userCardsPos.push(this.hands.parent.localToGlobal(this.hands.x, this.hands.y));
-        //     this.hands.selectedIndex++;
-        // }
-
-        // 找到目标对象
-        for (const uip of this.players){
-            if (uip.player.uid == uid){
-                targetPos = uip.parent.localToGlobal(uip.x, uip.y);
-            }
-        }
-
-        // 玩家的每张牌移动过去
-        this.hands.selectedIndex = 0;
-        while (this.hands.selectedIndex < 6){
-            let anim = egret.Tween.get(this.hands);
-            anim.to(
-                {
-                    x: targetPos.x,
-                    y: targetPos.y
-                },
-                1000
-            )
-        }
-
-        // TODO: 需要交换卡牌
-        
-    }
-
-    // 背景动画
-    private bgTween(): void {
-        const tw = egret.Tween.get(this.bg1, { loop: true });
-        tw.to({ rotation: 360 }, 30000).to({ rotation: 0 }, 0);
-    }
-
     // 两个玩家交换手牌动画
-    private playerSwitchCardAnim(uid0: number, uid1: number): void{
+    playerSwitchCardAnim(uid0: number, uid1: number): void {
         // 策略是用固定数量的动画来交换，正确数量的暂时没有更新
+        if (this.switchTween0) {
+            egret.Tween.removeTweens(this.switchTween0)
+        }
+        if (this.switchTween1) {
+            egret.Tween.removeTweens(this.switchTween1)
+        }
 
         // 为了减少遍历次数，用一个简单的map记录两个玩家的全局坐标
-        let playerPos: {[uid:number] : egret.Point} = {};
-        for (const uip of this.players){
-            if (uip.player.uid == uid0 || uip.player.uid == uid1){
+        let playerPos: { [uid: number]: egret.Point } = {};
+        for (const uip of this.players) {
+            if (uip.player.uid == uid0 || uip.player.uid == uid1) {
                 playerPos[uip.player.uid] = uip.parent.localToGlobal(uip.x, uip.y);
             }
         }
@@ -633,25 +595,31 @@ class UIMain extends eui.Component implements eui.UIComponent {
 
         this.switchCards0.visible = true;
         this.switchCards1.visible = true;
-        
-        let switchAnim0 = egret.Tween.get(this.switchCards0);
-        let switchAnim1 = egret.Tween.get(this.switchCards1);
 
-        switchAnim0.to(
+        this.switchTween0 = egret.Tween.get(this.switchCards0);
+        this.switchTween1 = egret.Tween.get(this.switchCards1);
+
+        this.switchTween0.to(
             {
                 x: playerPos[uid1].x,
                 y: playerPos[uid1].y
             },
-            1000
-        ).to({visible: false}, 0);
-        
-        switchAnim1.to(
+            600
+        ).to({ visible: false }, 0);
+
+        this.switchTween1.to(
             {
                 x: playerPos[uid0].x,
                 y: playerPos[uid0].y
             },
-            1000
-        ).to({visible: false}, 0);
+            600
+        ).to({ visible: false }, 0);
+    }
+
+    // 背景动画
+    private bgTween(): void {
+        const tw = egret.Tween.get(this.bg1, { loop: true });
+        tw.to({ rotation: 360 }, 30000).to({ rotation: 0 }, 0);
     }
 
     onHandsSelected(e: eui.PropertyEvent) {
@@ -662,10 +630,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
         );
     }
 
-    onCheckNextCard(e: eui.PropertyEvent) {
-        // 检查下一个张牌，关闭所有的pop弹窗
-        this.userDefuse(false, -1);
-    }
+
 
     onHandsRefresh(e?: eui.PropertyEvent) {
         this.setUserHands(User.inst.hands);
@@ -715,11 +680,11 @@ class UIMain extends eui.Component implements eui.UIComponent {
     }
 
     onBtnDefuseOptClick(opt: number) {
-        egret.log(`Defuse的手牌位置${this.defuseIdx}`);
-        egret.log(`炸弹放回选项为${opt}`);
+        console.log(`Defuse的手牌位置${this.defuseIdx}`);
+        console.log(`炸弹放回选项为${opt}`);
         const pos =
             opt === 0 ? Math.max(GameMgr.inst.stackCnt - 1, 0) : opt - 1;
-        egret.log(`将炸弹放到${pos}位置`);
+        console.log(`将炸弹放到${pos}位置`);
         this.userDefuse(false, this.defuseIdx);
         if (this.defuseIdx > -1) {
             this.userPlayCardAnim();

@@ -67,40 +67,40 @@ class GameMgr {
 
     getUid() {
         if (yess.exists) {
-            egret.log('NATIVE mode');
+            console.log('NATIVE mode');
             yess.getUid('platform.setUid');
         } else {
-            egret.log('TEST mode');
+            console.log('TEST mode');
             this.setUid(TestMode.MockUid);
         }
     }
 
     getWdh() {
         if (yess.exists) {
-            egret.log('NATIVE mode');
+            console.log('NATIVE mode');
             yess.getBombsWdh('platform.setWdh');
         } else {
-            egret.log('TEST mode');
+            console.log('TEST mode');
             this.setWdh(TestMode.MockWdh);
         }
     }
 
     getMatchInfo() {
         if (yess.exists) {
-            egret.log('NATIVE mode');
+            console.log('NATIVE mode');
             yess.getBombsMatchInfo('platform.setMatchInfo');
         } else {
-            egret.log('TEST mode');
+            console.log('TEST mode');
             this.setMatchInfo(TestMode.MockMatchInfo);
         }
     }
 
     getCookie() {
         if (yess.exists) {
-            egret.log('NATIVE mode');
+            console.log('NATIVE mode');
             yess.getCookie('http://47.94.202.234', 'platform.setCookie');
         } else {
-            egret.log('TEST mode');
+            console.log('TEST mode');
             this.setCookie(TestMode.MockCookie);
         }
     }
@@ -111,7 +111,7 @@ class GameMgr {
     }
 
     setUid(uid: string | number) {
-        egret.log(`UID: ${uid}`);
+        console.log(`UID: ${uid}`);
         if (this.$state === GameState.INIT) {
             this.$uid = +uid;
             this.tryInitGame();
@@ -119,7 +119,7 @@ class GameMgr {
     }
 
     setWdh(wdh: string | number) {
-        egret.log(`WDH: ${wdh}`);
+        console.log(`WDH: ${wdh}`);
         if (this.$state === GameState.INIT) {
             this.$wdh = +wdh;
             this.tryInitGame();
@@ -127,7 +127,7 @@ class GameMgr {
     }
 
     setMatchInfo(info: Native.IMatchInfo) {
-        egret.log(`GameState: ${this.$state}`);
+        console.log(`GameState: ${this.$state}`);
 
         if (this.$state === GameState.INIT) {
             this.$matchInfo = info;
@@ -141,7 +141,7 @@ class GameMgr {
     }
 
     setCookie(strCookie: string) {
-        egret.log(`cookie: ${strCookie}`);
+        console.log(`cookie: ${strCookie}`);
         if (this.$state === GameState.INIT) {
             this.$cookie = strCookie;
             this.tryInitGame();
@@ -173,7 +173,7 @@ class GameMgr {
             }
 
             if (tp.uid === User.inst.player.uid && rp.handsInfo) {
-                User.inst.hands = rp.handsInfo.cardIds;
+                User.inst.checkHands(rp.handsInfo.cardIds)
                 this.$uiMain.setUserHands(User.inst.hands);
                 if (tp.state === PlayerState.DEAD) {
                     NetMgr.inst.disconnect();
@@ -201,7 +201,7 @@ class GameMgr {
     }
 
     tryInitGame() {
-        egret.log('Try init game');
+        console.log('Try init game');
         if (
             this.$state === GameState.INIT &&
             this.$uid &&
@@ -216,7 +216,7 @@ class GameMgr {
     }
 
     private initGame() {
-        egret.log('Init game');
+        console.log('Init game');
 
         for (let i = 0; i < this.$players.length; i++) {
             if (this.$players[i].uid === this.$uid) {
@@ -228,10 +228,9 @@ class GameMgr {
 
         this.$uiMain.setPlayerData(this.$players, this.userSeat);
 
-        // egret.log(JSON.stringify(this.$matchInfo));
+        // console.log(JSON.stringify(this.$matchInfo));
 
         this.$rid = this.$matchInfo.matchid;
-        egret.log(`rid: ${this.$rid}`);
 
         this.$state = GameState.READY;
         NetMgr.inst.setUidAndRid(this.$uid, this.$rid);
@@ -269,12 +268,14 @@ class GameMgr {
         NetMgr.inst.req.joinRoom(joinRoomData);
     }
 
-    toDie() { }
+    toDie() {
+        NetMgr.inst.req.defuseFailed();
+    }
 
     toWin() { }
 
     startGame() {
-        egret.log('game start');
+        console.log('game start');
         this.$uiMain.updateHandsCnt();
         this.$uiMain.showHandsCnt(true);
         this.$uiMain.showGm(Config.Gm);
@@ -304,7 +305,7 @@ class GameMgr {
     }
 
     gameover(rankUids: number[]) {
-        egret.log('Game Over');
+        console.log('Game Over');
         NetMgr.inst.disconnect();
         const gameResultJson = JSON.stringify(rankUids)
             .replace('[', '')
@@ -312,10 +313,10 @@ class GameMgr {
         this.gameBombsEnd(2, this.$wdh, gameResultJson);
     }
 
-    drawCard(uid: number, card?: Card) {
-        if (uid === User.inst.player.uid && card !== undefined) {
+    drawCard(uid: number) {
+        if (uid === User.inst.player.uid) {
             // User
-            User.inst.nextCard = card;
+            // User.inst.nextCard = card;
         } else {
             // Others
             this.$uiMain.otherDrawCard(uid);

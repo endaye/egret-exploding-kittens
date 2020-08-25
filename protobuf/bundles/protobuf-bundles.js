@@ -2217,6 +2217,7 @@ $root.Msg = (function() {
                 case 9:
                 case 10:
                 case 11:
+                case 12:
                     break;
                 }
             if (message.joinRoomReq != null && message.hasOwnProperty("joinRoomReq")) {
@@ -2326,6 +2327,7 @@ $root.Msg = (function() {
          * @property {number} ERROR=9 ERROR value
          * @property {number} PICK_INFO_NTF=10 PICK_INFO_NTF value
          * @property {number} RELEASE_INFO_NTF=11 RELEASE_INFO_NTF value
+         * @property {number} DEFUSE_FAILED_REQ=12 DEFUSE_FAILED_REQ value
          */
         Message.CommandType = (function() {
             var valuesById = {}, values = Object.create(valuesById);
@@ -2341,6 +2343,7 @@ $root.Msg = (function() {
             values[valuesById[9] = "ERROR"] = 9;
             values[valuesById[10] = "PICK_INFO_NTF"] = 10;
             values[valuesById[11] = "RELEASE_INFO_NTF"] = 11;
+            values[valuesById[12] = "DEFUSE_FAILED_REQ"] = 12;
             return values;
         })();
 
