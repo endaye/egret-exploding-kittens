@@ -34,6 +34,8 @@ class UIMain extends eui.Component implements eui.UIComponent {
     gpDefuse: eui.Group;
     defuseFrame: eui.Image;
     defuseBg: eui.Image;
+    boom: eui.Image;
+    bang: eui.Image;
     btnDefuse: eui.Button;
     btnDefuseDisable: eui.Button;
     btnDefuseCancel: eui.Button;
@@ -51,6 +53,8 @@ class UIMain extends eui.Component implements eui.UIComponent {
     btnOpt6: eui.Button;
     btnOpt7: eui.Button;
     btnOpt8: eui.Button;
+    defuseBoomAnim: egret.Tween;
+    bangAnim: egret.Tween;
 
     // 被攻击弹窗
     gpAttack: eui.Group;
@@ -111,6 +115,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
         this.userAction(false);
 
         this.bgTween();
+        this.defuseAnim();
     }
 
     setPlayerData(data: Player[], userSeat: number) {
@@ -616,6 +621,29 @@ class UIMain extends eui.Component implements eui.UIComponent {
         ).to({ visible: false }, 0);
     }
 
+    // 玩家拆除页面
+    // 在外层判断拆弹状态，这里就没写了
+    defuseAnim(): void{
+        if (this.defuseBoomAnim){
+            egret.Tween.removeTweens(this.boom);
+        }
+        this.gpDefuse.visible = true;
+        this.defuseBoomAnim = egret.Tween.get(this.boom, {loop: true});
+        this.defuseBoomAnim.to({ scaleX: 1.2, scaleY: 1.2 }, 400).to({scaleX: 1, scaleY:1}, 300);
+
+    }
+
+    // 拆弹失败
+    boomBangAnim(): void{
+        if (this.bangAnim){
+            egret.Tween.removeTweens(this.bang);
+        }
+        
+        this.bangAnim = egret.Tween.get(this.bang);
+        this.bangAnim.to({visible: true}, 0).to({ scaleX: 1.2 }, 400, egret.Ease.circIn)
+            .to({ scaleY: 1.5 }, 300, egret.Ease.circIn);
+    }
+
     // 背景动画
     private bgTween(): void {
         const tw = egret.Tween.get(this.bg1, { loop: true });
@@ -693,8 +721,18 @@ class UIMain extends eui.Component implements eui.UIComponent {
     }
 
     onBtnDefuseCancelClick() {
-        this.gpBoom.visible = false;
-        this.gpBang.visible = true;
+        // 炸弹先膨胀，然后爆炸
+        // 先移除，要不然那个循环的无法去除
+        egret.Tween.removeTweens(this.boom);
+        this.defuseBoomAnim = egret.Tween.get(this.boom);
+        this.defuseBoomAnim.to({scaleX: 1.6, scaleY: 1.6}, 800).to({visible: false}, 0).
+        call(
+            ()=>{
+                this.gpBoom.visible = false;
+                this.gpBang.visible = true;
+                this.boomBangAnim();
+            }
+        );
         GameMgr.inst.toDie();
     }
 

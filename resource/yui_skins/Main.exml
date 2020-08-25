@@ -67,7 +67,7 @@
 	<e:Group id="gpDefuse" left="0" right="0" top="0" bottom="0" visible="false">
 		<e:Image id="defuseFrame" source="Damage_Frame_png" top="0" bottom="0" left="0" right="0" scale9Grid="48,47,48,47"/>
 		<e:Image id="defuseBg" source="Damage_Frame_png" top="-50" bottom="-50" left="-50" right="-50" scale9Grid="48,47,48,47" visible="false"/>
-		<e:Group id="gpBoom" width="400" height="600" verticalCenter="0" horizontalCenter="0" visible="false">
+		<e:Group id="gpBoom" width="400" height="600" verticalCenter="0" horizontalCenter="0">
 			<e:Image id="boomBg" source="Boom_Bg_png" x="95.85" y="268" anchorOffsetX="0" width="216.31" anchorOffsetY="0" height="148" scaleX="1" scaleY="1"/>
 			<e:Image id="boom" source="Boom_png" x="80.44" y="47.24" scaleX="1" scaleY="1"/>
 			<e:Button id="btnDefuse" label="拆除" x="140" y="560" width="128" height="56" scaleX="1" scaleY="1" skinName="yui.BtnRed"/>
