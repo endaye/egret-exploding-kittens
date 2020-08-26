@@ -628,6 +628,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
                 selectedIndex: this.hands.selectedIndex,
             })
         );
+        this.onHandsRefresh();
     }
 
 
