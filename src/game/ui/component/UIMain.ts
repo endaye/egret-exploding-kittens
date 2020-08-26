@@ -79,6 +79,9 @@ class UIMain extends eui.Component implements eui.UIComponent {
     switchTween0: egret.Tween; // 换牌的tween
     switchTween1: egret.Tween; // 换牌的tween
 
+    // 洗牌用到的动画
+    shuffleAnim: egret.tween.TweenGroup;
+    shuffleCard: eui.Image;
 
     // 压力表
     boomPin: eui.Image;
@@ -115,7 +118,6 @@ class UIMain extends eui.Component implements eui.UIComponent {
         this.userAction(false);
 
         this.bgTween();
-        this.defuseAnim();
     }
 
     setPlayerData(data: Player[], userSeat: number) {
@@ -642,6 +644,11 @@ class UIMain extends eui.Component implements eui.UIComponent {
         this.bangAnim = egret.Tween.get(this.bang);
         this.bangAnim.to({visible: true}, 0).to({ scaleX: 1.2 }, 400, egret.Ease.circIn)
             .to({ scaleY: 1.5 }, 300, egret.Ease.circIn);
+    }
+
+    // 洗牌动画
+    playShuffleAnim(): void{
+        this.shuffleAnim.play();
     }
 
     // 背景动画

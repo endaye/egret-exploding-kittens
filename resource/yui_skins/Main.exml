@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin width="640" height="1136" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" class="yui.Main">
+<e:Skin width="640" height="1136" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" xmlns:tween="egret.tween.*" class="yui.Main">
+	<w:Declarations>
+		<tween:TweenGroup id="shuffleAnim">
+			<tween:TweenItem target="{shuffleCard}">
+				<tween:To duration="300">
+				<tween:props>
+					<e:Object rotation="{30}" x="{380}" y="{422.46}" scaleX="{0.9}"/>
+				</tween:props>
+				</tween:To>
+				<tween:To duration="250">
+				<tween:props>
+					<e:Object rotation="{50}" x="{422.57}" y="{425.35}" scaleX="{0.4}"/>
+				</tween:props>
+				</tween:To>
+				<tween:To duration="450">
+				<tween:props>
+					<e:Object scaleX="{0.4}" rotation="{40}" x="{413.04}" y="{417.23}"/>
+				</tween:props>
+				</tween:To>
+				<tween:To duration="250">
+					<tween:props>
+						<e:Object x="{180}" scaleX="{1}" rotation="{0}" y="{441.74}"/>
+					</tween:props>
+				</tween:To>
+			</tween:TweenItem>
+		</tween:TweenGroup>
+	</w:Declarations>
 	<e:Image id="template" source="Game_Overview_png" top="0" bottom="-143" left="20" right="20" locked="true" visible="false"/>
 	<e:Image id="bg0" source="Background_0_png" left="0" right="0" top="0" bottom="0" locked="true" visible="false"/>
 	<e:Image id="bg1" source="Background_1_png" anchorOffsetX="360" anchorOffsetY="360" width="720" y="342" height="720" horizontalCenter="0" locked="true"/>
@@ -8,10 +34,10 @@
 	<e:Image id="direction" source="Direction_png" x="320" y="360" anchorOffsetX="30" width="60" anchorOffsetY="25" height="50" scaleX="-1"/>
 	<e:Image id="boomPanel" source="Boom_Panel_png" x="59.2" y="519.5" anchorOffsetX="0" width="180.09" anchorOffsetY="0" height="82.24"/>
 	<e:Image id="boomPin" source="Boom_Pin_png" x="102.41" y="558.92" anchorOffsetX="5" width="10" anchorOffsetY="22" height="27"/>
-	<e:Image id="stack" source="Deck_png" x="180" y="441.74" anchorOffsetX="0" width="120" anchorOffsetY="0" height="160"/>
+	<e:Image id="stack" source="Deck_png" x="180" y="441.74" anchorOffsetX="0" width="120" anchorOffsetY="0" height="160" visible="false"/>
 
 	<e:Image id="playArea" source="Deck_png" x="320" y="441.74" anchorOffsetX="0" width="120" anchorOffsetY="0" height="160" locked="true" visible="false"/>
-	<e:Label id="stackCnt" text="剩余0涨" x="175.29" y="610" size="16" fontFamily="Microsoft YaHei" height="16" width="128" textAlign="center"/>
+	<e:Label id="stackCnt" text="剩余0张" x="175.29" y="610" size="16" fontFamily="Microsoft YaHei" height="16" width="128" textAlign="center"/>
 
 	<e:Image id="fg0" source="Foreground_png" left="0" right="0" scale9Grid="0,70,413,122" bottom="-49" anchorOffsetY="0" height="349"/>
 	<e:Button id="btnDrawCard" label="摸牌" x="173" y="665" width="128" height="56" enabled="true" skinName="yui.BtnYellow"/>
@@ -41,6 +67,7 @@
 	<e:Label id="userName" text="名字名字名字名字" x="144.25" y="854" size="16" fontFamily="Microsoft YaHei" height="16" width="128"/>
 
 	<e:Image id="deck" source="Deck_png" x="180" y="441.74" anchorOffsetX="0" width="120" anchorOffsetY="0" height="160"/>
+	<e:Image id="shuffleCard" source="Deck_png" x="180" y="441.74" anchorOffsetX="0" width="120" anchorOffsetY="0" height="160"/>
 	<e:Image id="favorBg" source="Damage_Frame_png" top="-50" bottom="-50" left="-50" right="-50" scale9Grid="48,47,48,47" visible="false"/>
 	<e:List id="hands" height="200" y="870.3" anchorOffsetY="0" itemRendererSkinName="yui.CardItem" horizontalCenter="0">
 		<e:ArrayCollection>
