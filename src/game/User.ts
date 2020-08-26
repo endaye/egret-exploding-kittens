@@ -54,7 +54,7 @@ class User {
 
     checkHands(cardIds: Card[]) {
         if (this.drawing) {
-            if (this.$hands.length = cardIds.length - 1) {
+            if (this.$hands.length === cardIds.length - 1) {
                 this.nextCard = cardIds[cardIds.length - 1]
                 this.checkNextCard();
             } else {
