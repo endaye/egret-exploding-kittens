@@ -323,11 +323,12 @@ class GameMgr {
         }
     }
 
-    playCard(uid: number, card?: Card) {
+    playCard(uid: number, card: Card) {
         if (uid === User.inst.player.uid) {
             // TODO: User play a card
-        } else if (card !== undefined) {
+        } else {
             this.$uiMain.otherPlayCard(uid, card);
         }
+        this.$uiMain.cardEffect(uid, card);
     }
 }
