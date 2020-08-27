@@ -54,11 +54,11 @@ class User {
 
     checkHands(cardIds: Card[]) {
         if (this.drawing) {
-            if (this.$hands.length = cardIds.length - 1) {
+            if (this.$hands.length === cardIds.length - 1) {
                 this.nextCard = cardIds[cardIds.length - 1]
                 this.checkNextCard();
             } else {
-                throw Error('下发下发手牌有误');
+                throw Error('下发手牌有误');
             }
             this.drawing = false;
         } else {
@@ -82,14 +82,8 @@ class User {
             cardIdx > this.hands.length - 1
         ) {
             return false;
-        } else if (this.hands.length === 1) {
-            return this.hands[0] !== Card.DEFUSE || this.hands[0] !== Card.BOOM;
-        } else {
-            return (
-                this.hands[cardIdx] !== Card.DEFUSE ||
-                this.hands[cardIdx] !== Card.BOOM
-            );
         }
+        return this.hands[cardIdx] != Card.DEFUSE && this.hands[cardIdx] !== Card.BOOM
     }
 
     private checkNextCard() {
