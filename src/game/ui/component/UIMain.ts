@@ -391,7 +391,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
 
     // 玩家拆弹
     userDefuse(show: boolean, defuseIdx?: number) {
-        // TODO: animation
+        this.defuseAnim();      // 弹出拆弹界面
         this.defuseBg.visible = false;
         this.gpDefuse.visible = show;
         this.defuseFrame.visible = true;
