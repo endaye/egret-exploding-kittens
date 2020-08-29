@@ -3,26 +3,39 @@
 	<w:Declarations>
 		<tween:TweenGroup id="shuffleAnim">
 			<tween:TweenItem target="{shuffleCard}">
-				<tween:To duration="250">
+				<tween:To duration="200">
 				<tween:props>
 					<e:Object rotation="{30}" scaleX="{0.9}" x="{356}" y="{433.44}"/>
 				</tween:props>
 				</tween:To>
-				<tween:To duration="250">
+				<tween:To duration="200">
 				<tween:props>
 					<e:Object rotation="{50}" x="{422.57}" y="{425.35}" scaleX="{0.4}"/>
 				</tween:props>
 				</tween:To>
-				<tween:To duration="250">
+				<tween:To duration="200">
 				<tween:props>
 					<e:Object scaleX="{0.4}" rotation="{40}" x="{392.85}" y="{432.29}"/>
 				</tween:props>
 				</tween:To>
-				<tween:To duration="250">
+				<tween:To duration="200">
 					<tween:props>
 						<e:Object x="{180}" scaleX="{1}" rotation="{0}" y="{441.74}"/>
 					</tween:props>
 				</tween:To>
+			</tween:TweenItem>
+			<tween:TweenItem target="{deck}">
+				<tween:Set>
+					<tween:props>
+						<e:Object alpha="{0}"/>
+					</tween:props>
+				</tween:Set>
+				<tween:Wait duration="400"/>
+				<tween:Set>
+					<tween:props>
+						<e:Object alpha="{1}"/>
+					</tween:props>
+				</tween:Set>
 			</tween:TweenItem>
 		</tween:TweenGroup>
 	</w:Declarations>
@@ -37,7 +50,7 @@
 	<e:Image id="stack" source="Deck_png" x="180" y="441.74" anchorOffsetX="0" width="120" anchorOffsetY="0" height="160"/>
 
 	<e:Image id="playArea" source="Deck_png" x="320" y="441.74" anchorOffsetX="0" width="120" anchorOffsetY="0" height="160" locked="true" visible="false"/>
-	<e:Image id="shuffleCard" source="Deck_png" x="180" y="441.74" anchorOffsetX="0" width="120" anchorOffsetY="0" height="160"/>
+	<e:Image id="shuffleCard" source="Deck_png" x="180" y="441.74" anchorOffsetX="0" width="120" anchorOffsetY="0" height="160" locked="true"/>
 	<e:Label id="stackCnt" text="剩余0张" x="175.29" y="610" size="16" fontFamily="Microsoft YaHei" height="16" width="128" textAlign="center"/>
 
 	<e:Image id="fg0" source="Foreground_png" left="0" right="0" scale9Grid="0,70,413,122" bottom="-49" anchorOffsetY="0" height="349"/>
