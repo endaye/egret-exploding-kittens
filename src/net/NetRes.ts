@@ -38,7 +38,6 @@ class NetRes {
     }
 
     gameRank(msg: Msg.IMessage) {
-        console.log('=====================================');
         console.log('res: GAME_RANK_NTF');
         if (msg.gameRankingNtf) {
             console.log(msg.gameRankingNtf);
