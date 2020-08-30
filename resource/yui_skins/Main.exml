@@ -58,13 +58,13 @@
 	<e:Button id="btnPlayCardDisable" label="出牌" x="342" y="664" anchorOffsetX="0" width="128" anchorOffsetY="0" height="56" enabled="true" skinName="yui.BtnGrey"/>
 	<e:Button id="btnPlayCard" label="出牌" x="342" y="664" anchorOffsetX="0" width="128" anchorOffsetY="0" height="56" enabled="true" skinName="yui.BtnGreen"/>
 	<e:Button id="btnExit" label="Button" enabled="true" x="37.87" y="50.09" skinName="yui.BtnExit"/>
-	<e:Group id="switchCards0" width="67" height="60" y="324" anchorOffsetY="0" x="290" anchorOffsetX="0" locked="true" visible="false">
+	<e:Group id="swapCards0" width="67" height="60" y="324" anchorOffsetY="0" x="290" anchorOffsetX="0" locked="true" visible="false">
 		<e:Image id="deck3" source="Deck_png" x="-1" y="0" anchorOffsetX="0" width="45" anchorOffsetY="0" height="60"/>
 		<e:Image id="deck0" source="Deck_png" x="7" y="0" anchorOffsetX="0" width="45" anchorOffsetY="0" height="60"/>
 		<e:Image id="deck1" source="Deck_png" x="14" y="0" anchorOffsetX="0" width="45" anchorOffsetY="0" height="60"/>
 		<e:Image id="deck2" source="Deck_png" x="21.5" y="0" anchorOffsetX="0" width="45" anchorOffsetY="0" height="60"/>
 	</e:Group>
-	<e:Group id="switchCards1" width="67" height="60" y="324" anchorOffsetY="0" x="400" anchorOffsetX="0" locked="true" visible="false">
+	<e:Group id="swapCards1" width="67" height="60" y="324" anchorOffsetY="0" x="400" anchorOffsetX="0" locked="true" visible="false">
 		<e:Image id="deck4" source="Deck_png" x="-1" y="0" anchorOffsetX="0" width="45" anchorOffsetY="0" height="60"/>
 		<e:Image id="deck5" source="Deck_png" x="7" y="0" anchorOffsetX="0" width="45" anchorOffsetY="0" height="60"/>
 		<e:Image id="deck6" source="Deck_png" x="14" y="0" anchorOffsetX="0" width="45" anchorOffsetY="0" height="60"/>

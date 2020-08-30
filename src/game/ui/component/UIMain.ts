@@ -56,6 +56,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
     defuseBoomAnim: egret.Tween;
     bangAnim: egret.Tween;
 
+
     // 被攻击弹窗
     gpAttack: eui.Group;
 
@@ -76,8 +77,8 @@ class UIMain extends eui.Component implements eui.UIComponent {
 
     deckTween: egret.Tween; // 抓拍摸牌的tween
     attackTween: egret.Tween; // 甩锅的tween
-    switchTween0: egret.Tween; // 换牌的tween
-    switchTween1: egret.Tween; // 换牌的tween
+    swapTween0: egret.Tween; // 换牌的tween
+    swapTween1: egret.Tween; // 换牌的tween
 
     // 洗牌用到的动画
     shuffleAnim: egret.tween.TweenGroup;
@@ -87,8 +88,8 @@ class UIMain extends eui.Component implements eui.UIComponent {
     boomPin: eui.Image;
 
     // 交换手牌动画用的卡组
-    switchCards0: eui.Group;
-    switchCards1: eui.Group;
+    swapCards0: eui.Group;
+    swapCards1: eui.Group;
 
     private cardSmScale = 0.5;
     private cardsArray: eui.ArrayCollection = new eui.ArrayCollection();
@@ -343,6 +344,17 @@ class UIMain extends eui.Component implements eui.UIComponent {
         }
     }
 
+    // 玩家选择交换目标
+    userSwap() {
+        for (let i = 0; i < this.players.length; i++) {
+            const ui = this.players[i];
+            const show =
+                ui.player.uid !== User.inst.player.uid &&
+                ui.player.state !== PlayerState.DEAD;
+            ui.showBtnSwap(show);
+        }
+    }
+
     // 玩家看预言第几张雷
     userPredict(show: boolean) {
         this.gpPredict.visible = show;
@@ -491,7 +503,10 @@ class UIMain extends eui.Component implements eui.UIComponent {
 
     cardEffect(uid: number, card: Card) {
         if (card === Card.SHUFFLE) {
-            this.playShuffleAnim()
+            this.playShuffleAnim();
+        }
+        else if (card === Card.SWAP){
+            this.userSwap();
         }
     }
 
@@ -583,13 +598,13 @@ class UIMain extends eui.Component implements eui.UIComponent {
     }
 
     // 两个玩家交换手牌动画
-    playerSwitchCardAnim(uid0: number, uid1: number): void {
+    playerSwapCardAnim(uid0: number, uid1: number): void {
         // 策略是用固定数量的动画来交换，正确数量的暂时没有更新
-        if (this.switchTween0) {
-            egret.Tween.removeTweens(this.switchTween0)
+        if (this.swapTween0) {
+            egret.Tween.removeTweens(this.swapTween0)
         }
-        if (this.switchTween1) {
-            egret.Tween.removeTweens(this.switchTween1)
+        if (this.swapTween1) {
+            egret.Tween.removeTweens(this.swapTween1)
         }
 
         // 为了减少遍历次数，用一个简单的map记录两个玩家的全局坐标
@@ -601,18 +616,18 @@ class UIMain extends eui.Component implements eui.UIComponent {
         }
 
         // 先把预置好的卡牌放在合适位置，这样不会突兀
-        this.switchCards0.x = playerPos[uid0].x;
-        this.switchCards0.y = playerPos[uid0].y;
-        this.switchCards1.x = playerPos[uid1].x;
-        this.switchCards1.y = playerPos[uid1].y;
+        this.swapCards0.x = playerPos[uid0].x;
+        this.swapCards0.y = playerPos[uid0].y;
+        this.swapCards1.x = playerPos[uid1].x;
+        this.swapCards1.y = playerPos[uid1].y;
 
-        this.switchCards0.visible = true;
-        this.switchCards1.visible = true;
+        this.swapCards0.visible = true;
+        this.swapCards1.visible = true;
 
-        this.switchTween0 = egret.Tween.get(this.switchCards0);
-        this.switchTween1 = egret.Tween.get(this.switchCards1);
+        this.swapTween0 = egret.Tween.get(this.swapCards0);
+        this.swapTween1 = egret.Tween.get(this.swapCards1);
 
-        this.switchTween0.to(
+        this.swapTween0.to(
             {
                 x: playerPos[uid1].x,
                 y: playerPos[uid1].y
@@ -620,7 +635,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
             600
         ).to({ visible: false }, 0);
 
-        this.switchTween1.to(
+        this.swapTween1.to(
             {
                 x: playerPos[uid0].x,
                 y: playerPos[uid0].y

@@ -75,6 +75,14 @@ class User {
         });
     }
 
+    swap(uid: number) {
+        NetMgr.inst.req.releaseCard({
+            cardId: this.prevCard as number,
+            targetId: uid,
+            favorPush: ReleaseMethod.NORMAL,
+        });
+    }
+
     ableToPlayACard(cardIdx: number): boolean {
         if (
             this.hands.length === 0 ||

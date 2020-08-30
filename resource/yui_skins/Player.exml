@@ -12,4 +12,5 @@
 	<e:Image id="boom" source="Boom_Sm_png" y="43" anchorOffsetX="62" width="124" anchorOffsetY="60" height="120" horizontalCenter="9" scaleX="1" scaleY="1" locked="true" visible="false"/>
 	<e:Image id="bang" source="Bang_Sm_png" y="37.89" anchorOffsetX="74.5" horizontalCenter="0.5" width="149" anchorOffsetY="76" height="152.22" scaleX="1" scaleY="1" locked="true" visible="false"/>
 	<e:Button id="btnAttack" label="攻击" y="165" skinName="yui.BtnRed" horizontalCenter="0" locked="true" visible="false"/>
+	<e:Button id="btnSwap" label="交换" y="165" horizontalCenter="0" skinName="yui.BtnYellow" visible="false" locked="true"/>
 </e:Skin>

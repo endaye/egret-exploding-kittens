@@ -14,6 +14,7 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
     uiMain: UIMain;
 
     btnAttack: eui.Button;
+    btnSwap: eui.Button;
 
     // 缓存
     cacheState: PlayerState;
@@ -131,6 +132,10 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
 
     showBtnAttack(show: boolean): void {
         this.btnAttack.visible = show;
+    }
+
+    showBtnSwap(show: boolean): void{
+        this.btnSwap.visible = show;
     }
 
     setAvatar(avatar: string): void {

@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "description_json,Background_1_png,Background_2_lg_png,Background_2_png,Boom_Panel_png,Boom_Pin_png,Btn_Exit_png,Card_Attack_png,Card_Boom_png,Card_Defuse_png,Card_Draw_Last_png,Card_Favor_png,Card_Predict_png,Card_Reverse_png,Card_Shuffle_png,Card_Skip_png,Card_Swap_png,Card_Xray_png,Deck_png,Desk_png,Direction_png,Game_Overview_png,Hands_Count_Bg_png,Timer_Body_png,Timer_Pin_png,Foreground_png,Avatar_3_png,Avatar_4_png,Avatar_5_png,Avatar_6_png,Avatar_1_png,Avatar_2_png,Card_Attack_Double_png,button_down_png,button_up_png,Background_0_png,Boom_png,Boom_Bg_png,Pan_png,Pan_2_png,View_png,Boom_Sm_png,Bang_Sm_png,Pan_Sm_png,View_2_png,Hand_png,Bang_Spark_png,Bang_Fire_png,Bang_png,Damage_Frame_png,Btn_Yellow_png,Btn_Red_png,Btn_Grey_png,Btn_Green_png,10_second_countdown_mp3,auto_finish_and_win_mp3,card_move_mp3,card_draw_mp3,card_sent_1_mp3,card_sent_2_mp3,card_sent_3_mp3,card_sent_4_mp3,card_sent_5_mp3,card_sent_6_mp3,free_daily_coins_shower_sound_mp3,game_start_mp3,no_move_mp3,when_click_vegas_cross_mp3,you_lost_mp3",
+			"keys": "description_json,Background_1_png,Background_2_lg_png,Background_2_png,Boom_Panel_png,Boom_Pin_png,Btn_Exit_png,Card_Attack_png,Card_Boom_png,Card_Defuse_png,Card_Draw_Last_png,Card_Favor_png,Card_Predict_png,Card_Reverse_png,Card_Shuffle_png,Card_Skip_png,Card_Swap_png,Card_Xray_png,Deck_png,Desk_png,Direction_png,Game_Overview_png,Hands_Count_Bg_png,Timer_Body_png,Timer_Pin_png,Foreground_png,Avatar_3_png,Avatar_4_png,Avatar_5_png,Avatar_6_png,Avatar_1_png,Avatar_2_png,Card_Attack_Double_png,button_down_png,button_up_png,Background_0_png,Boom_png,Boom_Bg_png,Pan_png,Pan_2_png,View_png,Boom_Sm_png,Bang_Sm_png,Pan_Sm_png,View_2_png,Hand_png,Bang_Spark_png,Bang_Fire_png,Bang_png,Damage_Frame_png,Btn_Yellow_png,Btn_Red_png,Btn_Grey_png,Btn_Green_png,10_second_countdown_mp3,auto_finish_and_win_mp3,card_move_mp3,card_draw_mp3,card_sent_1_mp3,card_sent_2_mp3,card_sent_3_mp3,card_sent_4_mp3,card_sent_5_mp3,card_sent_6_mp3,free_daily_coins_shower_sound_mp3,game_start_mp3,no_move_mp3,when_click_vegas_cross_mp3,you_lost_mp3,10_second_countdown2_mp3,auto_finish_and_win2_mp3,card_draw2_mp3,card_move2_mp3,card_sent_12_mp3,card_sent_22_mp3,card_sent_32_mp3,card_sent_42_mp3,card_sent_52_mp3,card_sent_62_mp3,free_daily_coins_shower_sound2_mp3,game_start2_mp3,no_move2_mp3,when_click_vegas_cross2_mp3,you_lost2_mp3",
 			"name": "preload"
 		},
 		{
@@ -352,6 +352,81 @@
 		},
 		{
 			"name": "you_lost_mp3",
+			"type": "sound",
+			"url": "sound/you_lost.mp3"
+		},
+		{
+			"name": "10_second_countdown2_mp3",
+			"type": "sound",
+			"url": "sound/10_second_countdown.mp3"
+		},
+		{
+			"name": "auto_finish_and_win2_mp3",
+			"type": "sound",
+			"url": "sound/auto_finish_and_win.mp3"
+		},
+		{
+			"name": "card_draw2_mp3",
+			"type": "sound",
+			"url": "sound/card_draw.mp3"
+		},
+		{
+			"name": "card_move2_mp3",
+			"type": "sound",
+			"url": "sound/card_move.mp3"
+		},
+		{
+			"name": "card_sent_12_mp3",
+			"type": "sound",
+			"url": "sound/card_sent_1.mp3"
+		},
+		{
+			"name": "card_sent_22_mp3",
+			"type": "sound",
+			"url": "sound/card_sent_2.mp3"
+		},
+		{
+			"name": "card_sent_32_mp3",
+			"type": "sound",
+			"url": "sound/card_sent_3.mp3"
+		},
+		{
+			"name": "card_sent_42_mp3",
+			"type": "sound",
+			"url": "sound/card_sent_4.mp3"
+		},
+		{
+			"name": "card_sent_52_mp3",
+			"type": "sound",
+			"url": "sound/card_sent_5.mp3"
+		},
+		{
+			"name": "card_sent_62_mp3",
+			"type": "sound",
+			"url": "sound/card_sent_6.mp3"
+		},
+		{
+			"name": "free_daily_coins_shower_sound2_mp3",
+			"type": "sound",
+			"url": "sound/free_daily_coins_shower_sound.mp3"
+		},
+		{
+			"name": "game_start2_mp3",
+			"type": "sound",
+			"url": "sound/game_start.mp3"
+		},
+		{
+			"name": "no_move2_mp3",
+			"type": "sound",
+			"url": "sound/no_move.mp3"
+		},
+		{
+			"name": "when_click_vegas_cross2_mp3",
+			"type": "sound",
+			"url": "sound/when_click_vegas_cross.mp3"
+		},
+		{
+			"name": "you_lost2_mp3",
 			"type": "sound",
 			"url": "sound/you_lost.mp3"
 		}
