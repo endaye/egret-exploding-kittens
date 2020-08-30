@@ -45,6 +45,11 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
             this.onBtnAttackClick,
             this
         );
+        this.btnSwap.addEventListener(
+            egret.TouchEvent.TOUCH_TAP,
+            this.onBtnSwapClick,
+            this
+        );
     }
 
     setPlayer(player: Player, isUser: boolean = false): void {
@@ -159,6 +164,16 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
         // 攻击动画
         this.attackAnim();
 
+    }
+
+    onBtnSwapClick(): void {
+        User.inst.swap(this.player.uid);
+        if (this.uiMain){
+            this.uiMain.userSwap(false);
+        }
+
+        // 洗牌动画
+        this.uiMain.playerSwapCardAnim(this.player.uid, User.inst.player.uid);
     }
 
     // 头像环闪烁动画，表示正在出牌的玩家

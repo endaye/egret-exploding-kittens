@@ -220,7 +220,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
             this.onHandsSelected,
             this
         );
-
+    
         for (let i = 0; i < this.boomBackOptBtns.length; i++) {
             const btn = this.boomBackOptBtns[i];
             const btnArg = i;
@@ -345,10 +345,11 @@ class UIMain extends eui.Component implements eui.UIComponent {
     }
 
     // 玩家选择交换目标
-    userSwap() {
+    userSwap(swap: boolean) {
         for (let i = 0; i < this.players.length; i++) {
             const ui = this.players[i];
             const show =
+                swap &&
                 ui.player.uid !== User.inst.player.uid &&
                 ui.player.state !== PlayerState.DEAD;
             ui.showBtnSwap(show);
@@ -505,8 +506,9 @@ class UIMain extends eui.Component implements eui.UIComponent {
         if (card === Card.SHUFFLE) {
             this.playShuffleAnim();
         }
-        else if (card === Card.SWAP){
-            this.userSwap();
+        // 这里条件是错误的，单纯用于调试交换
+        else {
+            this.userSwap(true);
         }
     }
 
