@@ -13,15 +13,18 @@ class NetRes {
         this.handlers[Msg.Message.CommandType.RELEASE_INFO_NTF] = this.releaseInfo;
     }
 
+    // 收到服务器回包
     response(msg: Msg.IMessage) {
         // console.log(`res: ${msg.content}`);
         this.handlers[msg.cmd as Msg.Message.CommandType](msg);
     }
 
+    // 心跳
     heartBeat(msg: Msg.IMessage) {
         // console.log('res: HEARTBEAT_RESP');
     }
 
+    // 出牌
     releaseCard(msg: Msg.IMessage) {
         console.log('res: RELEASE_CARD_RESP');
         if (msg.releaseCardResp) {
@@ -29,6 +32,7 @@ class NetRes {
         }
     }
 
+    // 全房间信息
     roomInfo(msg: Msg.IMessage) {
         console.log('res: ROOM_INFO_NTF');
         if (msg.roomInfoNtf) {
@@ -37,6 +41,7 @@ class NetRes {
         }
     }
 
+    // 游戏排名
     gameRank(msg: Msg.IMessage) {
         console.log('res: GAME_RANK_NTF');
         if (msg.gameRankingNtf) {
@@ -45,6 +50,7 @@ class NetRes {
         }
     }
 
+    // 错误处理
     error(msg: Msg.IMessage) {
         console.log('res: ERROR');
         if (msg.err) {
@@ -53,6 +59,7 @@ class NetRes {
         }
     }
 
+    // 抓牌信息
     pickInfo(msg: Msg.IMessage) {
         console.log('res: PICK_INFO_NTF');
         if (msg.pickInfoNtf) {
@@ -61,6 +68,7 @@ class NetRes {
         }
     }
 
+    // 出牌通知
     releaseInfo(msg: Msg.IMessage) {
         console.log('res: RELEASE_INFO_NTF');
         if (msg.releaseInfoNtf) {
