@@ -44,6 +44,8 @@ class GameMgr {
     userSeat: number = 0;
     stackCnt: number = 0;
     aliveCnt: number = 0;
+    predictIndex: number = 0;   // 预言：炸弹在第几张
+    xrayCards: Card[] = [];   // 透视：三张牌
 
     get uid(): number {
         return this.$uid;
@@ -187,9 +189,7 @@ class GameMgr {
 
         this.$uiMain.userAction(User.inst.player.state === PlayerState.ACTION);
         this.$uiMain.userAttack(User.inst.player.state === PlayerState.ATTACK);
-        this.$uiMain.userPredict(
-            User.inst.player.state === PlayerState.PREDICT
-        );
+        this.$uiMain.userPredict(User.inst.player.state === PlayerState.ACTION);
         this.$uiMain.userXray(User.inst.player.state === PlayerState.XRAY);
     }
 
@@ -330,5 +330,14 @@ class GameMgr {
             this.$uiMain.otherPlayCard(uid, card);
         }
         this.$uiMain.cardEffect(uid, card);
+    }
+
+    playCardRes(res: ReleaseCard.IReleaseCardResponese) {
+        if (res.predictIndex) {
+            this.predictIndex = res.predictIndex
+        }
+        if (res.xrayCards) {
+            this.xrayCards = res.xrayCards
+        }
     }
 }

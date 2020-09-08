@@ -220,7 +220,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
             this.onHandsSelected,
             this
         );
-    
+
         for (let i = 0; i < this.boomBackOptBtns.length; i++) {
             const btn = this.boomBackOptBtns[i];
             const btnArg = i;
@@ -362,10 +362,11 @@ class UIMain extends eui.Component implements eui.UIComponent {
         if (!show) {
             return;
         }
-        if (User.inst.boomSeq > -1) {
-            this.predictBoomSeq.text = `第${User.inst.boomSeq + 1}张`;
+        if (GameMgr.inst.predictIndex > -1) {
+            this.predictBoomSeq.text = `第${GameMgr.inst.predictIndex}张`;
         } else {
             this.gpPredict.visible = false;
+            // console.error('GameMgr.inst.predictIndexy <= 0')
         }
     }
 
@@ -375,7 +376,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
         if (!show) {
             return;
         }
-        const card3: Card[] = User.inst.card3;
+        const card3: Card[] = GameMgr.inst.xrayCards;
         console.log(card3);
         if (card3 && card3.length > 0) {
             if (card3.length > 0) {
@@ -505,10 +506,13 @@ class UIMain extends eui.Component implements eui.UIComponent {
     cardEffect(uid: number, card: Card) {
         if (card === Card.SHUFFLE) {
             this.playShuffleAnim();
-        }
-        // 这里条件是错误的，单纯用于调试交换
-        else {
+        } else if (card == Card.SWAP) {
             this.userSwap(true);
+        } else if (card == Card.PREDICT) {
+            this.userPredict(true);
+        }
+        else {
+            // 这里条件是错误的，单纯用于调试交换
         }
     }
 

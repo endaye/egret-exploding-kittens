@@ -29,6 +29,7 @@ class NetRes {
         console.log('res: RELEASE_CARD_RESP');
         if (msg.releaseCardResp) {
             console.log(msg.releaseCardResp);
+            GameMgr.inst.playCardRes(msg.releaseCardResp)
         }
     }
 
