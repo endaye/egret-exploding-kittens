@@ -189,7 +189,9 @@ class GameMgr {
 
         this.$uiMain.userAction(User.inst.player.state === PlayerState.ACTION);
         this.$uiMain.userAttack(User.inst.player.state === PlayerState.ATTACK);
-        this.$uiMain.userPredict(User.inst.player.state === PlayerState.ACTION);
+        if (User.inst.player.state !== PlayerState.ACTION) {
+            this.$uiMain.userPredict(false);
+        }
         this.$uiMain.userXray(User.inst.player.state === PlayerState.XRAY);
     }
 
