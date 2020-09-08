@@ -46,7 +46,7 @@ class NetRes {
     gameRank(msg: Msg.IMessage) {
         console.log('res: GAME_RANK_NTF');
         if (msg.gameRankingNtf) {
-            console.log(msg.gameRankingNtf);
+            // console.log(msg.gameRankingNtf);
             GameMgr.inst.gameover(msg.gameRankingNtf.ranking);
         }
     }
@@ -64,7 +64,7 @@ class NetRes {
     pickInfo(msg: Msg.IMessage) {
         console.log('res: PICK_INFO_NTF');
         if (msg.pickInfoNtf) {
-            console.log(msg.pickInfoNtf);
+            // console.log(msg.pickInfoNtf);
             GameMgr.inst.drawCard(msg.pickInfoNtf.uid);
         }
     }
@@ -73,7 +73,7 @@ class NetRes {
     releaseInfo(msg: Msg.IMessage) {
         console.log('res: RELEASE_INFO_NTF');
         if (msg.releaseInfoNtf) {
-            console.log(msg.releaseInfoNtf);
+            // console.log(msg.releaseInfoNtf);
             GameMgr.inst.playCard(msg.releaseInfoNtf.uid, msg.releaseInfoNtf.cardId);
         }
     }
