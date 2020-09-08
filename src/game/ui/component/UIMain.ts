@@ -11,6 +11,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
     testCookie: eui.Button;
     testDie: eui.Button;
     testWin: eui.Button;
+
     player0: UIPlayer; // self user
     player1: UIPlayer;
     player2: UIPlayer;
@@ -296,16 +297,16 @@ class UIMain extends eui.Component implements eui.UIComponent {
         const boomCnt = GameMgr.inst.aliveCnt - 1;
         // console.log(`boomCnt=${boomCnt}, stackCnt=${GameMgr.inst.stackCnt}`)
         if (stackCnt >= 0 && boomCnt >= 0) {
-            this.updatePressure(boomCnt, stackCnt);
+            this.manometerAnim(boomCnt, stackCnt);
         } else if (boomCnt == 0) {
             console.warn(`压力表参数有误：boomCnt=${boomCnt}, stackCnt=${GameMgr.inst.stackCnt}`)
         }
     }
 
     // 实现压力表旋转动画
-    updatePressure(boomCnt: number, stackCnt: number): void {
+    manometerAnim(boomCnt: number, stackCnt: number): void {
         let thePin = egret.Tween.get(this.boomPin);
-        let arg: number = ((boomCnt / stackCnt) * 270 - 100) % 136;      // 最大角度135
+        let arg: number = (boomCnt / stackCnt - .6) * 270;      // 左右最大角度135, 0.6是为了更左倾
         thePin.to({ rotation: arg }, 1000);
     }
 
@@ -551,7 +552,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
             },
             600
             )
-        .to({ visible: false }, 0)
+            .to({ visible: false }, 0)
         // .call(() => {
         //     User.inst.checkHands();
         // });
