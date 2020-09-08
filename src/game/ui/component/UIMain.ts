@@ -511,8 +511,9 @@ class UIMain extends eui.Component implements eui.UIComponent {
             this.userSwap(true);
         } else if (card == Card.PREDICT) {
             this.userPredict(true);
-        }
-        else {
+        } else if (card == Card.XRAY) {
+            this.userXray(true);
+        } else {
             // 这里条件是错误的，单纯用于调试交换
         }
     }
