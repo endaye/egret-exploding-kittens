@@ -108,7 +108,7 @@
 		<e:Button id="testCookie" label="Cookie" x="100" y="150" scaleX="1" scaleY="1"/>
 
 	</e:Group>
-	<e:Group id="gpDefuse" left="0" right="0" top="0" bottom="0" anchorOffsetX="0" anchorOffsetY="0" visible="false">
+	<e:Group id="gpDefuse" left="0" right="0" top="0" bottom="0" anchorOffsetX="0" anchorOffsetY="0" visible="false" locked="true">
 		<e:Image id="defuseFrame" source="Damage_Frame_png" top="0" bottom="0" left="0" right="0" scale9Grid="48,47,48,47" locked="true"/>
 		<e:Image id="defuseBg" source="Damage_Frame_png" top="-50" bottom="-50" left="-50" right="-50" scale9Grid="48,47,48,47" visible="false"/>
 		<e:Group id="gpBoom" width="400" height="600" verticalCenter="0" horizontalCenter="0" locked="true">
@@ -138,11 +138,11 @@
 			</e:Group>
 		</e:Group>
 	</e:Group>
-	<e:Group id="gpAttack" left="0" right="0" top="0" bottom="0" visible="false">
+	<e:Group id="gpAttack" left="0" right="0" top="0" bottom="0" visible="false" locked="true">
 		<e:Image id="pan2" source="Pan_2_png" verticalCenter="-10" horizontalCenter="6"/>
 		<e:Image id="pan" source="Pan_png" verticalCenter="-66" horizontalCenter="-18"/>
 	</e:Group>
-	<e:Group id="gpPredict" left="0" right="0" top="0" bottom="0" visible="false">
+	<e:Group id="gpPredict" left="0" right="0" top="0" bottom="0" visible="false" locked="true">
 		<e:Image id="predictFrame" source="Damage_Frame_png" top="-50" bottom="-50" left="-50" right="-50" scale9Grid="48,47,48,47"/>
 		<e:Image id="predictCard" source="Deck_png" width="120" height="160" horizontalCenter="0" verticalCenter="-60"/>
 		<e:Label id="predictTitle1" text="定位" horizontalCenter="0" verticalCenter="-280" bold="true" size="44" fontFamily="Microsoft YaHei" textAlign="center" verticalAlign="middle"/>
@@ -151,7 +151,7 @@
 		<e:Button id="btnPredict" label="看到了" x="260" y="916.9" width="128" height="56" skinName="yui.BtnGreen"/>
 		<e:Image id="predictSeee" anchorOffsetX="0" width="400" anchorOffsetY="0" height="188" verticalCenter="136" horizontalCenter="0" x="123" y="602" scaleX="1" scaleY="1" source="View_2_png"/>
 	</e:Group>
-	<e:Group id="gpXray" left="0" right="0" top="0" bottom="0" visible="false">
+	<e:Group id="gpXray" left="0" right="0" top="0" bottom="0" visible="false" locked="true">
 		<e:Image id="xrayFrame" source="Damage_Frame_png" top="-50" bottom="-50" left="-50" right="-50" scale9Grid="48,47,48,47"/>
 		<e:Group id="gpXrayCards" width="400" height="600" verticalCenter="0" horizontalCenter="0">
 			<e:Image id="xrayCard1" source="Deck_png" width="120" height="160" horizontalCenter="-160" verticalCenter="-60"/>
@@ -160,6 +160,9 @@
 		</e:Group>
 		<e:Label id="xrayTitle1" text="透视" horizontalCenter="0" verticalCenter="-280" bold="true" size="44" fontFamily="Microsoft YaHei" textAlign="center" verticalAlign="middle"/>
 		<e:Label id="xrayTitle2" text="牌堆顶的3张牌" horizontalCenter="0" verticalCenter="-230" size="30" fontFamily="Microsoft YaHei" verticalAlign="middle" textAlign="center"/>
+		<e:Label id="slot1" text="第1张" horizontalCenter="-156" verticalCenter="64" fontFamily="Microsoft YaHei" size="24"/>
+		<e:Label id="slot2" text="第2张" horizontalCenter="0" verticalCenter="64" fontFamily="Microsoft YaHei" size="24"/>
+		<e:Label id="slot3" text="第3张" horizontalCenter="156" verticalCenter="64" fontFamily="Microsoft YaHei" size="24"/>
 		<e:Image id="xraySee" source="View_png" anchorOffsetX="0" width="400" anchorOffsetY="0" height="200" verticalCenter="148" horizontalCenter="0"/>
 		<e:Button id="btnXray" label="看到了" x="260" y="916.9" width="128" height="56" skinName="yui.BtnGreen"/>
 	</e:Group>
