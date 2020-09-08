@@ -551,7 +551,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
             },
             600
             )
-        // .to({ visible: false }, 0)
+        .to({ visible: false }, 0)
         // .call(() => {
         //     User.inst.checkHands();
         // });
