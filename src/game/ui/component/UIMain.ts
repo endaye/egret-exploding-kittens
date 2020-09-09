@@ -677,7 +677,8 @@ class UIMain extends eui.Component implements eui.UIComponent {
 
     // 洗牌动画
     playShuffleAnim(): void {
-        this.shuffleAnim.play();
+        // 参数0代表从头播放
+        this.shuffleAnim.play(0);
     }
 
     // 背景动画
