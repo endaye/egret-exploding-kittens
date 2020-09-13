@@ -57,8 +57,9 @@ message PickInfo {
 }
 
 message ReleaseInfo {
-  uint32 uid = 1;     // 出牌玩家id
-  uint32 cardId = 2;  // 卡牌id
+  uint32 uid = 1;               // 出牌玩家id
+  uint32 cardId = 2;            // 卡牌id
+  optional uint32 targetId = 3; // 目标玩家id
 }
 
 message GameRankingInfo { repeated uint32 ranking = 1; }
