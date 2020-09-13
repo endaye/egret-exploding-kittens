@@ -52,13 +52,9 @@ class User {
     }
 
     checkHands(cardIds: Card[]) {
-        if (this.drawing) {
-            if (this.$hands.length === cardIds.length - 1) {
-                this.nextCard = cardIds[cardIds.length - 1]
-                this.checkNextCard();
-            } else {
-                throw Error('下发手牌有误');
-            }
+        if (this.drawing && this.$hands.length === cardIds.length - 1) {
+            this.nextCard = cardIds[cardIds.length - 1]
+            this.checkNextCard();
             this.drawing = false;
         } else {
             this.hands = cardIds;
