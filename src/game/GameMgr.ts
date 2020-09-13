@@ -278,7 +278,7 @@ class GameMgr {
 
     startGame() {
         console.log('game start');
-        this.$uiMain.updateHandsCnt();
+        this.$uiMain.updatePlayers();
         this.$uiMain.showHandsCnt(true);
         this.$uiMain.showGm(Config.Gm);
     }
@@ -325,13 +325,13 @@ class GameMgr {
         }
     }
 
-    playCard(uid: number, card: Card) {
+    playCard(uid: number, card: Card, targetId?: number) {
         if (uid === User.inst.player.uid) {
             // TODO: User play a card
         } else {
             this.$uiMain.otherPlayCard(uid, card);
         }
-        this.$uiMain.cardEffect(uid, card);
+        this.$uiMain.cardEffect(uid, card, targetId);
     }
 
     playCardRes(res: ReleaseCard.IReleaseCardResponese) {

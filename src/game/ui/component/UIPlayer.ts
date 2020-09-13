@@ -155,9 +155,6 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
         if (this.uiMain) {
             this.uiMain.userAttack(false);
         }
-
-        // 攻击动画
-        this.attackAnim();
     }
 
     onBtnSwapClick(): void {
@@ -167,7 +164,7 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
         }
 
         // 交换手牌动画
-        this.uiMain.playerSwapCardAnim(this.player.uid, User.inst.player.uid);
+        this.uiMain.swapAnim(this.player.uid, User.inst.player.uid);
     }
 
     // 头像环闪烁动画，表示正在出牌的玩家

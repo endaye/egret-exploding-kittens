@@ -57,7 +57,6 @@ class UIMain extends eui.Component implements eui.UIComponent {
     defuseBoomAnim: egret.Tween;
     bangAnim: egret.Tween;
 
-
     // 被攻击弹窗
     gpAttack: eui.Group;
 
@@ -82,7 +81,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
     swapTween1: egret.Tween; // 换牌的tween
 
     // 洗牌用到的动画
-    shuffleAnim: egret.tween.TweenGroup;
+    shuffleTween: egret.tween.TweenGroup;
     shuffleCard: eui.Image;
 
     // 压力表
@@ -91,6 +90,10 @@ class UIMain extends eui.Component implements eui.UIComponent {
     // 交换手牌动画用的卡组
     swapCards0: eui.Group;
     swapCards1: eui.Group;
+
+    // 索要
+    favorBg: eui.Image;
+    favorHand: eui.Image;
 
     private cardSmScale = 0.5;
     private cardsArray: eui.ArrayCollection = new eui.ArrayCollection();
@@ -262,13 +265,12 @@ class UIMain extends eui.Component implements eui.UIComponent {
 
     updateRoomInfo() {
         this.updateDirection();
-        this.updateHandsCnt();
+        this.updatePlayers();
         this.updateStackCnt();
-        this.updateAttack();
         this.updateManometer();
     }
 
-    updateHandsCnt() {
+    updatePlayers() {
         for (let i = 0; i < this.players.length; i++) {
             this.players[i].update();
         }
@@ -282,16 +284,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
         this.direction.scaleX = GameMgr.inst.clockwise ? -1 : 1;
     }
 
-    updateAttack() {
-        this.gpAttack.visible = this.player0.player.attackMark > 0;
-        if (this.gpAttack.visible) {
-            setTimeout(() => {
-                this.gpAttack.visible = false;
-            }, 800);
-        }
-    }
-
-    // 更新压力表 
+    // 更新压力表
     updateManometer() {
         const stackCnt = GameMgr.inst.stackCnt;
         const boomCnt = GameMgr.inst.aliveCnt - 1;
@@ -299,14 +292,16 @@ class UIMain extends eui.Component implements eui.UIComponent {
         if (stackCnt >= 0 && boomCnt >= 0) {
             this.manometerAnim(boomCnt, stackCnt);
         } else if (boomCnt == 0) {
-            console.warn(`压力表参数有误：boomCnt=${boomCnt}, stackCnt=${GameMgr.inst.stackCnt}`)
+            console.warn(
+                `压力表参数有误：boomCnt=${boomCnt}, stackCnt=${GameMgr.inst.stackCnt}`
+            );
         }
     }
 
     // 实现压力表旋转动画
     manometerAnim(boomCnt: number, stackCnt: number): void {
         let thePin = egret.Tween.get(this.boomPin);
-        let arg: number = (boomCnt / stackCnt - .6) * 270;      // 左右最大角度135, 0.6是为了更左倾
+        let arg: number = (boomCnt / stackCnt - 0.6) * 270; // 左右最大角度135, 0.6是为了更左倾
         thePin.to({ rotation: arg }, 1000);
     }
 
@@ -406,7 +401,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
 
     // 玩家拆弹
     userDefuse(show: boolean, defuseIdx?: number) {
-        this.defuseAnim();      // 弹出拆弹界面
+        this.userDefuseAnim(); // 弹出拆弹界面
         this.defuseBg.visible = false;
         this.gpDefuse.visible = show;
         this.defuseFrame.visible = true;
@@ -446,13 +441,13 @@ class UIMain extends eui.Component implements eui.UIComponent {
                 this.deckTween = egret.Tween.get(this.deck);
                 this.deckTween
                     .to(
-                    {
-                        x: x,
-                        y: y,
-                        scaleX: this.cardSmScale,
-                        scaleY: this.cardSmScale,
-                    },
-                    600
+                        {
+                            x: x,
+                            y: y,
+                            scaleX: this.cardSmScale,
+                            scaleY: this.cardSmScale,
+                        },
+                        600
                     )
                     .to({ visible: false }, 0);
                 break;
@@ -484,13 +479,13 @@ class UIMain extends eui.Component implements eui.UIComponent {
                 this.deckTween = egret.Tween.get(this.deck);
                 this.deckTween
                     .to(
-                    {
-                        x: this.playArea.x,
-                        y: this.playArea.y,
-                        scaleX: this.playArea.scaleX,
-                        scaleY: this.playArea.scaleY,
-                    },
-                    600
+                        {
+                            x: this.playArea.x,
+                            y: this.playArea.y,
+                            scaleX: this.playArea.scaleX,
+                            scaleY: this.playArea.scaleY,
+                        },
+                        600
                     )
                     .to({ visible: false }, 0)
                     .call(() => {
@@ -504,19 +499,24 @@ class UIMain extends eui.Component implements eui.UIComponent {
         }
     }
 
-    cardEffect(uid: number, card: Card) {
+    cardEffect(uid: number, card: Card, targetId?: number) {
         if (card === Card.SHUFFLE) {
-            this.playShuffleAnim();
-        } else if (card == Card.SWAP) {
-            this.userSwap(true);
+            this.shuffleAnim();
         } else if (card == Card.PREDICT) {
             this.userPredict(true);
         } else if (card == Card.XRAY) {
             this.userXray(true);
         } else if (card == Card.DRAWBACK) {
             this.userDrawCardAnim();
-        }
-        else {
+        } else if (card == Card.ATTACK && targetId) {
+            if (targetId === User.inst.player.uid) {
+                // TODO: 播放玩家被攻击动画
+                this.userBeAttackedAnim();
+            } else {
+                // TODO: 播放其他玩家被攻击动画
+                this.otherBeAttackedAnim(targetId);
+            }
+        } else {
             // 这里条件是错误的，单纯用于调试交换
         }
     }
@@ -550,13 +550,13 @@ class UIMain extends eui.Component implements eui.UIComponent {
         this.deckTween = egret.Tween.get(this.deck);
         this.deckTween
             .to(
-            {
-                x: x,
-                y: y,
-            },
-            600
+                {
+                    x: x,
+                    y: y,
+                },
+                600
             )
-            .to({ visible: false }, 0)
+            .to({ visible: false }, 0);
         // .call(() => {
         //     User.inst.checkHands();
         // });
@@ -595,11 +595,11 @@ class UIMain extends eui.Component implements eui.UIComponent {
         this.deckTween = egret.Tween.get(this.deck);
         this.deckTween
             .to(
-            {
-                x: x,
-                y: y,
-            },
-            600
+                {
+                    x: x,
+                    y: y,
+                },
+                600
             )
             .to({ visible: false }, 0)
             .call(() => {
@@ -608,21 +608,51 @@ class UIMain extends eui.Component implements eui.UIComponent {
             });
     }
 
+    // 玩家被攻击动画
+    userBeAttackedAnim(): void {
+        // TODO: 之后添加动画
+        this.gpAttack.visible = true;
+        if (this.gpAttack.visible) {
+            setTimeout(() => {
+                this.gpAttack.visible = false;
+            }, 800);
+        }
+    }
+
+    // 其他玩家被攻击动画
+    otherBeAttackedAnim(targetId: number): void {
+        for (let i = 0; i < this.players.length; i++) {
+            if (this.players[i].player.uid === targetId) {
+                // TODO: 这里可能会和UIPlayer.ts中的updateAttackMark重复
+                this.players[i].attackAnim();
+            }
+        }
+    }
+
+    // 玩家被要手牌动画
+    userBeFavorAnim(): void {
+        this.favorBg.visible = true;
+        // TODO: 之后补上,用favorHand和favorBg做动画
+    }
+
     // 两个玩家交换手牌动画
-    playerSwapCardAnim(uid0: number, uid1: number): void {
+    swapAnim(uid0: number, uid1: number): void {
         // 策略是用固定数量的动画来交换，正确数量的暂时没有更新
         if (this.swapTween0) {
-            egret.Tween.removeTweens(this.swapTween0)
+            egret.Tween.removeTweens(this.swapTween0);
         }
         if (this.swapTween1) {
-            egret.Tween.removeTweens(this.swapTween1)
+            egret.Tween.removeTweens(this.swapTween1);
         }
 
         // 为了减少遍历次数，用一个简单的map记录两个玩家的全局坐标
         let playerPos: { [uid: number]: egret.Point } = {};
         for (const uip of this.players) {
             if (uip.player.uid == uid0 || uip.player.uid == uid1) {
-                playerPos[uip.player.uid] = uip.parent.localToGlobal(uip.x, uip.y);
+                playerPos[uip.player.uid] = uip.parent.localToGlobal(
+                    uip.x,
+                    uip.y
+                );
             }
         }
 
@@ -638,50 +668,57 @@ class UIMain extends eui.Component implements eui.UIComponent {
         this.swapTween0 = egret.Tween.get(this.swapCards0);
         this.swapTween1 = egret.Tween.get(this.swapCards1);
 
-        this.swapTween0.to(
-            {
-                x: playerPos[uid1].x,
-                y: playerPos[uid1].y
-            },
-            600
-        ).to({ visible: false }, 0);
+        this.swapTween0
+            .to(
+                {
+                    x: playerPos[uid1].x,
+                    y: playerPos[uid1].y,
+                },
+                600
+            )
+            .to({ visible: false }, 0);
 
-        this.swapTween1.to(
-            {
-                x: playerPos[uid0].x,
-                y: playerPos[uid0].y
-            },
-            600
-        ).to({ visible: false }, 0);
+        this.swapTween1
+            .to(
+                {
+                    x: playerPos[uid0].x,
+                    y: playerPos[uid0].y,
+                },
+                600
+            )
+            .to({ visible: false }, 0);
     }
 
     // 玩家拆除页面
     // 在外层判断拆弹状态，这里就没写了
-    defuseAnim(): void {
+    userDefuseAnim(): void {
         if (this.defuseBoomAnim) {
             egret.Tween.removeTweens(this.boom);
         }
         this.gpDefuse.visible = true;
         this.defuseBoomAnim = egret.Tween.get(this.boom, { loop: true });
-        this.defuseBoomAnim.to({ scaleX: 1.2, scaleY: 1.2 }, 400).to({ scaleX: 1, scaleY: 1 }, 300);
-
+        this.defuseBoomAnim
+            .to({ scaleX: 1.2, scaleY: 1.2 }, 400)
+            .to({ scaleX: 1, scaleY: 1 }, 300);
     }
 
     // 拆弹失败
-    boomBangAnim(): void {
+    userBangAnim(): void {
         if (this.bangAnim) {
             egret.Tween.removeTweens(this.bang);
         }
 
         this.bangAnim = egret.Tween.get(this.bang);
-        this.bangAnim.to({ visible: true }, 0).to({ scaleX: 1.2 }, 400, egret.Ease.circIn)
+        this.bangAnim
+            .to({ visible: true }, 0)
+            .to({ scaleX: 1.2 }, 400, egret.Ease.circIn)
             .to({ scaleY: 1.5 }, 300, egret.Ease.circIn);
     }
 
     // 洗牌动画
-    playShuffleAnim(): void {
+    shuffleAnim(): void {
         // 参数0代表从头播放
-        this.shuffleAnim.play(0);
+        this.shuffleTween.play(0);
     }
 
     // 背景动画
@@ -703,8 +740,8 @@ class UIMain extends eui.Component implements eui.UIComponent {
         this.setUserHands(User.inst.hands);
         this.userAction(
             User.inst.player.state === PlayerState.ACTION ||
-            User.inst.player.state === PlayerState.PREDICT ||
-            User.inst.player.state === PlayerState.XRAY
+                User.inst.player.state === PlayerState.PREDICT ||
+                User.inst.player.state === PlayerState.XRAY
         );
     }
 
@@ -764,14 +801,14 @@ class UIMain extends eui.Component implements eui.UIComponent {
         // 先移除，要不然那个循环的无法去除
         egret.Tween.removeTweens(this.boom);
         this.defuseBoomAnim = egret.Tween.get(this.boom);
-        this.defuseBoomAnim.to({ scaleX: 1.6, scaleY: 1.6 }, 800).to({ visible: false }, 0).
-            call(
-            () => {
+        this.defuseBoomAnim
+            .to({ scaleX: 1.6, scaleY: 1.6 }, 800)
+            .to({ visible: false }, 0)
+            .call(() => {
                 this.gpBoom.visible = false;
                 this.gpBang.visible = true;
-                this.boomBangAnim();
-            }
-            );
+                this.userBangAnim();
+            });
         GameMgr.inst.toDie();
     }
 

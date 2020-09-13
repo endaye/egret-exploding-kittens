@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin width="640" height="1136" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" xmlns:tween="egret.tween.*" class="yui.Main">
 	<w:Declarations>
-		<tween:TweenGroup id="shuffleAnim">
+		<tween:TweenGroup id="shuffleTween">
 			<tween:TweenItem target="{shuffleCard}">
 				<tween:To duration="200">
 				<tween:props>
