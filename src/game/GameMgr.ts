@@ -342,4 +342,12 @@ class GameMgr {
             this.xrayCards = res.xrayCards
         }
     }
+
+    userAttack(attack: boolean) {
+        this.$uiMain.userAttack(attack);
+    }
+
+    userSwap(swap: boolean) {
+        this.$uiMain.userSwap(swap);
+    }
 }

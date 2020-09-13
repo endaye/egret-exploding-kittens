@@ -40,22 +40,31 @@ class User {
     // 玩家出牌
     playACard(cardIdx: number, target?: number) {
         const card = this.$hands[cardIdx];
-        if (card === Card.DRAWBACK) {
-            this.drawing = this.drawing
-        } else if (card === Card.ATTACK || card === Card.ATTACK2) {
 
+        if (card === Card.DRAWBACK) {
+            this.drawing = true;
+        } else if (card === Card.ATTACK || card === Card.ATTACK2) {
+            GameMgr.inst.userAttack(true);
+            this.prevCard = this.hands.splice(cardIdx, 1)[0];
+            return;
+        } else if (card === Card.SWAP) {
+            GameMgr.inst.userSwap(true);
+            this.prevCard = this.hands.splice(cardIdx, 1)[0];
+            return;
         }
+
         NetMgr.inst.req.releaseCard({
             cardId: card,
             targetId: target,
             favorPush: ReleaseMethod.NORMAL,
         });
-        this.prevCard = this.hands.splice(cardIdx, 1)[0];
 
         GameDispatcher.inst.dispatchEvent(
             new egret.Event(EventName.HANDS_REFRESH, false, false)
         );
     }
+
+
 
     // 检查玩家手牌
     checkHands(cardIds: Card[]) {
@@ -69,19 +78,19 @@ class User {
     }
 
     // 攻击
-    attack(uid: number) {
+    attack(targetId: number) {
         NetMgr.inst.req.releaseCard({
             cardId: this.prevCard as number,
-            targetId: uid,
+            targetId: targetId,
             favorPush: ReleaseMethod.NORMAL,
         });
     }
 
     // 交换
-    swap(uid: number) {
+    swap(targetId: number) {
         NetMgr.inst.req.releaseCard({
             cardId: this.prevCard as number,
-            targetId: uid,
+            targetId: targetId,
             favorPush: ReleaseMethod.NORMAL,
         });
     }

@@ -61,7 +61,6 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
     }
 
     update(): void {
-
         this.updateHandsCnt();
         this.updateAttackMark();
         this.updateState();
@@ -78,11 +77,7 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
             return;
         }
         // 检查是否被攻击
-        if (this.player.attackMark > 0) {
-            this.attack.visible = true;
-        } else {
-            this.attack.visible = false;
-        }
+        this.attack.visible = this.player.attackMark > 0;
 
         // 刚刚被攻击
         if (this.player.attackMark > this.cacheAttackMark) {
@@ -139,7 +134,7 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
         this.btnAttack.visible = show;
     }
 
-    showBtnSwap(show: boolean): void{
+    showBtnSwap(show: boolean): void {
         this.btnSwap.visible = show;
     }
 
@@ -163,16 +158,15 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
 
         // 攻击动画
         this.attackAnim();
-
     }
 
     onBtnSwapClick(): void {
         User.inst.swap(this.player.uid);
-        if (this.uiMain){
+        if (this.uiMain) {
             this.uiMain.userSwap(false);
         }
 
-        // 洗牌动画
+        // 交换手牌动画
         this.uiMain.playerSwapCardAnim(this.player.uid, User.inst.player.uid);
     }
 
