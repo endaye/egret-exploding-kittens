@@ -31,14 +31,20 @@ class User {
         this.player.handsCnt = this.$hands.length;
     }
 
+    // 玩家摸牌
     drawACard() {
         this.drawing = true;
         NetMgr.inst.req.pickCard();
     }
 
+    // 玩家出牌
     playACard(cardIdx: number, target?: number) {
         const card = this.$hands[cardIdx];
-        this.drawing = this.drawing || card == Card.DRAWBACK
+        if (card === Card.DRAWBACK) {
+            this.drawing = this.drawing
+        } else if (card === Card.ATTACK || card === Card.ATTACK2) {
+
+        }
         NetMgr.inst.req.releaseCard({
             cardId: card,
             targetId: target,
@@ -51,6 +57,7 @@ class User {
         );
     }
 
+    // 检查玩家手牌
     checkHands(cardIds: Card[]) {
         if (this.drawing && this.$hands.length === cardIds.length - 1) {
             this.nextCard = cardIds[cardIds.length - 1]
@@ -61,7 +68,7 @@ class User {
         }
     }
 
-
+    // 攻击
     attack(uid: number) {
         NetMgr.inst.req.releaseCard({
             cardId: this.prevCard as number,
@@ -70,6 +77,7 @@ class User {
         });
     }
 
+    // 交换
     swap(uid: number) {
         NetMgr.inst.req.releaseCard({
             cardId: this.prevCard as number,
@@ -78,6 +86,7 @@ class User {
         });
     }
 
+    // 检查选择的牌是否可以出
     ableToPlayACard(cardIdx: number): boolean {
         if (
             this.hands.length === 0 ||
@@ -89,6 +98,7 @@ class User {
         return this.hands[cardIdx] != Card.DEFUSE && this.hands[cardIdx] !== Card.BOOM
     }
 
+    // 检查摸到的下一张牌
     private checkNextCard() {
         if (
             this.nextCard === Card.BOOM &&
@@ -110,6 +120,7 @@ class User {
         }
     }
 
+    // 从手牌中找到“拆弹”牌
     private getDefuseCard(): number {
         for (let i = 0; i < this.hands.length; i++) {
             if (this.hands[i] === Card.DEFUSE) {
