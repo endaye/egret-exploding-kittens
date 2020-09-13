@@ -6,11 +6,13 @@ class NetRes {
         this.handlers[
             Msg.Message.CommandType.RELEASE_CARD_RESP
         ] = this.releaseCard;
+        this.handlers[Msg.Message.CommandType.PICK_INFO_NTF] = this.pickInfo;
+        this.handlers[
+            Msg.Message.CommandType.RELEASE_INFO_NTF
+        ] = this.releaseInfo;
         this.handlers[Msg.Message.CommandType.ROOM_INFO_NTF] = this.roomInfo;
         this.handlers[Msg.Message.CommandType.GAME_RANK_NTF] = this.gameRank;
         this.handlers[Msg.Message.CommandType.ERROR] = this.error;
-        this.handlers[Msg.Message.CommandType.PICK_INFO_NTF] = this.pickInfo;
-        this.handlers[Msg.Message.CommandType.RELEASE_INFO_NTF] = this.releaseInfo;
     }
 
     // 收到服务器回包
@@ -29,7 +31,7 @@ class NetRes {
         console.log('res: RELEASE_CARD_RESP');
         if (msg.releaseCardResp) {
             console.log(msg.releaseCardResp);
-            GameMgr.inst.playCardRes(msg.releaseCardResp)
+            GameMgr.inst.playCardRes(msg.releaseCardResp);
         }
     }
 
@@ -74,7 +76,11 @@ class NetRes {
         console.log('res: RELEASE_INFO_NTF');
         if (msg.releaseInfoNtf) {
             // console.log(msg.releaseInfoNtf);
-            GameMgr.inst.playCard(msg.releaseInfoNtf.uid, msg.releaseInfoNtf.cardId);
+            GameMgr.inst.playCard(
+                msg.releaseInfoNtf.uid,
+                msg.releaseInfoNtf.cardId,
+                msg.releaseInfoNtf.targetId
+            );
         }
     }
 }
