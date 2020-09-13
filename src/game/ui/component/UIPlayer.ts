@@ -185,7 +185,7 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
 
     // 清除玩家身上的Action动画
     clearActionAnim(): void {
-        egret.Tween.removeTweens(this.avatarBg1);
+        egret.Tween.pauseTweens(this.avatarBg1);
         this.avatarBg1.visible = false;
     }
 
@@ -195,11 +195,12 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
         // loop动画之后需要remove
         const tw = egret.Tween.get(this.boom, { loop: true });
         tw.to({ scaleX: 1.2, scaleY: 1.2 }, 100);
+        egret.Tween.resumeTweens(this.boom);
     }
 
     // 清除玩家身上的Boom动画
     clearBoomAnim(): void {
-        egret.Tween.removeTweens(this.boom);
+        egret.Tween.pauseTweens(this.boom);
         this.boom.visible = false;
     }
 
@@ -210,7 +211,7 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
             .to({ scaleY: 1.5 }, 300, egret.Ease.circIn)
             .to({ visible: false }, 800)
             .call(() => {
-                egret.Tween.removeTweens(this.bang);
+                egret.Tween.pauseTweens(this.bang);
             });
     }
 
@@ -220,7 +221,7 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
         tw.to({ scaleX: 1.8 }, 1000, egret.Ease.circOut)
             .to({ scaleX: 1 }, 500, egret.Ease.circOut)
             .call(() => {
-                egret.Tween.removeTweens(this.attack);
+                egret.Tween.pauseTweens(this.attack);
             });
     }
 }

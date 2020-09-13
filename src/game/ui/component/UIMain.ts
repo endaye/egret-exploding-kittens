@@ -513,7 +513,10 @@ class UIMain extends eui.Component implements eui.UIComponent {
             this.userPredict(true);
         } else if (card == Card.XRAY) {
             this.userXray(true);
-        } else {
+        } else if (card == Card.DRAWBACK) {
+            this.userDrawCardAnim();
+        }
+        else {
             // 这里条件是错误的，单纯用于调试交换
         }
     }
