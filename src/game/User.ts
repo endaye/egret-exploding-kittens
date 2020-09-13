@@ -38,6 +38,7 @@ class User {
 
     playACard(cardIdx: number, target?: number) {
         const card = this.$hands[cardIdx];
+        this.drawing = card == Card.DRAWBACK
         NetMgr.inst.req.releaseCard({
             cardId: card,
             targetId: target,
