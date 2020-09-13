@@ -1335,6 +1335,7 @@ $root.Common = (function() {
          * @interface IReleaseInfo
          * @property {number|null} [uid] ReleaseInfo uid
          * @property {number|null} [cardId] ReleaseInfo cardId
+         * @property {number|null} [targetId] ReleaseInfo targetId
          */
 
         /**
@@ -1369,6 +1370,14 @@ $root.Common = (function() {
         ReleaseInfo.prototype.cardId = 0;
 
         /**
+         * ReleaseInfo targetId.
+         * @member {number} targetId
+         * @memberof Common.ReleaseInfo
+         * @instance
+         */
+        ReleaseInfo.prototype.targetId = 0;
+
+        /**
          * Creates a new ReleaseInfo instance using the specified properties.
          * @function create
          * @memberof Common.ReleaseInfo
@@ -1396,6 +1405,8 @@ $root.Common = (function() {
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.uid);
             if (message.cardId != null && Object.hasOwnProperty.call(message, "cardId"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.cardId);
+            if (message.targetId != null && Object.hasOwnProperty.call(message, "targetId"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.targetId);
             return writer;
         };
 
@@ -1435,6 +1446,9 @@ $root.Common = (function() {
                     break;
                 case 2:
                     message.cardId = reader.uint32();
+                    break;
+                case 3:
+                    message.targetId = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1477,6 +1491,9 @@ $root.Common = (function() {
             if (message.cardId != null && message.hasOwnProperty("cardId"))
                 if (!$util.isInteger(message.cardId))
                     return "cardId: integer expected";
+            if (message.targetId != null && message.hasOwnProperty("targetId"))
+                if (!$util.isInteger(message.targetId))
+                    return "targetId: integer expected";
             return null;
         };
 

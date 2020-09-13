@@ -603,6 +603,9 @@ declare namespace Common {
 
         /** ReleaseInfo cardId */
         cardId?: (number|null);
+
+        /** ReleaseInfo targetId */
+        targetId?: (number|null);
     }
 
     /** Represents a ReleaseInfo. */
@@ -619,6 +622,9 @@ declare namespace Common {
 
         /** ReleaseInfo cardId. */
         public cardId: number;
+
+        /** ReleaseInfo targetId. */
+        public targetId: number;
 
         /**
          * Creates a new ReleaseInfo instance using the specified properties.
