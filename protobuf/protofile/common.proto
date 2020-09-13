@@ -57,7 +57,7 @@ message PickInfo {
 }
 
 message ReleaseInfo {
-  uint32 uid = 1;     // 摸牌玩家id
+  uint32 uid = 1;     // 出牌玩家id
   uint32 cardId = 2;  // 卡牌id
 }
 
