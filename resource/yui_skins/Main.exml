@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin width="640" height="1136" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" xmlns:tween="egret.tween.*" class="yui.Main">
+	<w:Config id="1749090c2d1"/>
 	<w:Declarations>
 		<tween:TweenGroup id="shuffleTween">
 			<tween:TweenItem target="{shuffleCard}">
@@ -38,12 +39,55 @@
 				</tween:Set>
 			</tween:TweenItem>
 		</tween:TweenGroup>
+		<tween:TweenGroup id="attackTween">
+			<tween:TweenItem target="{pan}">
+				<tween:Set>
+				<tween:props>
+					<e:Object width="{117.42}" height="{149.33}" x="{213.3}" y="{555}" rotation="{234.23}"/>
+				</tween:props>
+				</tween:Set>
+				<tween:To duration="250">
+				<tween:props>
+					<e:Object rotation="{317.48}" width="{223.01}" height="{282.25}" x="{123.46}" y="{457.02}"/>
+				</tween:props>
+				</tween:To>
+				<tween:To duration="100">
+				<tween:props>
+					<e:Object rotation="{338.24}"/>
+				</tween:props>
+				</tween:To>
+				<tween:To duration="150">
+				<tween:props>
+					<e:Object rotation="{0.57}" width="{279.68}" height="{349.48}" x="{193.13}" y="{292.79}" scaleX="{1}" scaleY="{1}"/>
+				</tween:props>
+				</tween:To>
+			</tween:TweenItem>
+			<tween:TweenItem target="{pan2}">
+				<tween:Set>
+				<tween:props>
+					<e:Object alpha="{0}"/>
+				</tween:props>
+				</tween:Set>
+				<tween:To duration="300"/>
+				<tween:Wait duration="50"/>
+				<tween:Set>
+				<tween:props>
+					<e:Object alpha="{0}"/>
+				</tween:props>
+				</tween:Set>
+				<tween:To duration="150">
+				<tween:props>
+					<e:Object alpha="{1}"/>
+				</tween:props>
+				</tween:To>
+			</tween:TweenItem>
+		</tween:TweenGroup>
 	</w:Declarations>
 	<e:Image id="template" source="Game_Overview_png" top="0" bottom="-143" left="20" right="20" locked="true" visible="false"/>
 	<e:Image id="bg0" source="Background_0_png" left="0" right="0" top="0" bottom="0" locked="true" visible="false"/>
 	<e:Image id="bg1" source="Background_1_png" anchorOffsetX="360" anchorOffsetY="360" width="720" y="342" height="720" horizontalCenter="0" locked="true"/>
 	<e:Image id="bg2" source="Background_2_lg_png" x="-396.89" y="181.78" anchorOffsetX="0" width="1433.79" anchorOffsetY="0" height="737.28" locked="true"/>
-	<e:Image id="table" source="Desk_png" anchorOffsetX="0" width="566.7" anchorOffsetY="0" height="493.94" horizontalCenter="0" verticalCenter="-25" locked="true"/>
+	<e:Image id="table" source="Desk_png" anchorOffsetX="0" width="566.7" anchorOffsetY="0" height="493.94" horizontalCenter="0" verticalCenter="-25" locked="true" x="{225}" y="{44}"/>
 	<e:Image id="direction" source="Direction_png" anchorOffsetX="30" width="60" anchorOffsetY="25" height="50" scaleX="-1" verticalCenter="-188" horizontalCenter="0" locked="true"/>
 	<e:Group id="manometer" width="180.09" height="82.24" horizontalCenter="-172" verticalCenter="-2">
 		<e:Image id="boomPanel" source="Boom_Panel_png" anchorOffsetX="0" width="180.09" anchorOffsetY="0" height="82.24" x="0" y="0" scaleX="1" scaleY="1"/>
@@ -96,7 +140,7 @@
 		<e:HorizontalLayout horizontalAlign="center" verticalAlign="bottom" gap="-50"/>
 		</e:layout>
 	</e:List>
-	<e:Image id="favorHand" source="Hand_png" anchorOffsetX="0" width="302" anchorOffsetY="0" height="509" top="0" horizontalCenter="0" visible="false"/>
+	<e:Image id="favorHand" source="Hand_png" anchorOffsetX="0" width="302" anchorOffsetY="0" height="509" y="0" x="169" visible="false"/>
 	<e:Group id="gm" width="200" height="200" right="0" bottom="226" visible="false">
 		<e:Button id="testToast" label="Toast" x="0" y="50" scaleX="1" scaleY="1"/>
 		<e:Button id="testExit" label="Exit" x="0" y="0" scaleX="1" scaleY="1"/>
@@ -138,7 +182,7 @@
 			</e:Group>
 		</e:Group>
 	</e:Group>
-	<e:Group id="gpAttack" left="0" right="0" top="0" bottom="0" visible="false" locked="true">
+	<e:Group id="gpAttack" left="0" right="0" top="0" bottom="0" locked="true" visible="false">
 		<e:Image id="pan2" source="Pan_2_png" verticalCenter="-10" horizontalCenter="6"/>
 		<e:Image id="pan" source="Pan_png" verticalCenter="-66" horizontalCenter="-18"/>
 	</e:Group>

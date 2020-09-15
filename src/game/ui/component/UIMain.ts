@@ -76,7 +76,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
     boomBackOptBtns: eui.Button[];
 
     deckTween: egret.Tween; // 抓拍摸牌的tween
-    attackTween: egret.Tween; // 甩锅的tween
+    attackTween: egret.tween.TweenGroup; // 甩锅的tween
     swapTween0: egret.Tween; // 换牌的tween
     swapTween1: egret.Tween; // 换牌的tween
 
@@ -94,6 +94,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
     // 索要
     favorBg: eui.Image;
     favorHand: eui.Image;
+    favorAnim: egret.Tween;
 
     private cardSmScale = 0.5;
     private cardsArray: eui.ArrayCollection = new eui.ArrayCollection();
@@ -264,6 +265,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
     }
 
     updateRoomInfo() {
+        this.userBeFavorAnim();
         this.updateDirection();
         this.updatePlayers();
         this.updateStackCnt();
@@ -612,6 +614,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
     userBeAttackedAnim(): void {
         // TODO: 之后添加动画
         this.gpAttack.visible = true;
+        this.attackTween.play(0);
         if (this.gpAttack.visible) {
             setTimeout(() => {
                 this.gpAttack.visible = false;
@@ -632,7 +635,18 @@ class UIMain extends eui.Component implements eui.UIComponent {
     // 玩家被要手牌动画
     userBeFavorAnim(): void {
         this.favorBg.visible = true;
-        // TODO: 之后补上,用favorHand和favorBg做动画
+        this.favorHand.visible = true;
+        this.favorHand.y = -500; 
+        this.favorAnim = egret.Tween.get(this.favorHand);
+        this.favorAnim.to(
+            {
+                y: 0
+            }, 400
+        );
+        setTimeout(()=>{
+            this.favorBg.visible = false;
+            this.favorHand.visible = false;
+        }, 2000);
     }
 
     // 两个玩家交换手牌动画
