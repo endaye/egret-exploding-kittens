@@ -16,9 +16,12 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
     btnAttack: eui.Button;
     btnSwap: eui.Button;
 
+    // 攻击标志
+    attackMark: eui.Image;
+    attackMarkText: eui.Label;
+
     // 缓存
     cacheState: PlayerState;
-    cacheAttackMark: number;
 
     constructor() {
         super();
@@ -73,18 +76,14 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
     }
 
     updateAttackMark(): void {
-        if (this.player.attackMark === this.cacheAttackMark) {
-            return;
+        if (this.player.attackMark === 0) {
+            this.attackMark.visible = false;
+            this.attackMarkText.visible = false;
+        } else {
+            this.attackMark.visible = true;
+            this.attackMarkText.visible = true;
+            this.attackMarkText.text = 'x ' + this.player.attackMark;
         }
-        // 检查是否被攻击
-        this.attack.visible = this.player.attackMark > 0;
-
-        // 刚刚被攻击
-        if (this.player.attackMark > this.cacheAttackMark) {
-            this.attackAnim();
-        }
-
-        this.cacheAttackMark = this.player.attackMark;
     }
 
     updateState(): void {

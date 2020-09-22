@@ -168,7 +168,7 @@ class GameMgr {
             }
 
             // TODO: attack marks
-            tp.attackMark = 0;
+            tp.attackMark = rp.attackMark;
 
             if (tp.state !== PlayerState.DEAD) {
                 this.aliveCnt++;
