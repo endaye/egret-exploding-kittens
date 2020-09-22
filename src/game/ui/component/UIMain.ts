@@ -301,9 +301,14 @@ class UIMain extends eui.Component implements eui.UIComponent {
 
     // 实现压力表旋转动画
     manometerAnim(boomCnt: number, stackCnt: number): void {
-        let thePin = egret.Tween.get(this.boomPin);
-        let arg: number = (boomCnt / stackCnt - 0.6) * 270; // 左右最大角度135, 0.6是为了更左倾
-        thePin.to({ rotation: arg }, 1000);
+        if (stackCnt > 0) {
+            const tw = egret.Tween.get(this.boomPin);
+            const arg: number = (boomCnt / stackCnt - 0.6) * 270; // 左右最大角度135, 0.6是为了更左倾
+            tw.to({ rotation: arg }, 1000);
+            egret.Tween.resumeTweens(this.boom);
+        } else {
+            this.boomPin.rotation = 135; // 最大
+        }
     }
 
     showHandsCnt(show: boolean = true) {
@@ -374,7 +379,6 @@ class UIMain extends eui.Component implements eui.UIComponent {
             return;
         }
         const card3: Card[] = GameMgr.inst.xrayCards;
-        console.log(card3);
         if (card3 && card3.length > 0) {
             if (card3.length > 0) {
                 this.xrayCard1.visible = true;
