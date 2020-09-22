@@ -1,5 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="yui.Player" width="160" height="210" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+<e:Skin class="yui.Player" width="160" height="210" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" xmlns:tween="egret.tween.*" >
+	<w:Declarations>
+		<tween:TweenGroup id="beFavoredTween1">
+			<tween:TweenItem target="{favorDeck}">
+				<tween:Set>
+					<tween:props>
+						<e:Object alpha="{0}" y="{30}"/>
+					</tween:props>
+				</tween:Set>
+				<tween:Wait duration="600"/>
+				<tween:Set>
+					<tween:props>
+						<e:Object alpha="{1}" y="{30}"/>
+					</tween:props>
+				</tween:Set>
+				<tween:Wait duration="100"/>
+				<tween:Set>
+					<tween:props>
+						<e:Object y="{30}" alpha="{1}"/>
+					</tween:props>
+				</tween:Set>
+				<tween:To duration="300">
+					<tween:props>
+						<e:Object alpha="{0}" y="{-120}"/>
+					</tween:props>
+				</tween:To>
+			</tween:TweenItem>
+			<tween:TweenItem target="{favor}">
+				<tween:Set>
+					<tween:props>
+						<e:Object y="{-200}" alpha="{0}"/>
+					</tween:props>
+				</tween:Set>
+				<tween:To duration="500" ease="cubicIn">
+					<tween:props>
+						<e:Object y="{-40}" alpha="{1}"/>
+					</tween:props>
+				</tween:To>
+				<tween:To duration="100">
+					<tween:props>
+						<e:Object y="{-50}"/>
+					</tween:props>
+				</tween:To>
+				<tween:Wait duration="100"/>
+				<tween:Set>
+					<tween:props>
+						<e:Object alpha="{1}"/>
+					</tween:props>
+				</tween:Set>
+				<tween:To duration="300">
+					<tween:props>
+						<e:Object alpha="{0}" y="{-200}"/>
+					</tween:props>
+				</tween:To>
+			</tween:TweenItem>
+		</tween:TweenGroup>
+	</w:Declarations>
 	<w:Config id="1709a557744"/>
 	<e:Rect id="avatarBg0" width="100" height="100" ellipseHeight="120" ellipseWidth="120" horizontalCenter="0" top="0" anchorOffsetX="50" strokeAlpha="1" strokeWeight="10" strokeColor="0x4289a7" fillColor="0xffffff" locked="true"/>
 	<e:Rect id="avatarBg1" width="100" height="100" ellipseHeight="120" ellipseWidth="120" horizontalCenter="0" top="0" anchorOffsetX="50" strokeAlpha="1" strokeWeight="10" fillColor="0xFFFFFF" strokeColor="0xdfe510" visible="false" locked="true"/>
@@ -10,7 +66,9 @@
 	<e:Label id="handsCnt" text="99" y="130" fontFamily="Microsoft YaHei" size="16" anchorOffsetX="12" width="24" height="24" textAlign="center" verticalAlign="middle" horizontalCenter="0" textColor="0x3cb49e"/>
 	<e:Image id="attackMark" source="Pan_Sm_png" y="28.5" horizontalCenter="-32.5" scaleX="1" scaleY="1" anchorOffsetX="48" anchorOffsetY="46" width="59" height="67" visible="false"/>
 	<e:Label id="attackMarkText" text="x 0" y="1" fontFamily="Microsoft YaHei" size="30" anchorOffsetX="31" width="62" height="24" textAlign="left" verticalAlign="middle" horizontalCenter="24" textColor="0xffb900" bold="true" visible="false"/>
-	<e:Image id="attack" source="Pan_Sm_png" y="-21" horizontalCenter="4" scaleX="1" scaleY="1" locked="true" visible="false"/>
+	<e:Image id="favorDeck" y="30" horizontalCenter="0" scaleX="1" scaleY="1" source="Deck_png" width="89.5" height="116.5" alpha="0"/>
+	<e:Image id="favor" y="-58" horizontalCenter="6" scaleX="1" scaleY="1" source="Hand_Sm_png" alpha="0"/>
+	<e:Image id="attack" source="Pan_Sm_png" y="-21" horizontalCenter="4" scaleX="1" scaleY="1" visible="false" locked="true"/>
 	<e:Image id="boom" source="Boom_Sm_png" y="43" anchorOffsetX="62" width="124" anchorOffsetY="60" height="120" horizontalCenter="9" scaleX="1" scaleY="1" locked="true" visible="false"/>
 	<e:Image id="bang" source="Bang_Sm_png" y="37.89" anchorOffsetX="74.5" horizontalCenter="0.5" width="149" anchorOffsetY="76" height="152.22" scaleX="1" scaleY="1" locked="true" visible="false"/>
 	<e:Button id="btnAttack" label="攻击" y="165" skinName="yui.BtnRed" horizontalCenter="0" locked="true" visible="false"/>

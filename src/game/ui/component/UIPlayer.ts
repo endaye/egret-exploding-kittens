@@ -16,6 +16,9 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
     btnAttack: eui.Button;
     btnSwap: eui.Button;
 
+    // 被索要的动画
+    beFavoredTween1: egret.tween.TweenGroup;
+
     // 攻击标志
     attackMark: eui.Image;
     attackMarkText: eui.Label;
@@ -208,7 +211,7 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
     }
 
     // 攻击动画
-    attackAnim(): void {
+    beAttackAnim(): void {
         this.attack.visible = true;
         const tw = egret.Tween.get(this.attack);
         tw.to({ scaleX: 1.8 }, 1000, egret.Ease.circOut)
@@ -217,5 +220,10 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
                 this.attack.visible = false;
                 egret.Tween.pauseTweens(this.attack);
             });
+    }
+
+    // 被索要动画
+    beFavoredAnim(): void {
+        this.beFavoredTween1.play(0);
     }
 }

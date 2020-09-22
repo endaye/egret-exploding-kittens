@@ -265,7 +265,6 @@ class UIMain extends eui.Component implements eui.UIComponent {
     }
 
     updateRoomInfo() {
-        // this.userBeFavorAnim();
         this.updateDirection();
         this.updatePlayers();
         this.updateStackCnt();
@@ -518,6 +517,12 @@ class UIMain extends eui.Component implements eui.UIComponent {
                 // TODO: 播放其他玩家被攻击动画
                 this.otherBeAttackedAnim(targetId);
             }
+        } else if (card == Card.FAVOR) {
+            if (targetId === User.inst.player.uid) {
+                this.userBeFavoredAnim();
+            } else {
+                this.otherBeFavoredAnim(targetId);
+            }
         } else {
             // 这里条件是错误的，单纯用于调试交换
         }
@@ -559,11 +564,6 @@ class UIMain extends eui.Component implements eui.UIComponent {
             600
             )
             .to({ visible: false }, 0);
-        // .call(() => {
-        //     User.inst.checkHands();
-        // });
-
-        // 把上面注释了之后不会出现手牌有牌背面的bug
     }
 
     // 自己出牌
@@ -626,26 +626,35 @@ class UIMain extends eui.Component implements eui.UIComponent {
     otherBeAttackedAnim(targetId: number): void {
         for (let i = 0; i < this.players.length; i++) {
             if (this.players[i].player.uid === targetId) {
-                this.players[i].attackAnim();
+                this.players[i].beAttackAnim();
             }
         }
     }
 
     // 玩家被要手牌动画
-    userBeFavorAnim(): void {
+    userBeFavoredAnim(): void {
         this.favorBg.visible = true;
         this.favorHand.visible = true;
-        this.favorHand.y = -500; 
+        this.favorHand.y = -500;
         this.favorAnim = egret.Tween.get(this.favorHand);
         this.favorAnim.to(
             {
                 y: 0
             }, 400
         );
-        setTimeout(()=>{
+        setTimeout(() => {
             this.favorBg.visible = false;
             this.favorHand.visible = false;
         }, 2000);
+    }
+
+    // 其他玩家被索要动画
+    otherBeFavoredAnim(targetId: number): void {
+        for (let i = 0; i < this.players.length; i++) {
+            if (this.players[i].player.uid === targetId) {
+                this.players[i].beFavoredAnim();
+            }
+        }
     }
 
     // 两个玩家交换手牌动画
