@@ -115,6 +115,8 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
             this.dead.visible = true;
             this.avatarBg0.strokeColor = 0xcccccc;
             this.attack.visible = false;
+            this.attackMark.visible = false
+            this.attackMarkText.visible = false
             this.boom.visible = false;
             this.bang.visible = true;
             this.bangAnim();
@@ -207,10 +209,12 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
 
     // 攻击动画
     attackAnim(): void {
+        this.attack.visible = true;
         const tw = egret.Tween.get(this.attack);
         tw.to({ scaleX: 1.8 }, 1000, egret.Ease.circOut)
             .to({ scaleX: 1 }, 500, egret.Ease.circOut)
             .call(() => {
+                this.attack.visible = false;
                 egret.Tween.pauseTweens(this.attack);
             });
     }

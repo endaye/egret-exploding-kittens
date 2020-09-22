@@ -265,7 +265,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
     }
 
     updateRoomInfo() {
-        this.userBeFavorAnim();
+        // this.userBeFavorAnim();
         this.updateDirection();
         this.updatePlayers();
         this.updateStackCnt();

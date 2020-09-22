@@ -10,7 +10,7 @@
 	<e:Label id="handsCnt" text="99" y="130" fontFamily="Microsoft YaHei" size="16" anchorOffsetX="12" width="24" height="24" textAlign="center" verticalAlign="middle" horizontalCenter="0" textColor="0x3cb49e"/>
 	<e:Image id="attackMark" source="Pan_Sm_png" y="28.5" horizontalCenter="-32.5" scaleX="1" scaleY="1" anchorOffsetX="48" anchorOffsetY="46" width="59" height="67" visible="false"/>
 	<e:Label id="attackMarkText" text="x 0" y="1" fontFamily="Microsoft YaHei" size="30" anchorOffsetX="31" width="62" height="24" textAlign="left" verticalAlign="middle" horizontalCenter="24" textColor="0xffb900" bold="true" visible="false"/>
-	<e:Image id="attack" source="Pan_Sm_png" y="-21" horizontalCenter="4" scaleX="1" scaleY="1" visible="false" locked="true"/>
+	<e:Image id="attack" source="Pan_Sm_png" y="-21" horizontalCenter="4" scaleX="1" scaleY="1" locked="true" visible="false"/>
 	<e:Image id="boom" source="Boom_Sm_png" y="43" anchorOffsetX="62" width="124" anchorOffsetY="60" height="120" horizontalCenter="9" scaleX="1" scaleY="1" locked="true" visible="false"/>
 	<e:Image id="bang" source="Bang_Sm_png" y="37.89" anchorOffsetX="74.5" horizontalCenter="0.5" width="149" anchorOffsetY="76" height="152.22" scaleX="1" scaleY="1" locked="true" visible="false"/>
 	<e:Button id="btnAttack" label="攻击" y="165" skinName="yui.BtnRed" horizontalCenter="0" locked="true" visible="false"/>
