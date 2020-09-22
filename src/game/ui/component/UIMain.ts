@@ -446,13 +446,13 @@ class UIMain extends eui.Component implements eui.UIComponent {
                 this.deckTween = egret.Tween.get(this.deck);
                 this.deckTween
                     .to(
-                    {
-                        x: x,
-                        y: y,
-                        scaleX: this.cardSmScale,
-                        scaleY: this.cardSmScale,
-                    },
-                    600
+                        {
+                            x: x,
+                            y: y,
+                            scaleX: this.cardSmScale,
+                            scaleY: this.cardSmScale,
+                        },
+                        600
                     )
                     .to({ visible: false }, 0);
                 break;
@@ -484,13 +484,13 @@ class UIMain extends eui.Component implements eui.UIComponent {
                 this.deckTween = egret.Tween.get(this.deck);
                 this.deckTween
                     .to(
-                    {
-                        x: this.playArea.x,
-                        y: this.playArea.y,
-                        scaleX: this.playArea.scaleX,
-                        scaleY: this.playArea.scaleY,
-                    },
-                    600
+                        {
+                            x: this.playArea.x,
+                            y: this.playArea.y,
+                            scaleX: this.playArea.scaleX,
+                            scaleY: this.playArea.scaleY,
+                        },
+                        600
                     )
                     .to({ visible: false }, 0)
                     .call(() => {
@@ -561,11 +561,11 @@ class UIMain extends eui.Component implements eui.UIComponent {
         this.deckTween = egret.Tween.get(this.deck);
         this.deckTween
             .to(
-            {
-                x: x,
-                y: y,
-            },
-            600
+                {
+                    x: x,
+                    y: y,
+                },
+                600
             )
             .to({ visible: false }, 0);
     }
@@ -601,11 +601,11 @@ class UIMain extends eui.Component implements eui.UIComponent {
         this.deckTween = egret.Tween.get(this.deck);
         this.deckTween
             .to(
-            {
-                x: x,
-                y: y,
-            },
-            600
+                {
+                    x: x,
+                    y: y,
+                },
+                600
             )
             .to({ visible: false }, 0)
             .call(() => {
@@ -643,8 +643,9 @@ class UIMain extends eui.Component implements eui.UIComponent {
         this.favorAnim = egret.Tween.get(this.favorHand);
         this.favorAnim.to(
             {
-                y: 0
-            }, 400
+                y: 0,
+            },
+            400
         );
         setTimeout(() => {
             this.favorBg.visible = false;
@@ -696,21 +697,21 @@ class UIMain extends eui.Component implements eui.UIComponent {
 
         this.swapTween0
             .to(
-            {
-                x: playerPos[uid1].x,
-                y: playerPos[uid1].y,
-            },
-            600
+                {
+                    x: playerPos[uid1].x,
+                    y: playerPos[uid1].y,
+                },
+                600
             )
             .to({ visible: false }, 0);
 
         this.swapTween1
             .to(
-            {
-                x: playerPos[uid0].x,
-                y: playerPos[uid0].y,
-            },
-            600
+                {
+                    x: playerPos[uid0].x,
+                    y: playerPos[uid0].y,
+                },
+                600
             )
             .to({ visible: false }, 0);
     }
@@ -766,8 +767,8 @@ class UIMain extends eui.Component implements eui.UIComponent {
         this.setUserHands(User.inst.hands);
         this.userAction(
             User.inst.player.state === PlayerState.ACTION ||
-            User.inst.player.state === PlayerState.PREDICT ||
-            User.inst.player.state === PlayerState.XRAY
+                User.inst.player.state === PlayerState.PREDICT ||
+                User.inst.player.state === PlayerState.XRAY
         );
     }
 

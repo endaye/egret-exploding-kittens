@@ -5,8 +5,8 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
     handsCnt: eui.Label;
     player: Player;
     dead: eui.Rect;
-    avatarBg0: eui.Rect;    // 等待状态
-    avatarBg1: eui.Rect;    // 闪烁状态
+    avatarBg0: eui.Rect; // 等待状态
+    avatarBg1: eui.Rect; // 闪烁状态
     attack: eui.Image;
     boom: eui.Image;
     bang: eui.Image;
@@ -97,7 +97,10 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
         }
 
         // 检查Action状态
-        if (this.player.state === PlayerState.ACTION && this.player.state != this.cacheState) {
+        if (
+            this.player.state === PlayerState.ACTION &&
+            this.player.state != this.cacheState
+        ) {
             this.actionAnim();
         } else {
             this.clearActionAnim();
@@ -118,8 +121,8 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
             this.dead.visible = true;
             this.avatarBg0.strokeColor = 0xcccccc;
             this.attack.visible = false;
-            this.attackMark.visible = false
-            this.attackMarkText.visible = false
+            this.attackMark.visible = false;
+            this.attackMarkText.visible = false;
             this.boom.visible = false;
             this.bang.visible = true;
             this.bangAnim();

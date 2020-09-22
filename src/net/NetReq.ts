@@ -3,7 +3,7 @@ class NetReq {
     private $userId: number;
     private $roomNo: string;
 
-    constructor() { }
+    constructor() {}
 
     set userId(uid: number) {
         this.$userId = uid;

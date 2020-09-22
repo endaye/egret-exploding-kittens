@@ -24,7 +24,7 @@ class GameMgr {
         }
         return GameMgr.$mgr;
     }
-    private constructor() { }
+    private constructor() {}
 
     private $players: Player[] = [];
     private readonly $user: User = User.inst; // 玩家本人
@@ -44,8 +44,8 @@ class GameMgr {
     userSeat: number = 0;
     stackCnt: number = 0;
     aliveCnt: number = 0;
-    predictIndex: number = 0;   // 预言：炸弹在第几张
-    xrayCards: Card[] = [];   // 透视：三张牌
+    predictIndex: number = 0; // 预言：炸弹在第几张
+    xrayCards: Card[] = []; // 透视：三张牌
 
     get uid(): number {
         return this.$uid;
@@ -175,7 +175,7 @@ class GameMgr {
             }
 
             if (tp.uid === User.inst.player.uid && rp.handsInfo) {
-                User.inst.checkHands(rp.handsInfo.cardIds)
+                User.inst.checkHands(rp.handsInfo.cardIds);
                 this.$uiMain.setUserHands(User.inst.hands);
                 if (tp.state === PlayerState.DEAD) {
                     NetMgr.inst.disconnect();
@@ -274,7 +274,7 @@ class GameMgr {
         NetMgr.inst.req.defuseFailed();
     }
 
-    toWin() { }
+    toWin() {}
 
     startGame() {
         console.log('game start');
@@ -336,10 +336,10 @@ class GameMgr {
 
     playCardRes(res: ReleaseCard.IReleaseCardResponese) {
         if (res.predictIndex) {
-            this.predictIndex = res.predictIndex
+            this.predictIndex = res.predictIndex;
         }
         if (res.xrayCards) {
-            this.xrayCards = res.xrayCards
+            this.xrayCards = res.xrayCards;
         }
     }
 

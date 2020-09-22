@@ -11,7 +11,7 @@ class User {
         }
         return User.$user;
     }
-    private constructor() { }
+    private constructor() {}
 
     player: Player;
     private $hands: Card[] = []; // 手牌
@@ -64,12 +64,10 @@ class User {
         );
     }
 
-
-
     // 检查玩家手牌
     checkHands(cardIds: Card[]) {
         if (this.drawing && this.$hands.length === cardIds.length - 1) {
-            this.nextCard = cardIds[cardIds.length - 1]
+            this.nextCard = cardIds[cardIds.length - 1];
             this.checkNextCard();
             this.drawing = false;
         } else {
@@ -104,7 +102,10 @@ class User {
         ) {
             return false;
         }
-        return this.hands[cardIdx] != Card.DEFUSE && this.hands[cardIdx] !== Card.BOOM
+        return (
+            this.hands[cardIdx] != Card.DEFUSE &&
+            this.hands[cardIdx] !== Card.BOOM
+        );
     }
 
     // 检查摸到的下一张牌

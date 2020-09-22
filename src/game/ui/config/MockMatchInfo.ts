@@ -9,10 +9,12 @@ namespace TestMode {
      * 100 => 游戏结束
      */
 
-    const uids = [101, 102, 103, 104, 105, 106]
+    const uids = [101, 102, 103, 104, 105, 106];
 
     function getMatchId(isRandom = true) {
-        const matchid = isRandom ? Math.random().toString().substr(2, 16) : '1234567890123456';
+        const matchid = isRandom
+            ? Math.random().toString().substr(2, 16)
+            : '1234567890123456';
         console.log(`matchid: ${matchid}`);
         return matchid;
     }
