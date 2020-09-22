@@ -64,11 +64,11 @@
 	<e:Label id="playerName" text="名字名字名字名字" y="105" fontFamily="Microsoft YaHei" size="16" horizontalCenter="0"/>
 	<e:Rect id="handsBg" width="24" height="24" y="130" fillColor="0xc5f8f8" ellipseHeight="24" ellipseWidth="24" anchorOffsetX="12" horizontalCenter="0"/>
 	<e:Label id="handsCnt" text="99" y="130" fontFamily="Microsoft YaHei" size="16" anchorOffsetX="12" width="24" height="24" textAlign="center" verticalAlign="middle" horizontalCenter="0" textColor="0x3cb49e"/>
-	<e:Image id="attackMark" source="Pan_Sm_png" y="28.5" horizontalCenter="-32.5" scaleX="1" scaleY="1" anchorOffsetX="48" anchorOffsetY="46" width="59" height="67" visible="false"/>
-	<e:Label id="attackMarkText" text="x 0" y="1" fontFamily="Microsoft YaHei" size="30" anchorOffsetX="31" width="62" height="24" textAlign="left" verticalAlign="middle" horizontalCenter="24" textColor="0xffb900" bold="true" visible="false"/>
-	<e:Image id="favorDeck" y="30" horizontalCenter="0" scaleX="1" scaleY="1" source="Deck_png" width="89.5" height="116.5" alpha="0"/>
-	<e:Image id="favor" y="-58" horizontalCenter="6" scaleX="1" scaleY="1" source="Hand_Sm_png" alpha="0"/>
-	<e:Image id="attack" source="Pan_Sm_png" y="-21" horizontalCenter="4" scaleX="1" scaleY="1" visible="false" locked="true"/>
+	<e:Image id="attackMark" source="Pan_Sm_png" y="-11.49" horizontalCenter="-40.5" scaleX="1" scaleY="1" anchorOffsetX="48" anchorOffsetY="46" width="59" height="67"/>
+	<e:Label id="attackMarkText" text="x 0" y="-38.99" fontFamily="Microsoft YaHei" size="30" anchorOffsetX="31" width="62" height="24" textAlign="left" verticalAlign="middle" horizontalCenter="22" bold="true" textColor="0xffffff"/>
+	<e:Image id="favorDeck" y="30" horizontalCenter="0" scaleX="1" scaleY="1" source="Deck_png" width="89.5" height="116.5" alpha="0" locked="true"/>
+	<e:Image id="favor" y="-58" horizontalCenter="6" scaleX="1" scaleY="1" source="Hand_Sm_png" alpha="0" locked="true"/>
+	<e:Image id="attack" y="-21" horizontalCenter="4" scaleX="1" scaleY="1" source="Pan_Md_png" visible="false"/>
 	<e:Image id="boom" source="Boom_Sm_png" y="43" anchorOffsetX="62" width="124" anchorOffsetY="60" height="120" horizontalCenter="9" scaleX="1" scaleY="1" locked="true" visible="false"/>
 	<e:Image id="bang" source="Bang_Sm_png" y="37.89" anchorOffsetX="74.5" horizontalCenter="0.5" width="149" anchorOffsetY="76" height="152.22" scaleX="1" scaleY="1" locked="true" visible="false"/>
 	<e:Button id="btnAttack" label="攻击" y="165" skinName="yui.BtnRed" horizontalCenter="0" locked="true" visible="false"/>
