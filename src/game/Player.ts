@@ -8,8 +8,8 @@ enum PlayerState {
     ATTACK = 7, // 选择攻击对象
     PREDICT = 8, // 看预言牌阶段
     XRAY = 9, // 看透视牌阶段
-    FAVOR_1 = 10, // 选择索要对象
-    FAVOR_2 = 11, // 选择给出的牌
+    FAVOR_WAIT = 10, // 等待索要对象
+    FAVOR_ACTION = 11, // 选择给出的牌
     // SWAP = 12, // 玩家换牌
     DEAD = 12, // 死亡
 }

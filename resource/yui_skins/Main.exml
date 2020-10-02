@@ -140,6 +140,7 @@
 		<e:HorizontalLayout horizontalAlign="center" verticalAlign="bottom" gap="-50"/>
 		</e:layout>
 	</e:List>
+	<e:Button id="btnGiveAFavor" label="给予" anchorOffsetX="0" width="128" anchorOffsetY="0" height="56" enabled="true" skinName="yui.BtnGreen" bottom="320" horizontalCenter="80" visible="false"/>
 	<e:Image id="favorHand" source="Hand_png" anchorOffsetX="0" width="302" anchorOffsetY="0" height="509" y="0" x="169" visible="false"/>
 	<e:Group id="gm" width="200" height="200" right="0" bottom="226" visible="false">
 		<e:Button id="testToast" label="Toast" x="0" y="50" scaleX="1" scaleY="1"/>
@@ -182,7 +183,7 @@
 			</e:Group>
 		</e:Group>
 	</e:Group>
-	<e:Group id="gpAttack" left="0" right="0" top="0" bottom="0" locked="true" visible="false">
+	<e:Group id="gpAttack" left="0" right="0" top="0" bottom="0" visible="false" locked="true">
 		<e:Image id="pan2" source="Pan_2_png" verticalCenter="-10" horizontalCenter="6"/>
 		<e:Image id="pan" source="Pan_png" verticalCenter="-66" horizontalCenter="-18"/>
 	</e:Group>

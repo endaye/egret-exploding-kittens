@@ -68,6 +68,25 @@ class User {
         );
     }
 
+        // 玩家出牌
+    giveAFavor(cardIdx: number, target?: number) {
+        const card = this.$hands[cardIdx];
+
+        const uids:number[] = GameMgr.inst.getUidsByPlayerState(PlayerState.FAVOR_WAIT)
+
+        target = uids.length > 0 ? uids[0]: undefined
+
+        NetMgr.inst.req.releaseCard({
+            cardId: card,
+            targetId: target,
+            favorPush: ReleaseMethod.FAVOR,
+        });
+
+        GameDispatcher.inst.dispatchEvent(
+            new egret.Event(EventName.HANDS_REFRESH, false, false)
+        );
+    }
+
     // 检查玩家手牌
     checkHands(cardIds: Card[]) {
         if (this.drawing && this.$hands.length === cardIds.length - 1) {

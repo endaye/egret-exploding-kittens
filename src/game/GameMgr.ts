@@ -77,6 +77,16 @@ class GameMgr {
         }
     }
 
+    getUidsByPlayerState(state: PlayerState):number[] {
+        const result = []
+        for (const p of this.$players) {
+            if (p.state != state) {
+                result.push(p.uid);
+            }
+        }
+        return result;
+    }
+
     getWdh() {
         if (yess.exists) {
             console.log('NATIVE mode');
@@ -188,7 +198,7 @@ class GameMgr {
         this.$uiMain.showStackCnt();
 
         this.$uiMain.userAction(User.inst.player.state === PlayerState.ACTION);
-        this.$uiMain.userAttack(User.inst.player.state === PlayerState.ATTACK);
+        this.$uiMain.userBeFavor(User.inst.player.state === PlayerState.FAVOR_ACTION);
         if (User.inst.player.state !== PlayerState.ACTION) {
             this.$uiMain.userPredict(false);
             this.$uiMain.userXray(false);

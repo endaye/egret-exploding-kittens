@@ -95,6 +95,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
     favorBg: eui.Image;
     favorHand: eui.Image;
     favorAnim: egret.Tween;
+    btnGiveAFavor: eui.Image;
 
     private cardSmScale = 0.5;
     private cardsArray: eui.ArrayCollection = new eui.ArrayCollection();
@@ -198,6 +199,11 @@ class UIMain extends eui.Component implements eui.UIComponent {
         this.btnPlayCard.addEventListener(
             egret.TouchEvent.TOUCH_TAP,
             this.onBtnPlayClick,
+            this
+        );
+        this.btnGiveAFavor.addEventListener(
+            egret.TouchEvent.TOUCH_TAP,
+            this.onBtnGiveAFavorClick,
             this
         );
         this.btnDefuse.addEventListener(
@@ -332,6 +338,13 @@ class UIMain extends eui.Component implements eui.UIComponent {
         this.btnPlayCardDisable.visible = action;
         this.btnPlayCard.visible =
             action && User.inst.ableToPlayACard(this.hands.selectedIndex);
+    }
+
+    // 玩家被索要行动
+    userBeFavor(beFavored:boolean) {
+        this.btnGiveAFavor.visible = beFavored;
+        this.favorBg.visible = beFavored;
+        this.favorHand.visible = beFavored;
     }
 
     // 玩家选择攻击目标
@@ -799,6 +812,14 @@ class UIMain extends eui.Component implements eui.UIComponent {
         if (this.hands.selectedIndex > -1) {
             this.userPlayCardAnim();
             User.inst.playACard(this.hands.selectedIndex);
+            this.hands.selectedIndex = undefined;
+            this.onHandsRefresh();
+        }
+    }
+
+    onBtnGiveAFavorClick() {
+        if (this.hands.selectedIndex > -1) {
+            User.inst.giveAFavor(this.hands.selectedIndex);
             this.hands.selectedIndex = undefined;
             this.onHandsRefresh();
         }
