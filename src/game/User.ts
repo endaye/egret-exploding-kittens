@@ -53,6 +53,8 @@ class User {
             return;
         } else if (card === Card.FAVOR) {
             GameMgr.inst.userFavor(true);
+            this.prevCard = this.hands.splice(cardIdx, 1)[0];
+            return
         }
 
         NetMgr.inst.req.releaseCard({
