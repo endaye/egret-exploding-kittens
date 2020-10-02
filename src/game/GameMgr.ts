@@ -350,4 +350,8 @@ class GameMgr {
     userSwap(swap: boolean) {
         this.$uiMain.userSwap(swap);
     }
+
+    userFavor(favor:boolean) {
+        this.$uiMain.userFavor(favor);
+    }
 }

@@ -51,6 +51,8 @@ class User {
             GameMgr.inst.userSwap(true);
             this.prevCard = this.hands.splice(cardIdx, 1)[0];
             return;
+        } else if (card === Card.FAVOR) {
+            GameMgr.inst.userFavor(true);
         }
 
         NetMgr.inst.req.releaseCard({
@@ -91,6 +93,15 @@ class User {
             targetId: targetId,
             favorPush: ReleaseMethod.NORMAL,
         });
+    }
+
+    // 索要
+    favor(targetId: number) {
+        NetMgr.inst.req.releaseCard({
+            cardId: this.prevCard as number,
+            targetId: targetId,
+            favorPush: ReleaseMethod.NORMAL,
+        })
     }
 
     // 检查选择的牌是否可以出

@@ -15,6 +15,7 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
 
     btnAttack: eui.Button;
     btnSwap: eui.Button;
+    btnFavor: eui.Button;
 
     // 被索要的动画
     beFavoredTween1: egret.tween.TweenGroup;
@@ -54,6 +55,11 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
         this.btnSwap.addEventListener(
             egret.TouchEvent.TOUCH_TAP,
             this.onBtnSwapClick,
+            this
+        );
+        this.btnFavor.addEventListener(
+            egret.TouchEvent.TOUCH_TAP,
+            this.onBtnFavorClick,
             this
         );
     }
@@ -145,6 +151,10 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
         this.btnSwap.visible = show;
     }
 
+    showBtnFavor(show: boolean): void {
+        this.btnFavor.visible = show;
+    }
+
     setAvatar(avatar: string): void {
         this.avatar.setAvatar(avatar);
     }
@@ -172,6 +182,13 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
 
         // 交换手牌动画
         this.uiMain.swapAnim(this.player.uid, User.inst.player.uid);
+    }
+
+    onBtnFavorClick():void {
+        User.inst.favor(this.player.uid);
+        if (this.uiMain) {
+            this.uiMain.userFavor(false);
+        }
     }
 
     // 头像环闪烁动画，表示正在出牌的玩家

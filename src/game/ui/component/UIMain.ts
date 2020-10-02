@@ -358,6 +358,18 @@ class UIMain extends eui.Component implements eui.UIComponent {
         }
     }
 
+    // 玩家选择索要目标
+    userFavor(favor: boolean) {
+        for (let i = 0; i < this.players.length; i++) {
+            const ui = this.players[i];
+            const show =
+                favor &&
+                ui.player.uid !== User.inst.player.uid &&
+                ui.player.state !== PlayerState.DEAD;
+            ui.showBtnFavor(show);
+        }
+    }
+
     // 玩家看预言第几张雷
     userPredict(show: boolean) {
         this.gpPredict.visible = show;
@@ -515,10 +527,8 @@ class UIMain extends eui.Component implements eui.UIComponent {
             this.userDrawCardAnim();
         } else if ((card == Card.ATTACK || card == Card.ATTACK2) && targetId) {
             if (targetId === User.inst.player.uid) {
-                // TODO: 播放玩家被攻击动画
                 this.userBeAttackedAnim();
             } else {
-                // TODO: 播放其他玩家被攻击动画
                 this.otherBeAttackedAnim(targetId);
             }
         } else if (card == Card.FAVOR) {
