@@ -353,7 +353,6 @@ class UIMain extends eui.Component implements eui.UIComponent {
             const ui = this.players[i];
             const show =
                 attack &&
-                ui.player.uid !== User.inst.player.uid &&
                 ui.player.state !== PlayerState.DEAD;
             ui.showBtnAttack(show);
         }
