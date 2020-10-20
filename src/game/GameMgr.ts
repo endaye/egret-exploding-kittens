@@ -325,7 +325,7 @@ class GameMgr {
             .replace('[', '')
             .replace(']', '');
         let exitType: number = 1
-        if (rankUids.length === 6) {
+        if (rankUids.length >= 5) {
             this.gameBombsEnd(2, this.$wdh, gameResultJson);
         } else {
             this.exitGame()
