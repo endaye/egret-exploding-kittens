@@ -326,9 +326,10 @@ class GameMgr {
             .replace(']', '');
         let exitType: number = 1
         if (rankUids.length === 6) {
-            exitType = 2
+            this.gameBombsEnd(2, this.$wdh, gameResultJson);
+        } else {
+            this.exitGame()
         }
-        this.gameBombsEnd(exitType, this.$wdh, gameResultJson);
     }
 
     drawCard(uid: number) {
