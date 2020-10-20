@@ -221,6 +221,7 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
 
     // 炸弹爆炸动画
     bangAnim(): void {
+        GameMgr.inst.vibrate()
         const tw = egret.Tween.get(this.bang);
         tw.to({ scaleX: 2 }, 400, egret.Ease.circIn)
             .to({ scaleY: 1.5 }, 300, egret.Ease.circIn)

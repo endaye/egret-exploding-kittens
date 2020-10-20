@@ -24,7 +24,7 @@ class GameMgr {
         }
         return GameMgr.$mgr;
     }
-    private constructor() {}
+    private constructor() { }
 
     private $players: Player[] = [];
     private readonly $user: User = User.inst; // 玩家本人
@@ -77,7 +77,7 @@ class GameMgr {
         }
     }
 
-    getUidsByPlayerState(state: PlayerState):number[] {
+    getUidsByPlayerState(state: PlayerState): number[] {
         const result = []
         for (const p of this.$players) {
             if (p.state != state) {
@@ -284,7 +284,7 @@ class GameMgr {
         NetMgr.inst.req.defuseFailed();
     }
 
-    toWin() {}
+    toWin() { }
 
     startGame() {
         console.log('game start');
@@ -367,7 +367,15 @@ class GameMgr {
         this.$uiMain.userSwap(swap);
     }
 
-    userFavor(favor:boolean) {
+    userFavor(favor: boolean) {
         this.$uiMain.userFavor(favor);
+    }
+
+    vibrate(): void {
+        if (navigator.vibrate) {
+            navigator.vibrate(300);
+        } else if (navigator["webkitVibrate"]) {
+            navigator["webkitVibrate"](300);
+        }
     }
 }
