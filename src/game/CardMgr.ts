@@ -1,16 +1,16 @@
 enum Card {
     BOOM = 1, // 炸弹 x 5
-    DEFUSE = 2, // 拆除 x 7
-    SHUFFLE = 3, // 洗牌 x 6
-    DRAWBACK = 4, // 抽底 x 6
-    ATTACK = 5, // 甩锅 x 4
-    ATTACK2 = 6, // 甩锅2 x 2
-    PREDICT = 7, // 预言 x 6
-    XRAY = 8, // 透视 x 6
-    REVERSE = 9, // 转向 x 6
-    SKIP = 10, // 跳过 x 6
-    FAVOR = 11, // 索要 x 5
-    SWAP = 12, // 交换 x 5
+    DEFUSE = 2, // 拆除 x 8
+    SHUFFLE = 3, // 洗牌 x 5
+    DRAWBACK = 4, // 抽底 x 5
+    ATTACK = 5, // 甩锅 x 5
+    ATTACK2 = 6, // 甩锅2 x 5
+    PREDICT = 7, // 预言 x 5
+    XRAY = 8, // 透视 x 5
+    REVERSE = 9, // 转向 x 7
+    SKIP = 10, // 跳过 x 7
+    FAVOR = 11, // 索要 x 6
+    SWAP = 12, // 交换 x 3
     DECK = 13, // 卡背
 }
 
