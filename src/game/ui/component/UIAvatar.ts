@@ -23,14 +23,15 @@ class UIAvatar extends eui.Component implements eui.UIComponent {
     }
 
     setAvatarUrl(avatarUrl: string) {
+        egret.log(avatarUrl)
         let imgLoader = new egret.ImageLoader();
-        imgLoader.crossOrigin = 'anonymous'; // 跨域请求
+        imgLoader.crossOrigin = '*'; // 跨域请求
         imgLoader.load(avatarUrl); // 去除链接中的转义字符‘\’
         imgLoader.once(
             egret.Event.COMPLETE,
             (evt: egret.Event) => {
                 if (evt.currentTarget.data) {
-                    // console.log('加载头像成功: ' + evt.currentTarget.data);
+                    // egret.log('加载头像成功: ' + evt.currentTarget.data);
                     let texture = new egret.Texture();
                     texture.bitmapData = evt.currentTarget.data;
                     let bitmap = new egret.Bitmap(texture);

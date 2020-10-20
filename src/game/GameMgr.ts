@@ -309,6 +309,7 @@ class GameMgr {
                 liveUids.push(p.uid);
             }
         }
+        liveUids.reverse();
         const gameResultJson = JSON.stringify(liveUids)
             .replace('[', '')
             .replace(']', '');
@@ -319,10 +320,15 @@ class GameMgr {
     gameover(rankUids: number[]) {
         console.log('Game Over');
         NetMgr.inst.disconnect();
+        console.log(rankUids)
         const gameResultJson = JSON.stringify(rankUids)
             .replace('[', '')
             .replace(']', '');
-        this.gameBombsEnd(2, this.$wdh, gameResultJson);
+        let exitType: number = 1
+        if (rankUids.length === 6) {
+            exitType = 2
+        }
+        this.gameBombsEnd(exitType, this.$wdh, gameResultJson);
     }
 
     drawCard(uid: number) {
