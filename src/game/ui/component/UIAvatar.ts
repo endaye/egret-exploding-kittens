@@ -25,7 +25,7 @@ class UIAvatar extends eui.Component implements eui.UIComponent {
     setAvatarUrl(avatarUrl: string) {
         egret.log(avatarUrl)
         let imgLoader = new egret.ImageLoader();
-        imgLoader.crossOrigin = '*'; // 跨域请求
+        imgLoader.crossOrigin = 'anonymous'; // 跨域请求
         imgLoader.load(avatarUrl); // 去除链接中的转义字符‘\’
         imgLoader.once(
             egret.Event.COMPLETE,
