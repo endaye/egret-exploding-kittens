@@ -229,7 +229,7 @@ class GameMgr {
 
     private initGame() {
         console.log('Init game');
-
+        this.vibrate()
         for (let i = 0; i < this.$players.length; i++) {
             if (this.$players[i].uid === this.$uid) {
                 User.inst.player = this.$players[i];
