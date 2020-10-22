@@ -335,7 +335,7 @@ class GameMgr {
     drawCard(uid: number) {
         if (uid === User.inst.player.uid) {
             // User
-            // User.inst.nextCard = card;
+            User.inst.drawing = true;
         } else {
             // Others
             this.$uiMain.otherDrawCard(uid);
