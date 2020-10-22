@@ -2388,6 +2388,7 @@ $root.ReleaseCard = (function() {
          * @property {number|null} [cardId] ReleaseCardRequest cardId
          * @property {number|null} [targetId] ReleaseCardRequest targetId
          * @property {number|null} [favorPush] ReleaseCardRequest favorPush
+         * @property {number|null} [returnPos] ReleaseCardRequest returnPos
          */
 
         /**
@@ -2430,6 +2431,14 @@ $root.ReleaseCard = (function() {
         ReleaseCardRequest.prototype.favorPush = 0;
 
         /**
+         * ReleaseCardRequest returnPos.
+         * @member {number} returnPos
+         * @memberof ReleaseCard.ReleaseCardRequest
+         * @instance
+         */
+        ReleaseCardRequest.prototype.returnPos = 0;
+
+        /**
          * Creates a new ReleaseCardRequest instance using the specified properties.
          * @function create
          * @memberof ReleaseCard.ReleaseCardRequest
@@ -2459,6 +2468,8 @@ $root.ReleaseCard = (function() {
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.targetId);
             if (message.favorPush != null && Object.hasOwnProperty.call(message, "favorPush"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.favorPush);
+            if (message.returnPos != null && Object.hasOwnProperty.call(message, "returnPos"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.returnPos);
             return writer;
         };
 
@@ -2501,6 +2512,9 @@ $root.ReleaseCard = (function() {
                     break;
                 case 3:
                     message.favorPush = reader.uint32();
+                    break;
+                case 4:
+                    message.returnPos = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2546,6 +2560,9 @@ $root.ReleaseCard = (function() {
             if (message.favorPush != null && message.hasOwnProperty("favorPush"))
                 if (!$util.isInteger(message.favorPush))
                     return "favorPush: integer expected";
+            if (message.returnPos != null && message.hasOwnProperty("returnPos"))
+                if (!$util.isInteger(message.returnPos))
+                    return "returnPos: integer expected";
             return null;
         };
 

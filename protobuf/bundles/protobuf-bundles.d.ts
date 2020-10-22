@@ -1025,6 +1025,9 @@ declare namespace ReleaseCard {
 
         /** ReleaseCardRequest favorPush */
         favorPush?: (number|null);
+
+        /** ReleaseCardRequest returnPos */
+        returnPos?: (number|null);
     }
 
     /** Represents a ReleaseCardRequest. */
@@ -1044,6 +1047,9 @@ declare namespace ReleaseCard {
 
         /** ReleaseCardRequest favorPush. */
         public favorPush: number;
+
+        /** ReleaseCardRequest returnPos. */
+        public returnPos: number;
 
         /**
          * Creates a new ReleaseCardRequest instance using the specified properties.

@@ -9,6 +9,7 @@ message ReleaseCardRequest {
   uint32 cardId = 1;
   uint32 targetId = 2; // 卡牌技能影响目标玩家 id 可选
   uint32 favorPush = 3; // 被索要时给出卡牌 1:因为索要给出, 2:正常出牌
+  uint32 returnPos = 4; // 放回牌堆位置
 }
 
 message ReleaseCardResponese {
