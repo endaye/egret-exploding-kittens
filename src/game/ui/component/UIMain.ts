@@ -844,12 +844,12 @@ class UIMain extends eui.Component implements eui.UIComponent {
         console.log(`Defuse的手牌位置${this.defuseIdx}`);
         console.log(`炸弹放回选项为${opt}`);
         const pos =
-            opt === 0 ? Math.max(GameMgr.inst.stackCnt - 1, 0) : opt - 1;
+            opt === 0 ? Math.max(GameMgr.inst.stackCnt, 0) : opt;
         console.log(`将炸弹放到${pos}位置`);
         this.userDefuse(false, this.defuseIdx);
         if (this.defuseIdx > -1) {
             this.userPlayCardAnim();
-            User.inst.playACard(this.defuseIdx, pos);
+            User.inst.playACard(this.defuseIdx, null, pos);
         }
     }
 

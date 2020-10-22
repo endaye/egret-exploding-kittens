@@ -38,7 +38,7 @@ class User {
     }
 
     // 玩家出牌
-    playACard(cardIdx: number, target?: number) {
+    playACard(cardIdx: number, target?: number, pos?: number) {
         const card = this.$hands[cardIdx];
 
         if (card === Card.DRAWBACK) {
@@ -57,10 +57,13 @@ class User {
             return
         }
 
+        console.log(`玩家出牌：${card}，target: ${target}`)
+
         NetMgr.inst.req.releaseCard({
             cardId: card,
             targetId: target,
             favorPush: ReleaseMethod.NORMAL,
+            returnPos: pos,
         });
 
         GameDispatcher.inst.dispatchEvent(
@@ -80,6 +83,7 @@ class User {
             cardId: card,
             targetId: target,
             favorPush: ReleaseMethod.FAVOR,
+            returnPos: undefined
         });
 
         GameDispatcher.inst.dispatchEvent(
@@ -104,6 +108,7 @@ class User {
             cardId: this.prevCard as number,
             targetId: targetId,
             favorPush: ReleaseMethod.NORMAL,
+            returnPos: undefined
         });
     }
 
@@ -113,6 +118,7 @@ class User {
             cardId: this.prevCard as number,
             targetId: targetId,
             favorPush: ReleaseMethod.NORMAL,
+            returnPos: undefined
         });
     }
 
@@ -122,6 +128,7 @@ class User {
             cardId: this.prevCard as number,
             targetId: targetId,
             favorPush: ReleaseMethod.NORMAL,
+            returnPos: undefined
         })
     }
 
