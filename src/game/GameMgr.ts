@@ -308,24 +308,38 @@ class GameMgr {
                 liveUids.push(p.uid);
             }
         }
-        liveUids.reverse();
         const gameResultJson = JSON.stringify(liveUids)
             .replace('[', '')
             .replace(']', '');
-
+        console.log(gameResultJson)
+        NetMgr.inst.disconnect();
         this.gameBombsEnd(1, this.$wdh, gameResultJson);
+    }
+
+    // 最后退出
+    finalExitGame(rankUids: number[]) {
+        if (rankUids.length === 5) {
+            for (const p of this.$players) {
+                if (p.state != PlayerState.DEAD && rankUids.indexOf(p.uid) < 0) {
+                    rankUids.unshift(p.uid);
+                    break;
+                } 
+            }
+        }
+        const gameResultJson = JSON.stringify(rankUids)
+            .replace('[', '')
+            .replace(']', '');
+        console.log(gameResultJson)
+        NetMgr.inst.disconnect();
+        this.gameBombsEnd(2, this.$wdh, gameResultJson);
     }
 
     gameover(rankUids: number[]) {
         console.log('Game Over');
-        NetMgr.inst.disconnect();
-        console.log(rankUids)
-        const gameResultJson = JSON.stringify(rankUids)
-            .replace('[', '')
-            .replace(']', '');
-        let exitType: number = 1
+        // 提前退出，传活着的id
+        // 最后退出，传排名，最后一个死亡放在第一个
         if (rankUids.length >= 5) {
-            this.gameBombsEnd(2, this.$wdh, gameResultJson);
+            this.finalExitGame(rankUids)
         } else {
             this.exitGame()
         }
