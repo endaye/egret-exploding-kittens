@@ -294,10 +294,9 @@ class GameMgr {
     }
 
     showToast(msg?: string) {
-        if (!msg) {
-            msg = 'yess yess yess';
+        if (msg) {
+            yess.showAndroidToast(msg);
         }
-        yess.showAndroidToast(msg);
     }
 
     // 中途退出
