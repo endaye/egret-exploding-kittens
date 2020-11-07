@@ -58,7 +58,7 @@
 	</w:Declarations>
 	<w:Config id="1709a557744"/>
 	<e:Rect id="avatarBg0" width="100" height="100" ellipseHeight="120" ellipseWidth="120" horizontalCenter="0" top="0" anchorOffsetX="50" strokeAlpha="1" strokeWeight="10" strokeColor="0x4289a7" fillColor="0xffffff" locked="true"/>
-	<e:Rect id="avatarBg1" width="100" height="100" ellipseHeight="120" ellipseWidth="120" horizontalCenter="0" top="0" anchorOffsetX="50" strokeAlpha="1" strokeWeight="10" fillColor="0xFFFFFF" strokeColor="0xdfe510" visible="false" locked="true"/>
+	<e:Rect id="avatarBg1" width="100" height="100" ellipseHeight="120" ellipseWidth="120" horizontalCenter="0" top="0" anchorOffsetX="50" strokeAlpha="1" strokeWeight="10" fillColor="0xFFFFFF" visible="true" fillAlpha="1" strokeColor="0xE5BE10"/>
 	<ns1:UIAvatar id="avatar" width="80" height="80" anchorOffsetX="50" anchorOffsetY="0" horizontalCenter="0" y="10"/>
 	<e:Rect id="dead" width="100" height="100" ellipseHeight="120" ellipseWidth="120" horizontalCenter="0" top="0" anchorOffsetX="50" strokeAlpha="1" strokeWeight="0" strokeColor="0x4289A7" fillColor="0x000000" fillAlpha="0.5" visible="false"/>
 	<e:Label id="playerName" text="名字名字名字名字" y="105" fontFamily="Microsoft YaHei" size="16" horizontalCenter="0"/>
