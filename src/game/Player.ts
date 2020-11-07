@@ -23,6 +23,7 @@ class Player {
     seat: number;
     attackMark: number = 0;
     handsCnt: number = -1;
+    countDownTime: number = 0;
 
     constructor(seat: number, player: Native.IMatchPlayer) {
         this.seat = seat;
