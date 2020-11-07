@@ -59,7 +59,7 @@ class User {
             return;
         }
 
-        console.log(`玩家出牌：${card}，target: ${target}`);
+        console.log(`玩家出牌：[${cardIdx}]: ${card}，target: ${target}`);
 
         GameMgr.inst.userPlayCardAnim(cardIdx);
         NetMgr.inst.req.releaseCard({
@@ -112,7 +112,7 @@ class User {
             favorPush: ReleaseMethod.NORMAL,
             returnPos: undefined,
         });
-        console.log(`玩家出牌：${this.prevCard}，target: ${targetId}`);
+        console.log(`玩家出牌：[${this.cardIdx}]: ${this.prevCard}，target: ${targetId}`);
     }
 
     // 交换
@@ -124,7 +124,7 @@ class User {
             favorPush: ReleaseMethod.NORMAL,
             returnPos: undefined,
         });
-        console.log(`玩家出牌：${this.prevCard}，target: ${targetId}`);
+        console.log(`玩家出牌：[${this.cardIdx}]: ${this.prevCard}，target: ${targetId}`);
     }
 
     // 索要
@@ -136,7 +136,7 @@ class User {
             favorPush: ReleaseMethod.NORMAL,
             returnPos: undefined,
         });
-        console.log(`玩家出牌：${this.prevCard}，target: ${targetId}`);
+        console.log(`玩家出牌：[${this.cardIdx}]: ${this.prevCard}，target: ${targetId}`);
     }
 
     // 检查选择的牌是否可以出

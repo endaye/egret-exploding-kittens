@@ -3,6 +3,8 @@ class UIMain extends eui.Component implements eui.UIComponent {
     gm: eui.Group;
 
     bg1: eui.Image;
+
+    // Test
     testToast: eui.Button;
     testExit: eui.Button;
     testBomb: eui.Button;
@@ -23,10 +25,13 @@ class UIMain extends eui.Component implements eui.UIComponent {
     players: UIPlayer[];
     hands: eui.List;
     stackCnt: eui.Label;
-    deck: eui.Image;
     stack: eui.Image;
     playArea: eui.Image;
     direction: eui.Image;
+
+    // 抓牌、出牌动画
+    deckAnim1: eui.Image; // 抓
+    deckAnim2: eui.Image; // 出
 
     // 抓牌、出牌按钮
     btnDrawCard: eui.Button;
@@ -127,6 +132,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
         this.userAction(false);
 
         this.bgTween();
+        this.addChild(this.createShape());
     }
 
     setPlayerData(data: Player[], userSeat: number) {
@@ -455,23 +461,24 @@ class UIMain extends eui.Component implements eui.UIComponent {
 
         for (const uip of this.players) {
             if (uip.player.uid === uid) {
-                this.deck.source = RES.getRes(
+                this.deckAnim1.source = RES.getRes(
                     CardMgr.inst.cards[Card.DECK]['img']
                 );
-                this.deck.visible = true;
-                this.deck.x = this.stack.x;
-                this.deck.y = this.stack.y;
-                this.deck.scaleX = this.stack.scaleX;
-                this.deck.scaleY = this.stack.scaleY;
+                this.deckAnim1.visible = true;
+                this.deckAnim1.x = this.stack.x;
+                this.deckAnim1.y = this.stack.y;
+                this.deckAnim1.scaleX = this.stack.scaleX;
+                this.deckAnim1.scaleY = this.stack.scaleY;
                 const globalPos = uip.parent.localToGlobal(uip.x, uip.y);
-                const localPos = this.deck.parent.globalToLocal(
+                const localPos = this.deckAnim1.parent.globalToLocal(
                     globalPos.x,
                     globalPos.y
                 );
-                const x = localPos.x + this.deck.width * this.cardSmScale * 0.5;
+                const x =
+                    localPos.x + this.deckAnim1.width * this.cardSmScale * 0.5;
                 const y = localPos.y;
 
-                this.deckTween = egret.Tween.get(this.deck);
+                this.deckTween = egret.Tween.get(this.deckAnim1);
                 this.deckTween
                     .to(
                         {
@@ -480,7 +487,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
                             scaleX: this.cardSmScale,
                             scaleY: this.cardSmScale,
                         },
-                        600
+                        400
                     )
                     .to({ visible: false }, 0);
                 break;
@@ -496,20 +503,22 @@ class UIMain extends eui.Component implements eui.UIComponent {
 
         for (const uip of this.players) {
             if (uip.player.uid === uid) {
-                this.deck.visible = true;
-                this.deck.source = RES.getRes(CardMgr.inst.cards[card]['img']);
-                this.deck.scaleX = this.cardSmScale;
-                this.deck.scaleY = this.cardSmScale;
+                this.deckAnim2.visible = true;
+                this.deckAnim2.source = RES.getRes(
+                    CardMgr.inst.cards[card]['img']
+                );
+                this.deckAnim2.scaleX = this.cardSmScale;
+                this.deckAnim2.scaleY = this.cardSmScale;
                 const globalPos = uip.parent.localToGlobal(uip.x, uip.y);
-                const localPos = this.deck.parent.globalToLocal(
+                const localPos = this.deckAnim2.parent.globalToLocal(
                     globalPos.x,
                     globalPos.y
                 );
-                this.deck.x =
-                    localPos.x + this.deck.width * this.cardSmScale * 0.5;
-                this.deck.y = localPos.y;
+                this.deckAnim2.x =
+                    localPos.x + this.deckAnim2.width * this.cardSmScale * 0.5;
+                this.deckAnim2.y = localPos.y;
 
-                this.deckTween = egret.Tween.get(this.deck);
+                this.deckTween = egret.Tween.get(this.deckAnim2);
                 this.deckTween
                     .to(
                         {
@@ -518,7 +527,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
                             scaleX: this.playArea.scaleX,
                             scaleY: this.playArea.scaleY,
                         },
-                        600
+                        400
                     )
                     .to({ visible: false }, 0)
                     .call(() => {
@@ -564,34 +573,37 @@ class UIMain extends eui.Component implements eui.UIComponent {
             egret.Tween.removeTweens(this.deckTween);
         }
 
-        this.deck.source = RES.getRes(CardMgr.inst.cards[Card.DECK]['img']);
-        this.deck.visible = true;
-        this.deck.x = this.stack.x;
-        this.deck.y = this.stack.y;
-        this.deck.scaleX = this.stack.scaleX;
-        this.deck.scaleY = this.stack.scaleY;
+        this.deckAnim1.source = RES.getRes(
+            CardMgr.inst.cards[Card.DECK]['img']
+        );
+        this.deckAnim1.visible = true;
+        this.deckAnim1.x = this.stack.x;
+        this.deckAnim1.y = this.stack.y;
+        this.deckAnim1.scaleX = this.stack.scaleX;
+        this.deckAnim1.scaleY = this.stack.scaleY;
         // console.log(`index: ${User.inst.player.handsCnt - 1}`);
+
         const index = Math.max(
             0,
-            Math.min(this.hands.numChildren, User.inst.player.handsCnt) - 1
+            Math.min(User.inst.player.handsCnt, this.hands.numChildren - 1)
         );
-        const last = this.hands.getChildAt(this.hands.numChildren - 1);
+        const last = this.hands.getChildAt(index);
         const globalPos = last.parent.localToGlobal(last.x, last.y);
-        const localPos = this.deck.parent.globalToLocal(
+        const localPos = this.deckAnim1.parent.globalToLocal(
             globalPos.x,
             globalPos.y
         );
         const x = localPos.x;
         const y = localPos.y;
 
-        this.deckTween = egret.Tween.get(this.deck);
+        this.deckTween = egret.Tween.get(this.deckAnim1);
         this.deckTween
             .to(
                 {
                     x: x,
                     y: y,
                 },
-                600
+                400
             )
             .to({ visible: false }, 0);
     }
@@ -609,28 +621,28 @@ class UIMain extends eui.Component implements eui.UIComponent {
             selectCard.x,
             selectCard.y
         );
-        const localPos = this.deck.parent.globalToLocal(
+        const localPos = this.deckAnim2.parent.globalToLocal(
             globalPos.x,
             globalPos.y
         );
-        this.deck.visible = true;
-        this.deck.source = cardImg;
-        this.deck.scaleX = selectCard.deck.scaleX;
-        this.deck.scaleY = selectCard.deck.scaleY;
-        this.deck.x = localPos.x;
-        this.deck.y = localPos.y;
+        this.deckAnim2.visible = true;
+        this.deckAnim2.source = cardImg;
+        this.deckAnim2.scaleX = selectCard.deck.scaleX;
+        this.deckAnim2.scaleY = selectCard.deck.scaleY;
+        this.deckAnim2.x = localPos.x;
+        this.deckAnim2.y = localPos.y;
 
         const x = this.playArea.x;
         const y = this.playArea.y;
 
-        this.deckTween = egret.Tween.get(this.deck);
+        this.deckTween = egret.Tween.get(this.deckAnim2);
         this.deckTween
             .to(
                 {
                     x: x,
                     y: y,
                 },
-                600
+                400
             )
             .to({ visible: false }, 0)
             .call(() => {
@@ -727,7 +739,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
                     x: playerPos[uid1].x,
                     y: playerPos[uid1].y,
                 },
-                600
+                400
             )
             .to({ visible: false }, 0);
 
@@ -737,7 +749,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
                     x: playerPos[uid0].x,
                     y: playerPos[uid0].y,
                 },
-                600
+                400
             )
             .to({ visible: false }, 0);
     }
@@ -849,9 +861,9 @@ class UIMain extends eui.Component implements eui.UIComponent {
         const pos = opt === 0 ? Math.max(GameMgr.inst.stackCnt, 0) : opt;
         console.log(`将炸弹放到${pos}位置`);
         this.userDefuse(false, this.defuseIdx);
-        if (this.defuseIdx > -1) {
-            this.userPlayCardAnim(this.defuseIdx);
-            User.inst.playACard(this.defuseIdx, null, pos);
+        const defuseIdx = this.defuseIdx;
+        if (defuseIdx > -1) {
+            User.inst.playACard(defuseIdx, null, pos);
         }
     }
 
@@ -882,6 +894,26 @@ class UIMain extends eui.Component implements eui.UIComponent {
     }
 
     //! TEST !//
+
+    private createShape(): egret.Shape {
+        let magicNum = 1 - 0.55228475;
+        let radius = 100;
+        let shape = new egret.Shape();
+        shape.graphics.lineStyle(10, 0x009900);
+        shape.graphics.beginFill(0x222200, 1);
+        shape.graphics.lineTo(radius, 0);
+        shape.graphics.cubicCurveTo(
+            magicNum * radius,
+            0,
+            0,
+            magicNum * radius,
+            0,
+            radius
+        );
+        shape.graphics.lineTo(0, 0);
+        shape.graphics.endFill();
+        return shape;
+    }
 
     initTestListeners() {
         this.testToast.addEventListener(

@@ -25,7 +25,7 @@
 					</tween:props>
 				</tween:To>
 			</tween:TweenItem>
-			<tween:TweenItem target="{deck}">
+			<tween:TweenItem target="{deckAnim3}">
 				<tween:Set>
 					<tween:props>
 						<e:Object alpha="{0}"/>
@@ -106,13 +106,13 @@
 	<e:Button id="btnPlayCardDisable" label="出牌" anchorOffsetX="0" width="128" anchorOffsetY="0" height="56" enabled="true" skinName="yui.BtnGrey" bottom="320" horizontalCenter="80"/>
 	<e:Button id="btnPlayCard" label="出牌" anchorOffsetX="0" width="128" anchorOffsetY="0" height="56" enabled="true" skinName="yui.BtnGreen" bottom="320" horizontalCenter="80"/>
 	<e:Button id="btnExit" label="Button" enabled="true" skinName="yui.BtnExit" top="66" left="36"/>
-	<e:Group id="swapCards0" width="67" height="60" y="324" anchorOffsetY="0" x="290" anchorOffsetX="0" locked="true" visible="false">
+	<e:Group id="swapCards0" width="67" height="60" y="324" anchorOffsetY="0" x="290" anchorOffsetX="0" visible="false" locked="true">
 		<e:Image id="deck3" source="Deck_png" x="-1" y="0" anchorOffsetX="0" width="45" anchorOffsetY="0" height="60"/>
 		<e:Image id="deck0" source="Deck_png" x="7" y="0" anchorOffsetX="0" width="45" anchorOffsetY="0" height="60"/>
 		<e:Image id="deck1" source="Deck_png" x="14" y="0" anchorOffsetX="0" width="45" anchorOffsetY="0" height="60"/>
 		<e:Image id="deck2" source="Deck_png" x="21.5" y="0" anchorOffsetX="0" width="45" anchorOffsetY="0" height="60"/>
 	</e:Group>
-	<e:Group id="swapCards1" width="67" height="60" y="324" anchorOffsetY="0" x="400" anchorOffsetX="0" locked="true" visible="false">
+	<e:Group id="swapCards1" width="67" height="60" y="324" anchorOffsetY="0" x="400" anchorOffsetX="0" visible="false" locked="true">
 		<e:Image id="deck4" source="Deck_png" x="-1" y="0" anchorOffsetX="0" width="45" anchorOffsetY="0" height="60"/>
 		<e:Image id="deck5" source="Deck_png" x="7" y="0" anchorOffsetX="0" width="45" anchorOffsetY="0" height="60"/>
 		<e:Image id="deck6" source="Deck_png" x="14" y="0" anchorOffsetX="0" width="45" anchorOffsetY="0" height="60"/>
@@ -128,7 +128,9 @@
 	<ns1:UIPlayer id="player0" width="120" height="158" scaleX="1" scaleY="1" left="18" bottom="178"/>
 	<e:Label id="userName" text="名字名字名字名字" x="144.25" size="16" fontFamily="Microsoft YaHei" height="16" width="128" anchorOffsetY="0" bottom="266"/>
 
-	<e:Image id="deck" source="Deck_png" anchorOffsetX="0" width="120" anchorOffsetY="0" height="160" x="180" y="442" visible="false"/>
+	<e:Image id="deckAnim1" source="Deck_png" anchorOffsetX="0" width="120" anchorOffsetY="0" height="160" x="180" y="442" visible="false"/>
+	<e:Image id="deckAnim2" source="Deck_png" anchorOffsetX="0" width="120" anchorOffsetY="0" height="160" x="180" y="442" visible="false"/>
+	<e:Image id="deckAnim3" source="Deck_png" anchorOffsetX="0" width="120" anchorOffsetY="0" height="160" x="180" y="422" visible="false"/>
 	<e:Image id="favorBg" source="Damage_Frame_png" top="-50" bottom="-50" left="-50" right="-50" scale9Grid="48,47,48,47" visible="false"/>
 	<e:List id="hands" height="200" anchorOffsetY="0" itemRendererSkinName="yui.CardItem" horizontalCenter="0" bottom="66">
 		<e:ArrayCollection>
