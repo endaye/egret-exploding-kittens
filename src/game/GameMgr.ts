@@ -208,6 +208,9 @@ class GameMgr {
         if (User.inst.player.state !== PlayerState.ACTION && !allWaitOrDead) {
             this.$uiMain.userPredict(false);
             this.$uiMain.userXray(false);
+            this.userAttack(false)
+            this.userSwap(false)
+            this.userFavor(false)
         }
     }
 

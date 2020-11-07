@@ -18,6 +18,7 @@ class User {
     prevCard: Card; // 刚刚打出的牌
     nextCard: Card; // 即将抓到的牌
     drawing: boolean = false; // 正在抓拍
+    selecting: boolean = false; // 正在选择目标
 
     get hands() {
         return this.$hands;
@@ -54,10 +55,10 @@ class User {
         } else if (card === Card.FAVOR) {
             GameMgr.inst.userFavor(true);
             this.prevCard = this.hands.splice(cardIdx, 1)[0];
-            return
+            return;
         }
 
-        console.log(`玩家出牌：${card}，target: ${target}`)
+        console.log(`玩家出牌：${card}，target: ${target}`);
 
         NetMgr.inst.req.releaseCard({
             cardId: card,
@@ -71,19 +72,21 @@ class User {
         );
     }
 
-        // 玩家出牌
+    // 玩家出牌
     giveAFavor(cardIdx: number, target?: number) {
         const card = this.$hands[cardIdx];
 
-        const uids:number[] = GameMgr.inst.getUidsByPlayerState(PlayerState.FAVOR_WAIT)
+        const uids: number[] = GameMgr.inst.getUidsByPlayerState(
+            PlayerState.FAVOR_WAIT
+        );
 
-        target = uids.length > 0 ? uids[0]: undefined
+        target = uids.length > 0 ? uids[0] : undefined;
 
         NetMgr.inst.req.releaseCard({
             cardId: card,
             targetId: target,
             favorPush: ReleaseMethod.FAVOR,
-            returnPos: undefined
+            returnPos: undefined,
         });
 
         GameDispatcher.inst.dispatchEvent(
@@ -108,7 +111,7 @@ class User {
             cardId: this.prevCard as number,
             targetId: targetId,
             favorPush: ReleaseMethod.NORMAL,
-            returnPos: undefined
+            returnPos: undefined,
         });
     }
 
@@ -118,7 +121,7 @@ class User {
             cardId: this.prevCard as number,
             targetId: targetId,
             favorPush: ReleaseMethod.NORMAL,
-            returnPos: undefined
+            returnPos: undefined,
         });
     }
 
@@ -128,8 +131,8 @@ class User {
             cardId: this.prevCard as number,
             targetId: targetId,
             favorPush: ReleaseMethod.NORMAL,
-            returnPos: undefined
-        })
+            returnPos: undefined,
+        });
     }
 
     // 检查选择的牌是否可以出

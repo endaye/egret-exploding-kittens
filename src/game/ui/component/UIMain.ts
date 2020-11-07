@@ -334,14 +334,16 @@ class UIMain extends eui.Component implements eui.UIComponent {
 
     // 玩家行动
     userAction(action: boolean) {
-        this.btnDrawCard.visible = action;
-        this.btnPlayCardDisable.visible = action;
+        this.btnDrawCard.visible = action && !User.inst.selecting;
+        this.btnPlayCardDisable.visible = action && !User.inst.selecting;
         this.btnPlayCard.visible =
-            action && User.inst.ableToPlayACard(this.hands.selectedIndex);
+            action &&
+            User.inst.ableToPlayACard(this.hands.selectedIndex) &&
+            !User.inst.selecting;
     }
 
     // 玩家被索要行动
-    userBeFavor(beFavored:boolean) {
+    userBeFavor(beFavored: boolean) {
         this.btnGiveAFavor.visible = beFavored;
         this.favorBg.visible = beFavored;
         this.favorHand.visible = beFavored;
@@ -351,11 +353,10 @@ class UIMain extends eui.Component implements eui.UIComponent {
     userAttack(attack: boolean) {
         for (let i = 0; i < this.players.length; i++) {
             const ui = this.players[i];
-            const show =
-                attack &&
-                ui.player.state !== PlayerState.DEAD;
+            const show = attack && ui.player.state !== PlayerState.DEAD;
             ui.showBtnAttack(show);
         }
+        User.inst.selecting = attack;
     }
 
     // 玩家选择交换目标
@@ -368,6 +369,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
                 ui.player.state !== PlayerState.DEAD;
             ui.showBtnSwap(show);
         }
+        User.inst.selecting = swap;
     }
 
     // 玩家选择索要目标
@@ -380,6 +382,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
                 ui.player.state !== PlayerState.DEAD;
             ui.showBtnFavor(show);
         }
+        User.inst.selecting = favor;
     }
 
     // 玩家看预言第几张雷
@@ -843,8 +846,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
     onBtnDefuseOptClick(opt: number) {
         console.log(`Defuse的手牌位置${this.defuseIdx}`);
         console.log(`炸弹放回选项为${opt}`);
-        const pos =
-            opt === 0 ? Math.max(GameMgr.inst.stackCnt, 0) : opt;
+        const pos = opt === 0 ? Math.max(GameMgr.inst.stackCnt, 0) : opt;
         console.log(`将炸弹放到${pos}位置`);
         this.userDefuse(false, this.defuseIdx);
         if (this.defuseIdx > -1) {
@@ -879,7 +881,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
         this.userAction(true);
     }
 
-    /////////////// TEST ///////////////
+    //! TEST !//
 
     initTestListeners() {
         this.testToast.addEventListener(
