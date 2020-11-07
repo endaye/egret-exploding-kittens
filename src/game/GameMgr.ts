@@ -24,7 +24,7 @@ class GameMgr {
         }
         return GameMgr.$mgr;
     }
-    private constructor() { }
+    private constructor() {}
 
     private $players: Player[] = [];
     private readonly $user: User = User.inst; // 玩家本人
@@ -78,7 +78,7 @@ class GameMgr {
     }
 
     getUidsByPlayerState(state: PlayerState): number[] {
-        const result = []
+        const result = [];
         for (const p of this.$players) {
             if (p.state != state) {
                 result.push(p.uid);
@@ -168,7 +168,7 @@ class GameMgr {
         let rp: Common.IPlayerInfo;
         this.aliveCnt = 0;
 
-        let allWaitOrDead = true
+        let allWaitOrDead = true;
         for (let i = 0; i < this.$players.length; i++) {
             tp = this.$players[i];
             rp = roomInfo.players[i];
@@ -181,7 +181,10 @@ class GameMgr {
             }
 
             // console.log(tp.uid, tp.countDownTime)
-            allWaitOrDead = allWaitOrDead && (tp.state === PlayerState.WAIT || tp.state === PlayerState.DEAD)
+            allWaitOrDead =
+                allWaitOrDead &&
+                (tp.state === PlayerState.WAIT ||
+                    tp.state === PlayerState.DEAD);
 
             // TODO: attack marks
             tp.attackMark = rp.attackMark;
@@ -204,13 +207,15 @@ class GameMgr {
         this.$uiMain.showStackCnt();
 
         this.$uiMain.userAction(User.inst.player.state === PlayerState.ACTION);
-        this.$uiMain.userBeFavor(User.inst.player.state === PlayerState.FAVOR_ACTION);
+        this.$uiMain.userBeFavor(
+            User.inst.player.state === PlayerState.FAVOR_ACTION
+        );
         if (User.inst.player.state !== PlayerState.ACTION && !allWaitOrDead) {
             this.$uiMain.userPredict(false);
             this.$uiMain.userXray(false);
-            this.userAttack(false)
-            this.userSwap(false)
-            this.userFavor(false)
+            this.userAttack(false);
+            this.userSwap(false);
+            this.userFavor(false);
         }
     }
 
@@ -238,7 +243,7 @@ class GameMgr {
 
     private initGame() {
         console.log('Init game');
-        this.vibrate()
+        this.vibrate();
         for (let i = 0; i < this.$players.length; i++) {
             if (this.$players[i].uid === this.$uid) {
                 User.inst.player = this.$players[i];
@@ -293,7 +298,7 @@ class GameMgr {
         NetMgr.inst.req.defuseFailed();
     }
 
-    toWin() { }
+    toWin() {}
 
     startGame() {
         console.log('game start');
@@ -320,7 +325,7 @@ class GameMgr {
         const gameResultJson = JSON.stringify(liveUids)
             .replace('[', '')
             .replace(']', '');
-        console.log(gameResultJson)
+        console.log(gameResultJson);
         NetMgr.inst.disconnect();
         this.gameBombsEnd(1, this.$wdh, gameResultJson);
     }
@@ -329,16 +334,19 @@ class GameMgr {
     finalExitGame(rankUids: number[]) {
         if (rankUids.length === 5) {
             for (const p of this.$players) {
-                if (p.state != PlayerState.DEAD && rankUids.indexOf(p.uid) < 0) {
+                if (
+                    p.state != PlayerState.DEAD &&
+                    rankUids.indexOf(p.uid) < 0
+                ) {
                     rankUids.unshift(p.uid);
                     break;
-                } 
+                }
             }
         }
         const gameResultJson = JSON.stringify(rankUids)
             .replace('[', '')
             .replace(']', '');
-        console.log(gameResultJson)
+        console.log(gameResultJson);
         NetMgr.inst.disconnect();
         this.gameBombsEnd(2, this.$wdh, gameResultJson);
     }
@@ -348,9 +356,9 @@ class GameMgr {
         // 提前退出，传活着的id
         // 最后退出，传排名，最后一个死亡放在第一个
         if (rankUids.length >= 5) {
-            this.finalExitGame(rankUids)
+            this.finalExitGame(rankUids);
         } else {
-            this.exitGame()
+            this.exitGame();
         }
     }
 
@@ -382,6 +390,10 @@ class GameMgr {
         }
     }
 
+    userPlayCardAnim(cardIdx: number) {
+        this.$uiMain.userPlayCardAnim(cardIdx);
+    }
+
     userAttack(attack: boolean) {
         this.$uiMain.userAttack(attack);
     }
@@ -397,8 +409,8 @@ class GameMgr {
     vibrate(): void {
         if (navigator.vibrate) {
             navigator.vibrate(300);
-        } else if (navigator["webkitVibrate"]) {
-            navigator["webkitVibrate"](300);
+        } else if (navigator['webkitVibrate']) {
+            navigator['webkitVibrate'](300);
         }
     }
 }

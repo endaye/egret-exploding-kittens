@@ -12,6 +12,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
     testDie: eui.Button;
     testWin: eui.Button;
 
+    // 玩家
     player0: UIPlayer; // self user
     player1: UIPlayer;
     player2: UIPlayer;
@@ -27,6 +28,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
     playArea: eui.Image;
     direction: eui.Image;
 
+    // 抓牌、出牌按钮
     btnDrawCard: eui.Button;
     btnPlayCard: eui.Button;
     btnPlayCardDisable: eui.Button;
@@ -139,13 +141,12 @@ class UIMain extends eui.Component implements eui.UIComponent {
     }
 
     setUserHands(hands: Card[]) {
-        let tmp: { [img: string]: string }[] = [];
+        const tmp: { [img: string]: string }[] = [];
         for (const c of hands) {
             tmp.push(CardMgr.inst.cards[c]);
         }
 
         this.cardsArray.replaceAll(tmp);
-        // this.hands.selectedIndex = 0;
     }
 
     private initPlayers() {
@@ -596,14 +597,13 @@ class UIMain extends eui.Component implements eui.UIComponent {
     }
 
     // 自己出牌
-    userPlayCardAnim() {
+    userPlayCardAnim(cardIdx: number) {
         if (this.deckTween) {
             egret.Tween.removeTweens(this.deckTween);
         }
 
-        const selectCard = this.hands.getChildAt(
-            this.hands.selectedIndex
-        ) as UICardItem;
+        this.hands.selectedIndex = null;
+        const selectCard = this.hands.getChildAt(cardIdx) as UICardItem;
         const cardImg = selectCard.card.source;
         const globalPos = selectCard.parent.localToGlobal(
             selectCard.x,
@@ -636,6 +636,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
             .call(() => {
                 this.playArea.source = cardImg;
                 this.playArea.visible = true;
+                this.onHandsRefresh();
             });
     }
 
@@ -780,6 +781,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
     }
 
     onHandsSelected(e: eui.PropertyEvent) {
+        if (User.inst.selecting) return;
         GameDispatcher.inst.dispatchEvent(
             new egret.Event(EventName.HANDS_REFRESH, false, false, {
                 selectedIndex: this.hands.selectedIndex,
@@ -812,10 +814,8 @@ class UIMain extends eui.Component implements eui.UIComponent {
 
     onBtnPlayClick() {
         if (this.hands.selectedIndex > -1) {
-            this.userPlayCardAnim();
-            User.inst.playACard(this.hands.selectedIndex);
-            this.hands.selectedIndex = undefined;
-            this.onHandsRefresh();
+            const cardIdx: number = this.hands.selectedIndex;
+            User.inst.playACard(cardIdx);
         }
     }
 
@@ -850,7 +850,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
         console.log(`将炸弹放到${pos}位置`);
         this.userDefuse(false, this.defuseIdx);
         if (this.defuseIdx > -1) {
-            this.userPlayCardAnim();
+            this.userPlayCardAnim(this.defuseIdx);
             User.inst.playACard(this.defuseIdx, null, pos);
         }
     }

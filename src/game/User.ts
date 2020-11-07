@@ -15,6 +15,7 @@ class User {
 
     player: Player;
     private $hands: Card[] = []; // 手牌
+    cardIdx: number = 0; // 当前选中的手牌索引
     prevCard: Card; // 刚刚打出的牌
     nextCard: Card; // 即将抓到的牌
     drawing: boolean = false; // 正在抓拍
@@ -41,35 +42,32 @@ class User {
     // 玩家出牌
     playACard(cardIdx: number, target?: number, pos?: number) {
         const card = this.$hands[cardIdx];
-
+        this.cardIdx = cardIdx;
         if (card === Card.DRAWBACK) {
             this.drawing = true;
         } else if (card === Card.ATTACK || card === Card.ATTACK2) {
             GameMgr.inst.userAttack(true);
-            this.prevCard = this.hands.splice(cardIdx, 1)[0];
+            this.prevCard = card;
             return;
         } else if (card === Card.SWAP) {
             GameMgr.inst.userSwap(true);
-            this.prevCard = this.hands.splice(cardIdx, 1)[0];
+            this.prevCard = card;
             return;
         } else if (card === Card.FAVOR) {
             GameMgr.inst.userFavor(true);
-            this.prevCard = this.hands.splice(cardIdx, 1)[0];
+            this.prevCard = card;
             return;
         }
 
         console.log(`玩家出牌：${card}，target: ${target}`);
 
+        GameMgr.inst.userPlayCardAnim(cardIdx);
         NetMgr.inst.req.releaseCard({
             cardId: card,
             targetId: target,
             favorPush: ReleaseMethod.NORMAL,
             returnPos: pos,
         });
-
-        GameDispatcher.inst.dispatchEvent(
-            new egret.Event(EventName.HANDS_REFRESH, false, false)
-        );
     }
 
     // 玩家出牌
@@ -107,32 +105,38 @@ class User {
 
     // 攻击
     attack(targetId: number) {
+        GameMgr.inst.userPlayCardAnim(this.cardIdx);
         NetMgr.inst.req.releaseCard({
             cardId: this.prevCard as number,
             targetId: targetId,
             favorPush: ReleaseMethod.NORMAL,
             returnPos: undefined,
         });
+        console.log(`玩家出牌：${this.prevCard}，target: ${targetId}`);
     }
 
     // 交换
     swap(targetId: number) {
+        GameMgr.inst.userPlayCardAnim(this.cardIdx);
         NetMgr.inst.req.releaseCard({
             cardId: this.prevCard as number,
             targetId: targetId,
             favorPush: ReleaseMethod.NORMAL,
             returnPos: undefined,
         });
+        console.log(`玩家出牌：${this.prevCard}，target: ${targetId}`);
     }
 
     // 索要
     favor(targetId: number) {
+        GameMgr.inst.userPlayCardAnim(this.cardIdx);
         NetMgr.inst.req.releaseCard({
             cardId: this.prevCard as number,
             targetId: targetId,
             favorPush: ReleaseMethod.NORMAL,
             returnPos: undefined,
         });
+        console.log(`玩家出牌：${this.prevCard}，target: ${targetId}`);
     }
 
     // 检查选择的牌是否可以出
