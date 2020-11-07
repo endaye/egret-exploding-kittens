@@ -1,22 +1,23 @@
 {
-		"compilerOptions": {
-				"target": "es5",
-				"outDir": "bin-debug",
-				"experimentalDecorators": true,
-				"lib": [
-						"es5",
-						"dom",
-						"es2015.promise"
-				],
-				"types": []
-		},
-		"include": [
-				"src",
-				"libs",
-				"protobuf/**/*.d.ts"
-		],
-		"exclude": [
-				"package.json",
-				"package-lock.json"
-		]
+  "compilerOptions": {
+    "target": "es5",
+    "outDir": "bin-debug",
+    "experimentalDecorators": true,
+    "lib": [
+      "es5",
+      "dom",
+      "es2015.promise"
+    ],
+    "types": [],
+    "sourceMap": true
+  },
+  "include": [
+    "src",
+    "libs",
+    "protobuf/**/*.d.ts"
+  ],
+  "exclude": [
+    "package.json",
+    "package-lock.json"
+  ]
 }
