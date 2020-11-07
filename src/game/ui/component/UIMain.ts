@@ -132,7 +132,6 @@ class UIMain extends eui.Component implements eui.UIComponent {
         this.userAction(false);
 
         this.bgTween();
-        this.addChild(this.createShape());
     }
 
     setPlayerData(data: Player[], userSeat: number) {
