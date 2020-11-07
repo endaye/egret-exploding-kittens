@@ -167,15 +167,21 @@ class GameMgr {
         let tp: Player;
         let rp: Common.IPlayerInfo;
         this.aliveCnt = 0;
+
+        let allWaitOrDead = true
         for (let i = 0; i < this.$players.length; i++) {
             tp = this.$players[i];
             rp = roomInfo.players[i];
             tp.state = rp.state;
+            tp.countDownTime = rp.countDownTime;
             if (rp.handsInfo && rp.handsInfo.cardIds) {
                 tp.handsCnt = rp.handsInfo.cardIds.length;
             } else {
                 tp.handsCnt = 0;
             }
+
+            // console.log(tp.uid, tp.countDownTime)
+            allWaitOrDead = allWaitOrDead && (tp.state === PlayerState.WAIT || tp.state === PlayerState.DEAD)
 
             // TODO: attack marks
             tp.attackMark = rp.attackMark;
@@ -199,7 +205,7 @@ class GameMgr {
 
         this.$uiMain.userAction(User.inst.player.state === PlayerState.ACTION);
         this.$uiMain.userBeFavor(User.inst.player.state === PlayerState.FAVOR_ACTION);
-        if (User.inst.player.state !== PlayerState.ACTION) {
+        if (User.inst.player.state !== PlayerState.ACTION && !allWaitOrDead) {
             this.$uiMain.userPredict(false);
             this.$uiMain.userXray(false);
         }
