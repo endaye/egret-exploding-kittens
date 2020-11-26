@@ -333,6 +333,7 @@ class GameMgr {
     // 最后退出
     finalExitGame(rankUids: number[]) {
         if (rankUids.length === 5) {
+            rankUids.reverse()
             for (const p of this.$players) {
                 if (
                     p.state != PlayerState.DEAD &&
