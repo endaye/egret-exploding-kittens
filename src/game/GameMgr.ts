@@ -408,10 +408,10 @@ class GameMgr {
     }
 
     vibrate(): void {
-        if (navigator.vibrate) {
-            navigator.vibrate(300);
-        } else if (navigator['webkitVibrate']) {
-            navigator['webkitVibrate'](300);
-        }
+        // if (navigator.vibrate) {
+        //     navigator.vibrate(300);
+        // } else if (navigator['webkitVibrate']) {
+        //     navigator['webkitVibrate'](300);
+        // }
     }
 }
