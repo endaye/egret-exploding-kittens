@@ -80,7 +80,7 @@ class GameMgr {
     getUidsByPlayerState(state: PlayerState): number[] {
         const result = [];
         for (const p of this.$players) {
-            if (p.state != state) {
+            if (p.state === state) {
                 result.push(p.uid);
             }
         }

@@ -70,7 +70,7 @@ class User {
         });
     }
 
-    // 玩家出牌
+    // 玩家给牌
     giveAFavor(cardIdx: number, target?: number) {
         const card = this.$hands[cardIdx];
 
