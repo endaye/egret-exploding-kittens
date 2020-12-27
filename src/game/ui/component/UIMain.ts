@@ -78,6 +78,9 @@ class UIMain extends eui.Component implements eui.UIComponent {
     xrayCard1: eui.Image;
     xrayCard2: eui.Image;
     xrayCard3: eui.Image;
+    xrayLabel1: eui.Label;
+    xrayLabel2: eui.Label;
+    xrayLabel3: eui.Label;
 
     boomBackOpt: number;
     boomBackOptBtns: eui.Button[];
@@ -415,22 +418,26 @@ class UIMain extends eui.Component implements eui.UIComponent {
         if (card3 && card3.length > 0) {
             if (card3.length > 0) {
                 this.xrayCard1.visible = true;
-                console.log(CardMgr.inst.cards[card3[0]].img);
+                this.xrayLabel1.visible = true;
                 this.xrayCard1.source = CardMgr.inst.cards[card3[0]].img;
             } else {
                 this.xrayCard1.visible = false;
+                this.xrayLabel1.visible = false;
             }
             if (card3.length > 1) {
                 this.xrayCard2.visible = true;
+                this.xrayLabel2.visible = true;
                 this.xrayCard2.source = CardMgr.inst.cards[card3[1]].img;
             } else {
                 this.xrayCard2.visible = false;
             }
             if (card3.length > 2) {
                 this.xrayCard3.visible = true;
+                this.xrayLabel3.visible = true;
                 this.xrayCard3.source = CardMgr.inst.cards[card3[2]].img;
             } else {
                 this.xrayCard3.visible = false;
+                this.xrayLabel3.visible = false;
             }
         } else {
             this.gpXray.visible = false;
