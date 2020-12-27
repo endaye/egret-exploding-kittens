@@ -849,7 +849,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
             this.defuseBg.visible = true;
             for (let i = 0; i < this.boomBackOptBtns.length; i++) {
                 this.boomBackOptBtns[i].visible =
-                    i === 0 || i - 1 <= GameMgr.inst.stackCnt;
+                    i === 0 || i <= GameMgr.inst.stackCnt + 1;
             }
         }
     }
@@ -857,12 +857,12 @@ class UIMain extends eui.Component implements eui.UIComponent {
     onBtnDefuseOptClick(opt: number) {
         console.log(`Defuse的手牌位置${this.defuseIdx}`);
         console.log(`炸弹放回选项为${opt}`);
-        const pos = opt === 0 ? Math.max(GameMgr.inst.stackCnt, 0) + 1 : opt;
-        console.log(`将炸弹放到${pos}位置`);
+        const backpos = opt === 0 ? Math.max(GameMgr.inst.stackCnt, 0) + 1 : opt;
+        console.log(`将炸弹放到${backpos}位置`);
         this.userDefuse(false, this.defuseIdx);
         const defuseIdx = this.defuseIdx;
         if (defuseIdx > -1) {
-            User.inst.playACard(defuseIdx, null, pos);
+            User.inst.playACard(defuseIdx, null, backpos);
         }
     }
 
