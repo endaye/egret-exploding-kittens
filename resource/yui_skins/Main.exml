@@ -89,7 +89,7 @@
 	<e:Image id="bg2" source="Background_2_lg_png" x="-396.89" y="181.78" anchorOffsetX="0" width="1433.79" anchorOffsetY="0" height="737.28" locked="true"/>
 	<e:Image id="table" source="Desk_png" anchorOffsetX="0" width="566.7" anchorOffsetY="0" height="493.94" horizontalCenter="0" verticalCenter="-25" locked="true" x="{225}" y="{44}"/>
 	<e:Image id="direction" source="Direction_png" anchorOffsetX="30" width="60" anchorOffsetY="25" height="50" scaleX="-1" verticalCenter="-188" horizontalCenter="0" locked="true"/>
-	<e:Group id="manometer" width="180.09" height="82.24" horizontalCenter="-172" verticalCenter="-2">
+	<e:Group id="manometer" width="180.09" height="82.24" horizontalCenter="-172" verticalCenter="-2" visible="true">
 		<e:Image id="boomPanel" source="Boom_Panel_png" anchorOffsetX="0" width="180.09" anchorOffsetY="0" height="82.24" x="0" y="0" scaleX="1" scaleY="1"/>
 		<e:Image id="boomPin" source="Boom_Pin_png" anchorOffsetX="5" width="10" anchorOffsetY="22" height="28" fillMode="scale" x="43" y="38" scaleX="1" scaleY="1"/>
 	</e:Group>
@@ -101,7 +101,7 @@
 	<e:Image id="shuffleCard" source="Deck_png" anchorOffsetX="0" width="120" anchorOffsetY="0" height="160" verticalCenter="-46" horizontalCenter="-80"/>
 	<e:Label id="stackCnt" text="剩余0张" size="16" fontFamily="Microsoft YaHei" height="16" width="128" textAlign="center" verticalCenter="53" horizontalCenter="-80"/>
 
-	<e:Image id="fg0" source="Foreground_png" left="0" right="0" scale9Grid="0,70,413,122" bottom="-49" anchorOffsetY="0" height="349"/>
+	<e:Image id="fg0" source="Foreground_png" left="-1" right="1" scale9Grid="0,70,413,122" bottom="-43" anchorOffsetY="0" height="349"/>
 	<e:Button id="btnDrawCard" label="摸牌" width="128" height="56" enabled="true" skinName="yui.BtnYellow" bottom="320" horizontalCenter="-80"/>
 	<e:Button id="btnPlayCardDisable" label="出牌" anchorOffsetX="0" width="128" anchorOffsetY="0" height="56" enabled="true" skinName="yui.BtnGrey" bottom="320" horizontalCenter="80"/>
 	<e:Button id="btnPlayCard" label="出牌" anchorOffsetX="0" width="128" anchorOffsetY="0" height="56" enabled="true" skinName="yui.BtnGreen" bottom="320" horizontalCenter="80"/>
@@ -118,21 +118,20 @@
 		<e:Image id="deck6" source="Deck_png" x="14" y="0" anchorOffsetX="0" width="45" anchorOffsetY="0" height="60"/>
 		<e:Image id="deck7" source="Deck_png" x="21.5" y="0" anchorOffsetX="0" width="45" anchorOffsetY="0" height="60"/>
 	</e:Group>
-	<e:Group id="others" width="600" height="300" verticalCenter="-277" horizontalCenter="0" locked="true">
+	<e:Group id="others" width="600" height="300" verticalCenter="-277" horizontalCenter="0">
 		<ns1:UIPlayer id="player1" width="120" height="158" scaleX="1" scaleY="1" bottom="0" left="0"/>
 		<ns1:UIPlayer id="player2" width="120" height="158" scaleX="1" scaleY="1" top="0" horizontalCenter="-160"/>
 		<ns1:UIPlayer id="player3" width="120" height="158" scaleX="1" scaleY="1" horizontalCenter="0" top="0"/>
 		<ns1:UIPlayer id="player4" width="120" height="158" scaleX="1" scaleY="1" horizontalCenter="160" x="50" top="0"/>
 		<ns1:UIPlayer id="player5" width="120" height="158" scaleX="1" scaleY="1" right="0" bottom="0"/>
 	</e:Group>
-	<ns1:UIPlayer id="player0" width="120" height="158" scaleX="1" scaleY="1" left="18" bottom="178"/>
-	<e:Label id="userName" text="名字名字名字名字" x="144.25" size="16" fontFamily="Microsoft YaHei" height="16" width="128" anchorOffsetY="0" bottom="266"/>
+	<ns1:UIPlayer id="player0" width="120" height="158" scaleX="1" scaleY="1" left="18" bottom="178" visible="true"/>
 
-	<e:Image id="deckAnim1" source="Deck_png" anchorOffsetX="0" width="120" anchorOffsetY="0" height="160" x="180" y="442" visible="false"/>
+	<e:Image id="deckAnim1" source="Deck_png" anchorOffsetX="0" width="120" anchorOffsetY="0" height="160" x="180" y="442" visible="false" locked="true"/>
 	<e:Image id="deckAnim2" source="Deck_png" anchorOffsetX="0" width="120" anchorOffsetY="0" height="160" x="180" y="442" visible="false"/>
 	<e:Image id="deckAnim3" source="Deck_png" anchorOffsetX="0" width="120" anchorOffsetY="0" height="160" x="180" y="422" visible="false"/>
 	<e:Image id="favorBg" source="Damage_Frame_png" top="-50" bottom="-50" left="-50" right="-50" scale9Grid="48,47,48,47" visible="false"/>
-	<e:List id="hands" height="200" anchorOffsetY="0" itemRendererSkinName="yui.CardItem" horizontalCenter="0" bottom="66">
+	<e:List id="hands" height="200" anchorOffsetY="0" itemRendererSkinName="yui.CardItem" horizontalCenter="0" bottom="66" locked="true" visible="true">
 		<e:ArrayCollection>
 		<e:Array>
 			<e:Object/>
@@ -198,7 +197,7 @@
 		<e:Button id="btnPredict" label="看到了" x="260" y="916.9" width="128" height="56" skinName="yui.BtnGreen"/>
 		<e:Image id="predictSeee" anchorOffsetX="0" width="400" anchorOffsetY="0" height="188" verticalCenter="136" horizontalCenter="0" x="123" y="602" scaleX="1" scaleY="1" source="View_2_png"/>
 	</e:Group>
-	<e:Group id="gpXray" left="0" right="0" top="0" bottom="0" visible="true">
+	<e:Group id="gpXray" left="0" right="0" top="0" bottom="0" visible="false" locked="true">
 		<e:Image id="xrayFrame" source="Damage_Frame_png" top="-50" bottom="-50" left="-50" right="-50" scale9Grid="48,47,48,47"/>
 		<e:Group id="gpXrayCards" width="400" height="600" verticalCenter="0" horizontalCenter="0">
 			<e:Image id="xrayCard1" source="Deck_png" width="120" height="160" horizontalCenter="-160" verticalCenter="-60"/>

@@ -68,7 +68,22 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
         this.player = player;
         this.playerName.text = player.nickname;
         this.seAvatarUrl(player.avatar);
-        this.playerName.visible = !isUser;
+        if (isUser) {
+            this.playerName.horizontalCenter = 120;
+            this.handsBg.horizontalCenter = 200;
+            this.handsCnt.horizontalCenter = 200;
+            this.btnAttack.horizontalCenter = 280;
+            this.btnSwap.horizontalCenter = 280;
+            this.btnFavor.horizontalCenter = 280;
+            this.playerName.y = 49;
+            this.handsBg.y = 45;
+            this.handsCnt.y = 46;
+            this.btnAttack.y = 38;
+            this.btnAttack.visible = true;
+            this.btnSwap.visible = true;
+            this.btnFavor.visible = true;
+        }
+        this.playerName.visible = true;
         this.update();
     }
 
@@ -184,7 +199,7 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
         this.uiMain.swapAnim(this.player.uid, User.inst.player.uid);
     }
 
-    onBtnFavorClick():void {
+    onBtnFavorClick(): void {
         User.inst.favor(this.player.uid);
         if (this.uiMain) {
             this.uiMain.userFavor(false);
@@ -221,7 +236,7 @@ class UIPlayer extends eui.Component implements eui.UIComponent {
 
     // 炸弹爆炸动画
     bangAnim(): void {
-        GameMgr.inst.vibrate()
+        GameMgr.inst.vibrate();
         const tw = egret.Tween.get(this.bang);
         tw.to({ scaleX: 2 }, 400, egret.Ease.circIn)
             .to({ scaleY: 1.5 }, 300, egret.Ease.circIn)

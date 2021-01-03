@@ -21,7 +21,6 @@ class UIMain extends eui.Component implements eui.UIComponent {
     player3: UIPlayer;
     player4: UIPlayer;
     player5: UIPlayer;
-    userName: eui.Label;
     players: UIPlayer[];
     hands: eui.List;
     stackCnt: eui.Label;
@@ -130,7 +129,6 @@ class UIMain extends eui.Component implements eui.UIComponent {
         this.initBoomBackOpts();
         this.initListeners();
 
-        this.userName.visible = false;
         this.stackCnt.visible = false;
         this.userAction(false);
 
@@ -144,8 +142,6 @@ class UIMain extends eui.Component implements eui.UIComponent {
                 i == 0
             );
         }
-        this.userName.text = data[userSeat].nickname;
-        this.userName.visible = true;
     }
 
     setUserHands(hands: Card[]) {
@@ -865,7 +861,8 @@ class UIMain extends eui.Component implements eui.UIComponent {
     onBtnDefuseOptClick(opt: number) {
         console.log(`Defuse的手牌位置${this.defuseIdx}`);
         console.log(`炸弹放回选项为${opt}`);
-        const backpos = opt === 0 ? Math.max(GameMgr.inst.stackCnt, 0) + 1 : opt;
+        const backpos =
+            opt === 0 ? Math.max(GameMgr.inst.stackCnt, 0) + 1 : opt;
         console.log(`将炸弹放到${backpos}位置`);
         this.userDefuse(false, this.defuseIdx);
         const defuseIdx = this.defuseIdx;
