@@ -416,7 +416,7 @@ class UIMain extends eui.Component implements eui.UIComponent {
         }
         const card3: Card[] = GameMgr.inst.xrayCards;
         if (card3 && card3.length > 0) {
-            if (card3.length > 0) {
+            if (card3.length >= 1) {
                 this.xrayCard1.visible = true;
                 this.xrayLabel1.visible = true;
                 this.xrayCard1.source = CardMgr.inst.cards[card3[0]].img;
@@ -424,14 +424,15 @@ class UIMain extends eui.Component implements eui.UIComponent {
                 this.xrayCard1.visible = false;
                 this.xrayLabel1.visible = false;
             }
-            if (card3.length > 1) {
+            if (card3.length >= 2) {
                 this.xrayCard2.visible = true;
                 this.xrayLabel2.visible = true;
                 this.xrayCard2.source = CardMgr.inst.cards[card3[1]].img;
             } else {
                 this.xrayCard2.visible = false;
+                this.xrayLabel2.visible = false;
             }
-            if (card3.length > 2) {
+            if (card3.length >= 3) {
                 this.xrayCard3.visible = true;
                 this.xrayLabel3.visible = true;
                 this.xrayCard3.source = CardMgr.inst.cards[card3[2]].img;
