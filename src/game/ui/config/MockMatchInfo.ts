@@ -18,7 +18,7 @@ namespace TestMode {
     }
 
     const uids = [101, 102, 103, 104, 105, 106];
-    const types = [0, 0, 1, 1, 1, 1]; // 1 = 机器人 0 = 正常玩家
+    const types = [0, 1, 1, 1, 1, 1]; // 1 = 机器人 0 = 正常玩家
 
     export const MockUid: number = uids[0];
     export const MockWdh: number = -1;
