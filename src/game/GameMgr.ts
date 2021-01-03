@@ -193,8 +193,14 @@ class GameMgr {
                 this.aliveCnt++;
             }
 
-            if (tp.uid === User.inst.player.uid && rp.handsInfo) {
-                User.inst.checkHands(rp.handsInfo.cardIds);
+            if (tp.uid === User.inst.player.uid) {
+                if (rp.handsInfo && rp.handsInfo.cardIds) {
+                    User.inst.checkHands(rp.handsInfo.cardIds);
+                } else {
+                    // 手牌为空
+                    User.inst.checkHands([]);
+                }
+
                 this.$uiMain.setUserHands(User.inst.hands);
                 if (tp.state === PlayerState.DEAD) {
                     NetMgr.inst.disconnect();
@@ -333,7 +339,7 @@ class GameMgr {
     // 最后退出
     finalExitGame(rankUids: number[]) {
         if (rankUids.length === 5) {
-            rankUids.reverse()
+            rankUids.reverse();
             for (const p of this.$players) {
                 if (
                     p.state != PlayerState.DEAD &&
