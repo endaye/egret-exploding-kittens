@@ -94,10 +94,12 @@ class NetMgr {
 
     private onSocketClose(): void {
         console.log('onSocketClose');
+        GameMgr.inst.exitGame();
     }
 
     private onSocketError(e: egret.IOErrorEvent): void {
         console.log('onSocketError');
+        GameMgr.inst.exitGame();
     }
 
     private onReceiveMessage(e: egret.ProgressEvent): void {
