@@ -46,6 +46,7 @@ class GameMgr {
     aliveCnt: number = 0;
     predictIndex: number = 0; // 预言：炸弹在第几张
     xrayCards: Card[] = []; // 透视：三张牌
+    rank: number[] = []; // 客户端本地记录的排名顺序
 
     get uid(): number {
         return this.$uid;
@@ -186,11 +187,13 @@ class GameMgr {
                 (tp.state === PlayerState.WAIT ||
                     tp.state === PlayerState.DEAD);
 
-            // TODO: attack marks
             tp.attackMark = rp.attackMark;
 
             if (tp.state !== PlayerState.DEAD) {
                 this.aliveCnt++;
+            } else if (this.rank.indexOf(tp.uid) < 0) {
+                // 刚刚死亡的
+                this.rank.unshift(tp.uid);
             }
 
             if (tp.uid === User.inst.player.uid) {
@@ -222,6 +225,15 @@ class GameMgr {
             this.userAttack(false);
             this.userSwap(false);
             this.userFavor(false);
+        }
+        // 只剩下一人的时候，检查退出
+        if (
+            this.aliveCnt === 1 &&
+            User.inst.player.state !== PlayerState.DEAD
+        ) {
+            setTimeout(() => {
+                this.finalExitGame();
+            }, 500);
         }
     }
 
@@ -321,6 +333,7 @@ class GameMgr {
 
     // 中途退出
     exitGame() {
+        console.log('exitGame')
         // yess.finishAndroidPage();
         const liveUids: number[] = [];
         for (const p of this.$players) {
@@ -337,8 +350,9 @@ class GameMgr {
     }
 
     // 最后退出
-    finalExitGame(rankUids: number[]) {
-        if (rankUids.length === 5) {
+    finalExitGame(rankUids?: number[]) {
+        console.log('finalExitGame')
+        if (rankUids && rankUids.length === 5) {
             rankUids.reverse();
             for (const p of this.$players) {
                 if (
@@ -349,6 +363,11 @@ class GameMgr {
                     break;
                 }
             }
+        } else if (this.rank.length === 6) {
+            rankUids = this.rank;
+        } else if (this.rank.length === 5) {
+            this.rank.unshift(User.inst.player.uid);
+            rankUids = this.rank;
         }
         const gameResultJson = JSON.stringify(rankUids)
             .replace('[', '')
