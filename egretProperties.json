@@ -1,56 +1,56 @@
 {
-  "native": {
-    "path_ignore": [
-      "package.json",
-      "package-lock.json"
-    ]
-  },
-  "engineVersion": "5.2.33",
-  "compilerVersion": "5.2.33",
-  "template": {},
-  "target": {
-    "current": "web"
-  },
-  "modules": [
-    {
-      "name": "egret"
-    },
-    {
-      "name": "eui"
-    },
-    {
-      "name": "assetsmanager"
-    },
-    {
-      "name": "tween"
-    },
-    {
-      "name": "promise"
-    },
-    {
-      "name": "socket"
-    },
-    {
-      "name": "egretmgobe",
-      "path": "./libs/egretmgobe"
-    },
-    {
-      "name": "yess",
-      "path": "./libs/yess"
-    },
-    {
-      "name": "protobuf-library",
-      "path": "protobuf/library"
-    },
-    {
-      "name": "protobuf-bundles",
-      "path": "protobuf/bundles"
-    }
-  ],
-  "eui": {
-    "exmlRoot": [
-      "resource/eui_skins",
-      "resource/yui_skins"
-    ]
-  }
+	"native": {
+		"path_ignore": [
+			"package.json",
+			"package-lock.json"
+		]
+	},
+	"engineVersion": "5.2.33",
+	"compilerVersion": "5.2.33",
+	"template": {},
+	"target": {
+		"current": "web"
+	},
+	"modules": [
+		{
+			"name": "egret"
+		},
+		{
+			"name": "eui"
+		},
+		{
+			"name": "assetsmanager"
+		},
+		{
+			"name": "tween"
+		},
+		{
+			"name": "promise"
+		},
+		{
+			"name": "socket"
+		},
+		{
+			"name": "egretmgobe",
+			"path": "./libs/egretmgobe"
+		},
+		{
+			"name": "yess",
+			"path": "./libs/yess"
+		},
+		{
+			"name": "protobuf-library",
+			"path": "protobuf/library"
+		},
+		{
+			"name": "protobuf-bundles",
+			"path": "protobuf/bundles"
+		}
+	],
+	"eui": {
+		"exmlRoot": [
+			"resource/eui_skins",
+			"resource/yui_skins"
+		]
+	}
 }

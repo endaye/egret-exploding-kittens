@@ -219,6 +219,7 @@ class GameMgr {
         this.$uiMain.userBeFavor(
             User.inst.player.state === PlayerState.FAVOR_ACTION
         );
+        this.$uiMain.userDefuse(User.inst.player.state === PlayerState.DEFUSE);
         if (User.inst.player.state !== PlayerState.ACTION && !allWaitOrDead) {
             this.$uiMain.userPredict(false);
             this.$uiMain.userXray(false);

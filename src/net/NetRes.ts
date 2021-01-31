@@ -30,7 +30,7 @@ class NetRes {
     releaseCard(msg: Msg.IMessage) {
         console.log('res: RELEASE_CARD_RESP');
         if (msg.releaseCardResp) {
-            console.log(msg.releaseCardResp);
+            // console.log(msg.releaseCardResp);
             GameMgr.inst.playCardRes(msg.releaseCardResp);
         }
     }

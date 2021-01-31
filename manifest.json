@@ -15,8 +15,8 @@
 	"game": [
 		"bin-debug/game/ui/config/Config.js",
 		"bin-debug/game/ui/panel/UIBasePanel.js",
+		"bin-debug/platform/DebugPlatform.js",
 		"bin-debug/game/ui/component/UIMain.js",
-		"bin-debug/event/EventName.js",
 		"bin-debug/event/GameDispatcher.js",
 		"bin-debug/game/CardMgr.js",
 		"bin-debug/game/GameMgr.js",
@@ -35,7 +35,7 @@
 		"bin-debug/net/NetMgr.js",
 		"bin-debug/net/NetReq.js",
 		"bin-debug/net/NetRes.js",
-		"bin-debug/platform/DebugPlatform.js",
+		"bin-debug/event/EventName.js",
 		"bin-debug/platform/Platform.js",
 		"bin-debug/util/NetUtil.js"
 	]
